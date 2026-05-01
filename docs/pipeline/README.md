@@ -1,9 +1,10 @@
+```md
 ┌──────────────────────────────────────────────────────────┐
-│                YOUR OPPORTUNITY CONTROL ROOM             │
+│                      usr CONTROL ROOM                    │
 │                      _for each agent_                    │
 └──────────────────────────────────────────────────────────┘
 
-#### Togglers:
+### Togglers:
 - Focus     [ Career | Education | Grants | Side | All ] |
 - Autonomy  [ Suggest | Ask me | Auto ]                  |
 - Horizon   near ◄───────────────●───────────────► far   |
@@ -19,21 +20,41 @@
             └─────────────┬─────────────┘                 │
                           ▼                               │
                 ┌────────────────────┐                    │
- DB 🗄️  ◄─────► │ OPPORTUNITY RADAR  │◀───────────────────┘
+ DB 🗄️  ◄-----► │ OPPORTUNITY RADAR  │                    │
+                │     searching      │◄─┬─────────────────┘
+                └─────────┬──────────┘  │
+                          ▼             │
+                ┌────────────────────┐  │
+              ┌►│       FILTER       │◄─┘
+              │ └─────────┬──────────┘
+              │           ▼              
+              │ ┌────────────────────┐
+              └─│      FEEDBACK      │
+                │  usr sellects x%   │
                 └─────────┬──────────┘
+                          ▼              
+                ┌────────────────────┐
+                │       APPLY        │
+                │   our usr email    │
+                └────────────────────┘
+```
 
+```md
+┌──────────────────────────────────────────────────────────┐
+│                   usr PROGRESS DASHBOARD                 │
+└──────────────────────────────────────────────────────────┘
+┌─────────────┐     ┌─────────────┐     ┌──────────────┐
+│  THE EMAIL  │◄───►│  any NEWS ? │────►│ NOTIFICATION │
+└─────────────┘     └─────────────┘     └──────────────┘
+            ┌───────────────────┐       ┌──────────────┐
+            │ PROFILE IMPROVING │ ◄───► │  STATISTIC   │
+            └───────────────────┘       └──────────────┘
+                                        ┌──────────────┐
+                                        │   STATUSES   │
+                                        │  aplication  │
+                                        └──────────────┘
+                                   ┌───────────────────┐
+                                   │FEEDBACK AGREGATION│
+                                   └───────────────────┘
+```
 
-
-feedback opportunity from a person
-
-tracking by syntetic email
-
-
-
-
-
-
-
-3. intersect DB opps & goals |& profile
-4. initiate new searching
-5. 
