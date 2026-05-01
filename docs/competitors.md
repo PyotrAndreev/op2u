@@ -3,5 +3,29 @@
 - LazyApply
 - Sonara
 - LoopCV
-
-
+- Opportunity Desk
+- HeySuccess
+- Youth Opportunities
+- Global Opportunity Desk
+- Anfani
+- Feedo
+- AIApply
+- Teal
+- Huntr
+- Careerflow
+- Jobscan
+- Pivot-RP
+- GrantForward
+- Instrumentl
+- OpenGrants
+- Res Artis
+- TransArtists
+- On the Move
+- ArtConnect
+- Sessionize
+- PaperCall
+- WikiCFP
+- ScholarshipOwl
+- ScholarshipPortal
+- Common App scholarship matching
+- DAAD
