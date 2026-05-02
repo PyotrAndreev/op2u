@@ -1,6 +1,7 @@
 # Competitor Map
 
 ## 1. Job auto-apply / career agents
+- BloomAI
 - Simplify
 - LazyApply
 - Sonara
