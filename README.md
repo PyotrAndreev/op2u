@@ -6,7 +6,7 @@
 ## You want:
 - growing career: job, internship, conferences
 - education: bachelor, master, PhD
-- travel by grants to develop hobbies and interests
+- travel by grants to develop hobbies and interests with oper people
 
 
 ## 🌍 yearly you have:
