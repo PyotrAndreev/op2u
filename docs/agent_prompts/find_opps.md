@@ -10,7 +10,7 @@ Do not ask the user to restate the op2u idea. Treat it as fixed context.
 ## Input params
 - USER_FILE:           /op2u/usr/profile.md
 - OUTPUT_FORMAT:       PDF
-- OUTPUT_DIR:          /op2u/docs/agent_reports
+- OUTPUT_DIR:          /op2u/docs/agent_analysis
 - REPORT_BASENAME:     find_opps_report
 
 ## Output objective
