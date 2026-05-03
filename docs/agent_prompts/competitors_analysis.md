@@ -8,7 +8,8 @@ Load and use the following project context:
 
 ## Output params:
 - OUTPUT_DIR:           /op2u/docs/agent_analysis
-- OUTPUT_FORMAT:        LONG_READ
+- OUTPUT_FORMAT:        PDF
+- OUTPUT_STYLE:         LONG_READ
 
 ### Output formats
 __LONG_READ__  
@@ -194,7 +195,7 @@ Broad scope ↑
 
 
 # Output requirements
-Create the polished report in OUTPUT_FORMAT in OUTPUT_DIR
+Create the polished OUTPUT_FORMAT report with OUTPUT_STYLE in OUTPUT_DIR
 
 - Write for human decision-making, not data dumping.
 - Start with the answer first: recommendation, rationale, risks, next action.

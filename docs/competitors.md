@@ -1,18 +1,30 @@
 # Competitor Map
 
-## 1. Job auto-apply / career agents
+## 1. Job auto-apply and career agents
 - BloomAI
 - Simplify
 - LazyApply
 - Sonara
 - LoopCV
 - AIApply
+- LiftmyCV
+- Wobo AI
+- Jobright
+- Sovia
+- RONIN
+- GoApply
+
+## 2. Job trackers and resume optimization tools
 - Teal
 - Huntr
 - Careerflow
 - Jobscan
+- Rezi
+- Resume Worded
+- SkillSyncer
+- Kickresume
 
-## 2. Global opportunity directories
+## 3. Global opportunity directories
 - Opportunity Desk
 - HeySuccess
 - Youth Opportunities
@@ -20,8 +32,10 @@
 - Opportunities for Youth
 - Mladiinfo
 - AfterSchoolAfrica
+- InfoOpp
+- YouthAtlas
 
-## 3. Scholarships / education funding
+## 4. Scholarship and education funding platforms
 - ScholarshipPortal
 - ScholarshipOwl
 - Fastweb
@@ -30,8 +44,9 @@
 - DAAD
 - WeMakeScholars
 - Studyportals
+- Scholarships.com
 
-## 4. Research / grants
+## 5. Research grant databases
 - GrantForward
 - Pivot-RP
 - Instrumentl
@@ -39,8 +54,17 @@
 - Candid Foundation Directory
 - Grants.gov
 - EU Funding & Tenders Portal
+- GrantStation
+- FoundationSearch
 
-## 5. Creative residencies / open calls
+## 6. Nonprofit and grant management platforms
+- Fluxx
+- Foundant
+- Blackbaud Grantmaking
+- Submittable
+- SmartSimple
+
+## 7. Creative residency and open-call platforms
 - Res Artis
 - TransArtists
 - On the Move
@@ -48,8 +72,9 @@
 - Submittable Discover
 - CaFÉ
 - FilmFreeway
+- CuratorSpace
 
-## 6. Conferences / CFP
+## 8. Conference CFP and speaker opportunity platforms
 - Sessionize
 - PaperCall
 - WikiCFP
@@ -57,16 +82,19 @@
 - Luma
 - Meetup
 - Eventbrite
+- Sessioneer
 
-## 7. NGO / UN / policy / impact
+## 9. NGO / UN / policy / impact opportunity platforms
 - UN Volunteers
 - UN Careers
 - ReliefWeb
 - Devex
 - Impactpool
 - Idealist
+- UNjobs
+- Untalent
 
-## 8. Startup / hackathon / maker opportunities
+## 10. Startup accelerators / hackathon / maker-opportunity platforms
 - F6S
 - Gust
 - Wellfound
@@ -74,12 +102,22 @@
 - DoraHacks
 - Gitcoin Grants
 - Product Hunt
+- OpenVC
+- Unstop
+- Devfolio
 
-## 9. Substitutes
+## 11. General AI agents and search tools
 - Google Search
 - Perplexity
 - ChatGPT
+- Claude
+- Gemini
+
+## 12. Manual substitutes
 - Telegram channels
+- Discord communities
 - newsletters
-- Notion/Airtable trackers
+- Google Alerts / RSS
+- Notion / Airtable trackers
+- spreadsheets
 - personal assistant / VA
