@@ -8,7 +8,7 @@ Load and use the following project context:
 
 ## Output params:
 - OUTPUT_DIR:           /op2u/docs/agent_analysis
-- OUTPUT_FORMAT:        PDF
+- OUTPUT_FILE_FORMAT:   PDF
 - OUTPUT_STYLE:         LONG_READ
 
 ### Output formats
@@ -195,7 +195,10 @@ Broad scope ↑
 
 
 # Output requirements
-Create the polished OUTPUT_FORMAT report with OUTPUT_STYLE in OUTPUT_DIR
+The primary deliverable must be:
+- follow OUTPUT_STYLE
+- an actual OUTPUT_FILE_FORMAT file
+- saved in OUTPUT_DIR
 
 - Write for human decision-making, not data dumping.
 - Start with the answer first: recommendation, rationale, risks, next action.
@@ -237,7 +240,7 @@ Create the polished OUTPUT_FORMAT report with OUTPUT_STYLE in OUTPUT_DIR
 - Final report should feel like a strategy memo, not an AI-generated encyclopedia.
 
 
-## Extra files to provide:
+## Provide extra files:
 1. Markdown source file.
 2. CSV file with the competitor master table.
 3. PNG/SVG visualizations:
