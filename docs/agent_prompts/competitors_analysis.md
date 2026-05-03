@@ -1,27 +1,30 @@
 # Initialization
 Load and use the following project context:
 
-- PROJECT_IDEA:       /op2u/README.md
-- COMPETITORS:        /op2u/docs/competitors.md
-- TARGET_AUDIENCE:    /op2u/docs/target_audience.md
-- OUTPUT_DIR:         /op2u/docs/agent_analysis
+- PROJECT_IDEA:         /op2u/README.md
+- PRODUCT CONCEPT:      /op2u/docs/product_concept.md
+- COMPETITORS:          /op2u/docs/competitors.md
+- TARGET_AUDIENCE:      /op2u/docs/target_audience.md
 
-Keep these paths available for later steps.
+## Output params:
+- OUTPUT_DIR:           /op2u/docs/agent_analysis
+- OUTPUT_FORMAT:        LONG_READ
+
+### Output formats
+__LONG_READ__  
+is a deep written report for reading, thinking, and analysis.
+Optimize for depth, reasoning, context, tradeoffs, risks, opportunities, and recommendations.
+
+__FAST_PRESENT__  
+is a presentation-ready report for live delivery. Assume 1 slide ≈ 1 minute of speaking.
+Optimize for clarity, short slide text, one core message per slide, max 5 bullets.
+
 
 # Role
 You are a senior startup strategist, market researcher, YC-style evaluator, product analyst, and venture memo writer.
 
 Analyze the startup idea below and produce a rigorous competitor analysis report. Be skeptical, concise, quantitative where possible, and practical. Do not write generic startup fluff.
-
-# Product concept
-The product is a personal opportunity autopilot:
-- builds and maintains a user profile;
-- discovers relevant opportunities across jobs, education, grants, scholarships, conferences, fellowships, research visits, artist residencies, accelerators, NGO/policy programs, competitions, hackathons, and side opportunities;
-- scores fit and expected value;
-- prepares application materials;
-- applies automatically or with user approval;
-- tracks deadlines, submissions, statuses, replies, and outcomes;
-- uses feedback to improve the user profile and future applications.
+ 
 
 # Required research scope
 Analyze competitors and substitutes across these categories:
@@ -38,241 +41,202 @@ Analyze competitors and substitutes across these categories:
 11. General AI agents and search tools
 12. Manual substitutes: Google, newsletters, Telegram/Discord groups, spreadsheets, Notion, Airtable, personal assistants
 
-# Mandatory competitor examples
-Include, but do not limit yourself to COMPETITORS
+# Working with competitors
+1. Deep analyse all competitors from COMPETITORS.
+2. Check more competitores in Internet, if you find, add them into COMPETITORS.
+3. Deep analyse them.
+4. Add all analytics into a sheet in OUTPUT_DIR.
 
 # Research rules
 For every factual claim:
 - prefer official websites, pricing pages, documentation, app stores, public reviews, user forums, Reddit/Hacker News/Product Hunt/G2/Capterra where relevant;
-- cross-check important claims across at least 2 sources;
 - include source URLs and access dates;
 - distinguish confirmed facts from estimates and assumptions;
 - flag outdated, uncertain, or low-confidence data.
 
-# Report structure
-Produce a polished PDF report in OUTPUT_DIR with the following sections:
 
-## 1. Abstract
-One-page executive summary:
-- what the startup is;
-- what market it enters;
-- strongest competitors;
-- biggest risks;
-- strongest wedge;
-- final verdict.
+# Report structure (recomended not mandatory)
+## 0. Scoring legend — one scale for all judgments
+- 0 = absent
+- 1 = weak
+- 2 = partial
+- 3 = usable
+- 4 = strong
+- 5 = best-in-class
 
-## 2. Startup interpretation
-Explain the startup in one paragraph and one diagram.
+## 1. Executive recommendation — [MAIN VERDICT]
+### Output
+- Verdict
+- Best wedge
+- First user
+- MVP
+- Biggest risk
+- Next action
+- Kill criteria
 
-Include:
-- user persona;
-- core job-to-be-done;
-- main workflow;
-- why now;
-- what must be true for this to work.
+### Table
+| Decision | Answer | Why | Risk | Next action |
+|---|---|---|---|---|
 
-## 3. Competitive landscape
-Create a structured competitor taxonomy.
 
-For each category include:
-- category definition;
-- user pain it solves;
-- typical business model;
-- typical weakness;
-- relevance to the startup.
+## 2. Market logic — [WHY THIS MARKET IS / IS NOT ATTRACTIVE]
+### Logic chain
+Situation → Complication → Insight → Recommendation → Next action
 
-## 4. Competitor master table
-Create a table with columns:
+### Output
+* What is happening?
+* What is broken?
+* Why now?
+* What must be true?
+* What should the startup do?
 
-- Competitor
-- Category
-- Primary user
-- Core job-to-be-done
-- Main features
-- Pricing / business model
-- Geography / scope
-- Automation level: 0–5
-- Personalization level: 0–5
-- Breadth of opportunity coverage: 0–5
-- Application support: 0–5
-- Tracking/status workflow: 0–5
-- Data/source advantage: 0–5
-- UX quality: 0–5
-- Trust/compliance risk
-- Strengths
-- Weaknesses
-- Why users choose it
-- How op2u can beat it
-- Source URLs
-- Confidence: low/medium/high
 
-## 5. Competitor matrix visualizations
-Generate at least these visualizations:
+## 3. Competitor archetypes — [WHO REALLY COMPETES]
+### Compress competitors into 4–6 types
 
-### 5.1 Breadth vs autonomy matrix
-X-axis:
-- low autonomy → high autonomy
+| Archetype | Solved pain | Strength | Weakness | Threat level | How to beat |
+| --------- | ----------- | -------- | -------- | -----------: | ----------- |
 
-Y-axis:
-- narrow vertical → broad life-opportunity scope
+## 4. Wedge selection — [BEST STARTING NICHE]
+### Wedge scoring
 
-Place all competitors on the matrix.
+| Segment | Pain | WTP | Fragmentation | Data | Automation | Risk | Total | Priority |
+| ------- | ---: | --: | ------------: | ---: | ---------: | ---: | ----: | -------- |
 
-### 5.2 Pain vs solution adequacy map
-Rows:
-- opportunity discovery
-- fit scoring
-- deadline tracking
-- application writing
-- auto-application
-- status tracking
-- profile improvement
-- long-term life trajectory planning
+### Matrix
 
-Columns:
-- manual search
-- directories
-- job auto-apply bots
-- scholarship platforms
-- grant platforms
-- op2u target product
+Urgency / WTP ↑
+5 |              [Best wedge]
+4 |      [Good]              [Good]
+3 |              [Medium]
+2 |      [Weak]
+1 | [Avoid]
+  +--------------------------------→ Ease of MVP
+      1       2       3       4       5
 
-Use scores 0–5 and color coding.
+## 5. Product implications — [WHAT TO BUILD / AVOID]
+### Build / avoid table
 
-### 5.3 Market wedge matrix
-X-axis:
-- ease of MVP launch
+| Capability | Build now? | Why | Risk |
+| ---------- | ---------: | --- | ---- |
 
-Y-axis:
-- urgency / willingness to pay
+### Workflow
+Current workflow:
+Search → filter → decide → apply → track manually
 
-Plot:
-- jobs
-- scholarships
-- conferences/travel grants
-- fellowships/research visits
-- creative residencies
-- NGO/UN programs
-- startup accelerators
-- hackathons
-- nonprofit grants
+Target workflow:
+Profile → match → score → plan → apply support → track → improve
 
-### 5.4 Threat matrix
-X-axis:
-- ability to copy op2u
+## 6. Positioning — [WHERE THE STARTUP SHOULD OWN THE MAP]
+### Breadth vs autonomy
 
-Y-axis:
-- existing distribution/data advantage
+Broad scope ↑
+5 |                         [STARTUP_NAME]
+4 |        Directories
+3 |        Vertical platforms
+2 |                         Automation bots
+1 | Single-purpose tools
+  +--------------------------------→ Autonomy
+      0       1       2       3       4       5
 
-Plot major competitors.
+### Pain coverage
+| Pain | Manual | Directories | Vertical tools | Bots | [STARTUP_NAME] |
+| ---- | -----: | ----------: | -------------: | ---: | -------------: |
 
-### 5.5 User workflow comparison
-Compare:
-- current manual workflow
-- directory-based workflow
-- job auto-apply workflow
-- op2u workflow
 
-Use flow diagrams.
+## 7. Business model — [HOW THIS CAN MAKE MONEY]
+| Model | Buyer | Why pay | Risk | Test |
+| ----- | ----- | ------- | ---- | ---- |
 
-### 5.6 Positioning map
-Compare slogans and positioning:
-- “job application automation”
-- “scholarship matching”
-- “grant discovery”
-- “opportunity directory”
-- “personal opportunity autopilot”
-- “life trajectory engine”
+## 8. Risks / validation — [WHAT CAN KILL THE IDEA]
+| Risk | Severity | Evidence needed | Test | Mitigation |
+| ---- | -------: | --------------- | ---- | ---------- |
 
-## 6. Market assessment by direction
-For each opportunity direction evaluate:
+### Validation plan
+7 days: interviews → manual matching → ask for payment
+30 days: concierge MVP → tracker → repeat use → paid signal
+90 days: productized workflow → retention → scalable acquisition
 
-- market size estimate: TAM/SAM/SOM, with assumptions;
-- user urgency;
-- willingness to pay;
-- supply fragmentation;
-- regulatory/compliance complexity;
-- application complexity;
-- frequency of need;
-- retention potential;
-- data availability;
-- automation feasibility;
-- recommended priority.
 
-Use a 1–5 score and explain.
+## 9. Roadmap — [WHAT TO DO NEXT]
+| Period     | Goal              | Work                     | Success metric         |
+| ---------- | ----------------- | ------------------------ | ---------------------- |
+| 0–7 days   | Validate pain     | Interviews + manual test | Users act              |
+| 8–30 days  | Validate workflow | Concierge MVP            | Users return/pay       |
+| 31–60 days | Productize        | Data + scoring + tracker | Repeatable use         |
+| 61–90 days | Test growth       | Channels + pricing       | Retention + paid users |
 
-Directions:
-- jobs and internships;
-- scholarships and funded education;
-- conferences and travel grants;
-- fellowships and research visits;
-- creative residencies;
-- NGO/UN/policy programs;
-- startup accelerators;
-- hackathons and competitions;
-- grants for nonprofits/research;
-- hobby/side opportunities.
 
-## 7. User pain analysis
-Identify user pains.
+## 10. Final verdict — [GO / NO-GO / PIVOT]
 
-For each pain include:
-- pain statement;
-- current workaround;
-- why current workaround is insufficient;
-- frequency;
-- intensity;
-- willingness to pay;
-- which competitor solves it best today;
-- gap left open;
-- op2u feature opportunity.
+| Item                 | Answer |
+| -------------------- | ------ |
+| Verdict              | TBD    |
+| Best wedge           | TBD    |
+| MVP                  | TBD    |
+| Biggest threat       | TBD    |
+| Dangerous assumption | TBD    |
+| Kill criteria        | TBD    |
+| Next action          | TBD    |
 
-## 8. YC-style evaluation
-Evaluate according to YC-style criteria:
+# Appendix — evidence only
+## A. Competitor master table
+| Competitor | Archetype | User | JTBD | Features | Pricing | Scope | Scores | Strength | Weakness | Source | Confidence |
+| ---------- | --------- | ---- | ---- | -------- | ------- | ----- | ------ | -------- | -------- | ------ | ---------- |
 
-- Is this a real hair-on-fire problem?
-- Who has this problem most intensely?
-- Is the initial market small but expandable?
-- Is there a sharp wedge?
-- Can the team get users manually first?
-- Is there a path to a monopoly-like data/workflow advantage?
-- What is the 10x better product promise?
-- What is the dangerous assumption?
-- What can be tested in 7 days?
-- What can be tested in 30 days?
-- What metric proves pull?
+## B. Source log
+| Claim | Source URL | Source type | Date checked | Confidence | Notes |
+| ----- | ---------- | ----------- | ------------ | ---------- | ----- |
 
-Give brutally honest scores 0–10.
+## C. Assumption log
+| Assumption | Why it matters | How to test | Pass criteria |
+| ---------- | -------------- | ----------- | ------------- |
 
-## 9. Strategic recommendations
-Include:
-
-- best initial niche;
-- first 3 user personas;
-- MVP scope;
-- features to avoid;
-- data acquisition strategy;
-- distribution strategy;
-- monetization options;
-- moat strategy;
-- legal/compliance risks;
-- 30/60/90-day roadmap.
-
-## 10. Final verdict
-End with:
-
-- one-sentence verdict;
-- strongest opportunity;
-- biggest threat;
-- best wedge;
-- recommended MVP;
-- kill criteria;
-- next research tasks.
 
 # Output requirements
-Create the final answer as a PDF report in OUTPUT_DIR
+Create the polished report in OUTPUT_FORMAT in OUTPUT_DIR
 
-Also provide:
+- Write for human decision-making, not data dumping.
+- Start with the answer first: recommendation, rationale, risks, next action.
+- Use conclusion-style headings: every section title must state a finding, not a topic.
+- Separate report into:
+    - Executive recommendation
+    - Market logic
+    - Competitor archetypes
+    - Wedge selection
+    - Product implications
+    - Risks / validation plan
+    - Appendix / evidence base
+- Move long competitor tables to appendix; main body must show only synthesized insights.
+- Compress competitors into 4–6 archetypes, not dozens of repeated cards.
+- For every chart/table, add a “So what?” sentence explaining the implication.
+- Use one consistent scoring scale; define what each score means.
+- Never mix 0–5, 1–10, qualitative, and color scores without a legend.
+- Avoid generic section titles like “Market Assessment”; use titles like “Funded mobility is the strongest wedge.”
+- Prioritize clarity over completeness in the main report.
+- Keep raw evidence, confidence notes, and detailed matrices in appendices, but source URLs include as hyperlinks into mainbody text.
+- Replace large text blocks with:
+    - short paragraphs;
+    - bullets;
+    - decision tables;
+    - matrices;
+    - ranked lists.
+- Every page/section must answer:
+    - What did we learn?
+    - Why does it matter?
+    - What should op2u do?
+- Use a McKinsey-like logic chain:
+    - Situation
+    - Complication
+    - Insight
+    - Recommendation
+    - Next action
+- Make the report skeptical: challenge assumptions, especially automation trust, willingness to pay, data quality, and ToS risk.
+- Do not present all AI findings. Present only the findings needed for a human to make a decision.
+- Final report should feel like a strategy memo, not an AI-generated encyclopedia.
+
+
+## Extra files to provide:
 1. Markdown source file.
 2. CSV file with the competitor master table.
 3. PNG/SVG visualizations:
