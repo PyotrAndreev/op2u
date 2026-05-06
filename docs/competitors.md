@@ -7,6 +7,8 @@
 - Sonara
 - LoopCV
 - AIApply
+- JobCopilot
+- ApplyPass
 - LiftmyCV
 - Wobo AI
 - Jobright
@@ -30,6 +32,8 @@
 - Youth Opportunities
 - Global Opportunity Desk
 - Opportunities for Youth
+- ProFellow
+- EURAXESS
 - Mladiinfo
 - AfterSchoolAfrica
 - InfoOpp
@@ -45,17 +49,20 @@
 - WeMakeScholars
 - Studyportals
 - Scholarships.com
+- ScholarshipsAds
 
 ## 5. Research grant databases
 - GrantForward
 - Pivot-RP
 - Instrumentl
 - OpenGrants
+- GrantX
 - Candid Foundation Directory
 - Grants.gov
 - EU Funding & Tenders Portal
 - GrantStation
 - FoundationSearch
+- GrantWatch
 
 ## 6. Nonprofit and grant management platforms
 - Fluxx
@@ -69,10 +76,12 @@
 - TransArtists
 - On the Move
 - ArtConnect
+- ArtRabbit
 - Submittable Discover
 - CaFÉ
 - FilmFreeway
 - CuratorSpace
+- SlideRoom
 
 ## 8. Conference CFP and speaker opportunity platforms
 - Sessionize
@@ -83,6 +92,7 @@
 - Meetup
 - Eventbrite
 - Sessioneer
+- Sessionboard
 
 ## 9. NGO / UN / policy / impact opportunity platforms
 - UN Volunteers
@@ -101,6 +111,8 @@
 - Devpost
 - DoraHacks
 - Gitcoin Grants
+- Y Combinator
+- HackerEarth
 - Product Hunt
 - OpenVC
 - Unstop
@@ -112,6 +124,7 @@
 - ChatGPT
 - Claude
 - Gemini
+- Microsoft Copilot
 
 ## 12. Manual substitutes
 - Telegram channels
