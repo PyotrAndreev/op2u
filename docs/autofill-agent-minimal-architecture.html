@@ -1,0 +1,522 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Minimal Autofill Agent Architecture</title>
+  <style>
+    :root{
+      --bg:#f6f8fb;--paper:#fff;--ink:#172033;--muted:#5d6b82;--line:#d9e1ee;
+      --primary:#3157d5;--primary-soft:#eaf0ff;--green:#12805c;--green-soft:#e7f6ef;
+      --amber:#a15c00;--amber-soft:#fff4df;--red:#b42318;--red-soft:#ffebe9;
+      --violet:#6941c6;--violet-soft:#f1ecff;--code:#eef2f7;--shadow:0 14px 35px rgba(31,42,68,.08);--radius:16px;
+    }
+    *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;color:var(--ink);background:var(--bg);font:15px/1.55 Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+    header.hero{background:linear-gradient(135deg,#132047 0%,#3157d5 58%,#7b95ff 100%);color:#fff;padding:52px 28px 42px}.hero-inner{max-width:1280px;margin:0 auto}.eyebrow{text-transform:uppercase;letter-spacing:.1em;opacity:.76;font-size:12px;font-weight:800}h1{margin:10px 0 14px;font-size:clamp(32px,5vw,56px);line-height:1.02;letter-spacing:-.04em}.subtitle{max-width:920px;font-size:18px;opacity:.9;margin:0}.hero-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:28px}.hero-card{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);border-radius:14px;padding:14px;backdrop-filter:blur(4px)}.hero-card strong{display:block;font-size:13px;opacity:.76}.hero-card span{font-size:18px;font-weight:750}
+    main{max-width:1380px;margin:0 auto;padding:28px;display:grid;grid-template-columns:230px minmax(0,1fr);gap:24px;align-items:start}nav.toc{position:sticky;top:20px;display:flex;flex-direction:column;gap:8px;max-height:calc(100vh - 40px);overflow-y:auto;background:rgba(255,255,255,.9);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:12px}nav.toc:before{content:"Contents";color:var(--muted);font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;padding:2px 8px 6px}nav.toc a{color:var(--primary);background:transparent;text-decoration:none;padding:8px 10px;border:1px solid transparent;border-radius:10px;font-size:13px;font-weight:650}nav.toc a:hover{background:var(--primary-soft);border-color:#c9d5ff}main>section{grid-column:2}
+    section{background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:24px;margin:0 0 22px}h2{margin:0 0 14px;font-size:26px;letter-spacing:-.025em}h3{margin:20px 0 10px;font-size:18px}p{margin:8px 0 12px}ul,ol{margin:8px 0 0 20px;padding:0}li{margin:5px 0}code{background:var(--code);padding:2px 6px;border-radius:7px;font-size:.92em}pre{overflow:auto;background:#0f172a;color:#e5e7eb;border-radius:14px;padding:14px;line-height:1.45}pre code{background:transparent;color:inherit;padding:0}.grid{display:grid;gap:16px}.two{grid-template-columns:repeat(2,minmax(0,1fr))}.three{grid-template-columns:repeat(3,minmax(0,1fr))}.four{grid-template-columns:repeat(4,minmax(0,1fr))}.card{border:1px solid var(--line);border-radius:14px;padding:16px;background:#fbfcff}.card h3{margin-top:0}.note{border-left:4px solid var(--primary);background:var(--primary-soft);padding:12px 14px;border-radius:12px;color:#1e2d62}.warning{border-left:4px solid var(--amber);background:var(--amber-soft);padding:12px 14px;border-radius:12px;color:#633a00}.risk{border-left:4px solid var(--red);background:var(--red-soft);padding:12px 14px;color:#7a1912;border-radius:12px}.ok{border-left:4px solid var(--green);background:var(--green-soft);padding:12px 14px;border-radius:12px;color:#0f513a}.tag{display:inline-flex;align-items:center;padding:4px 8px;border-radius:999px;background:var(--primary-soft);color:var(--primary);font-weight:700;font-size:12px;margin:2px 4px 2px 0}.tag.green{background:var(--green-soft);color:var(--green)}.tag.amber{background:var(--amber-soft);color:var(--amber)}.tag.red{background:var(--red-soft);color:var(--red)}.tag.violet{background:var(--violet-soft);color:var(--violet)}
+    .diagram{overflow-x:auto;border:1px dashed var(--line);background:linear-gradient(180deg,#fff,#f9fbff);border-radius:14px;padding:16px;margin-top:14px}.mermaid{min-width:780px;background:#fff!important;color:#172033!important;border:1px solid #d9e1ee;border-radius:12px;padding:10px;line-height:1.35}.mermaid svg{background:#fff!important}.mermaid text{font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif!important}.diagram .messageText,.diagram .loopText,.diagram .noteText,.diagram .labelText,.diagram .nodeLabel,.diagram .edgeLabel{fill:#172033!important;color:#172033!important}.diagram .actor{fill:#eef2ff!important;stroke:#3157d5!important}.diagram .actor-line{stroke:#94a3b8!important}.diagram .messageLine0,.diagram .messageLine1,.diagram .flowchart-link{stroke:#475569!important}.diagram-caption{color:var(--muted);font-size:13px;margin-top:8px}table{width:100%;border-collapse:collapse;margin-top:10px;border-radius:12px;overflow:hidden}th,td{text-align:left;border-bottom:1px solid var(--line);padding:10px 12px;vertical-align:top}th{background:#f0f4fb;font-size:13px;color:#33415c}tr:last-child td{border-bottom:0}footer{max-width:1380px;margin:0 auto;padding:10px 28px 40px;color:var(--muted)}
+    @media(max-width:1040px){main{display:block;padding:18px}nav.toc{position:static;flex-direction:row;flex-wrap:wrap;max-height:none;overflow:visible;margin-bottom:20px}nav.toc:before{width:100%}.hero-grid,.two,.three,.four{grid-template-columns:1fr}section{padding:18px}.mermaid{min-width:640px}}
+    @media print{body{background:#fff}header.hero{color:var(--ink);background:#fff;padding-bottom:20px}nav.toc{display:none}section{box-shadow:none;break-inside:avoid}.hero-card{color:var(--ink);border-color:var(--line);background:#fff}.diagram{break-inside:avoid}}
+  </style>
+</head>
+<body>
+  <header class="hero">
+    <div class="hero-inner">
+      <div class="eyebrow">Architecture document</div>
+      <h1>Minimal Autofill Agent Architecture</h1>
+      <p class="subtitle">Smallest useful service architecture for applying to events with reusable form automation, immutable automation bundles, scoped user-data packages, and fill-and-submit Playwright execution.</p>
+      <div class="hero-grid">
+        <div class="hero-card"><strong>Orchestrator</strong><span>Application process</span></div>
+        <div class="hero-card"><strong>Automation owner</strong><span>Autofill service</span></div>
+        <div class="hero-card"><strong>Data owner</strong><span>User-data service</span></div>
+        <div class="hero-card"><strong>Event owner</strong><span>Events service</span></div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <nav class="toc">
+      <a href="#goal">Goal</a><a href="#principles">Principles</a><a href="#diagrams">UML diagrams</a><a href="#events">Event types</a><a href="#identity">Identity</a><a href="#bundle">Automation bundle</a><a href="#contract">User data contract</a><a href="#job">Application job</a><a href="#policy">Policy</a><a href="#data-request">User data request</a><a href="#references">Data references</a><a href="#execution">Autofill execution</a><a href="#workflow">Minimal workflow</a><a href="#ownership">Ownership</a><a href="#non-goals">V1 non-goals</a>
+    </nav>
+
+    <section id="goal">
+      <h2>Goal</h2>
+      <p>Define the smallest useful architecture for applying to events using reusable form automation.</p>
+      <div class="grid four">
+        <div class="card"><h3>Events-service</h3><p>Event collection, identification, application URL metadata, and event type ownership.</p></div>
+        <div class="card"><h3>User-data-service</h3><p>User data storage, processing, contract fulfillment, preview, and scoped execution access.</p></div>
+        <div class="card"><h3>Application-process-service</h3><p>Application job management, orchestration, policy evaluation, tracking, and notifications.</p></div>
+        <div class="card"><h3>Autofill-service</h3><p>Automation bundle generation and Playwright execution.</p></div>
+      </div>
+      <p class="warning">V1 supports only regular events. Events that require CAPTCHA or authentication are classified and stopped until separate pipelines are designed.</p>
+    </section>
+
+    <section id="principles">
+      <h2>Core Principles</h2>
+      <ul>
+        <li>Application-process-service orchestrates the workflow.</li>
+        <li>Autofill-service owns automation bundles and execution queues.</li>
+        <li>Events-service owns event type classification.</li>
+        <li>User-data-service owns user data and returns data package references, not reusable raw profile access.</li>
+        <li>Application-process-service stores references and decisions, not long-lived copies of resolved user data.</li>
+        <li>Automation bundle versions are immutable.</li>
+        <li>Production autofill execution is always fill-and-submit; user review happens before execution is queued.</li>
+      </ul>
+    </section>
+
+    <section id="diagrams">
+      <h2>UML Diagrams</h2>
+
+      <h3>1. Class Relations</h3>
+      <div class="diagram">
+        <pre class="mermaid">classDiagram
+  direction LR
+
+  class EventMetadata {
+    +event_id
+    +event_type
+    +application_url
+    +metadata
+  }
+
+  class ApplicationJob {
+    +application_job_id
+    +user_id
+    +event_id
+    +application_type
+    +status
+    +blocking_reason
+    +user_policy
+    +bundle_id
+    +bundle_version
+    +data_request_id
+    +data_package_id
+    +autofill_execution_id
+    +approval_status
+    +terminal_reason
+  }
+
+  class AutomationBundle {
+    +bundle_id
+    +event_id
+    +application_type
+    +version
+    +status
+    +playwright_script_ref
+    +user_data_contract
+    +metadata
+  }
+
+  class UserDataContract {
+    +contract_id_or_hash
+    +fields[]
+  }
+
+  class ContractField {
+    +field_id
+    +label
+    +semantic_type
+    +required
+    +value_type
+    +validation
+    +risk_level
+  }
+
+  class UserDataRequest {
+    +data_request_id
+    +status
+    +data_package_id
+    +missing_fields
+    +field_metadata
+  }
+
+  class DataPackagePreview {
+    +data_package_id
+    +contract_hash
+    +fields[]
+  }
+
+  class PreviewField {
+    +contract_field_id
+    +label
+    +display_value
+    +source
+    +confidence
+    +risk_flags
+    +sensitive_category
+    +requires_confirmation
+  }
+
+  class DataAccessGrant {
+    +application_job_id
+    +bundle_id
+    +bundle_version
+    +contract_hash
+    +read_only
+    +expires_at
+  }
+
+  class AutofillExecution {
+    +execution_id
+    +status
+    +failure_reason
+    +submitted_at
+    +evidence_ref
+  }
+
+  class AutofillExecutionResult {
+    +execution_id
+    +status
+    +failure_reason
+    +submitted_at
+    +final_url
+    +confirmation_text
+    +confirmation_id
+    +screenshot_ref
+  }
+
+  EventMetadata "1" --> "0..*" ApplicationJob : selected by
+  ApplicationJob "1" --> "0..1" AutomationBundle : uses immutable version
+  AutomationBundle "1" *-- "1" UserDataContract : embeds
+  UserDataContract "1" *-- "1..*" ContractField : requires
+  ApplicationJob "1" --> "0..1" UserDataRequest : creates
+  UserDataRequest "1" --> "0..1" DataPackagePreview : preview for approval
+  DataPackagePreview "1" *-- "0..*" PreviewField : displays
+  ApplicationJob "1" --> "0..1" DataAccessGrant : grants execution access
+  ApplicationJob "1" --> "0..1" AutofillExecution : queues
+  AutofillExecution "1" --> "0..1" AutofillExecutionResult : returns</pre>
+      </div>
+      <p class="diagram-caption">Class diagram emphasizes immutable bundle/contract coupling and job-owned references.</p>
+
+      <h3>2. Main Dataflow</h3>
+      <div class="diagram">
+        <pre class="mermaid">sequenceDiagram
+  autonumber
+  actor User
+  participant APS as Application-process-service
+  participant ES as Events-service
+  participant AFS as Autofill-service
+  participant UDS as User-data-service
+
+  User->>APS: Create application job(user_id,event_id,application_type,policy)
+  APS->>APS: Dedupe by user_id + event_id + application_type
+  APS->>ES: Load event metadata and event_type
+  alt event_type is with_captcha or with_auth
+    APS->>APS: status=unsupported, blocking_reason=unsupported_event_type
+    APS-->>User: Notify unsupported
+  else event_type is regular or unknown
+    APS->>AFS: Get ready bundle(event_id, application_type)
+    alt ready bundle found
+      AFS-->>APS: AutomationBundle + immutable user_data_contract
+    else no ready bundle
+      APS->>AFS: CreateBundleRequest(application_url,event_type,metadata)
+      loop poll bundle status
+        APS->>AFS: Get bundle status
+        AFS-->>APS: generating | ready | unsupported | failed
+      end
+    end
+    alt bundle unsupported
+      APS->>ES: Forward discovered event type
+      APS-->>User: Notify unsupported
+    else bundle ready
+      APS->>UDS: Create data request(contract + job context)
+      loop poll data request
+        APS->>UDS: Get data request status
+        UDS-->>APS: pending | incomplete | ready | failed
+      end
+      alt incomplete
+        APS-->>User: Notify missing data
+      else ready
+        UDS-->>APS: data_package_id + package metadata
+        APS->>APS: Evaluate review_all/review_risky/auto policy
+        opt review required
+          APS->>UDS: GET package preview
+          UDS-->>APS: display-safe preview
+          APS-->>User: Request approval
+          User-->>APS: Approve
+        end
+        APS->>UDS: Create scoped read-only data_access_grant
+        APS->>AFS: Create execution(bundle + package + grant)
+        AFS->>UDS: Fetch execution data using grant
+        AFS->>AFS: Fill and submit with Playwright
+        AFS-->>APS: Execution result/evidence summary
+        APS-->>User: Notify succeeded or failed
+      end
+    end
+  end</pre>
+      </div>
+
+      <h3>3. Bundle Creation</h3>
+      <div class="diagram">
+        <pre class="mermaid">sequenceDiagram
+  autonumber
+  participant APS as Application-process-service
+  participant AFS as Autofill-service
+  participant ES as Events-service
+  participant Store as Bundle Store
+
+  APS->>AFS: CreateBundleRequest(event_id, application_type, application_url, event_type, metadata)
+  AFS->>Store: Create AutomationBundle(status=generating, version=N)
+  AFS->>AFS: Crawl/open application_url
+  AFS->>AFS: Detect form, fields, CAPTCHA, auth walls
+  alt CAPTCHA or auth discovered
+    AFS->>Store: Mark bundle unsupported
+    AFS-->>APS: unsupported + discovered event_type
+    APS->>ES: Update event type
+    APS->>APS: Mark job unsupported
+  else regular application form
+    AFS->>AFS: Generate Playwright script
+    AFS->>AFS: Extract immutable user_data_contract
+    AFS->>AFS: Preflight and smoke validate without unsafe submit
+    alt validation passes
+      AFS->>Store: Save script_ref + contract, status=ready
+      AFS-->>APS: ready bundle_id/version/contract
+    else validation fails
+      AFS->>Store: status=failed
+      AFS-->>APS: failed
+    end
+  end</pre>
+      </div>
+
+      <h3>4. Application Job State Machine</h3>
+      <div class="diagram">
+        <pre class="mermaid">stateDiagram-v2
+  [*] --> created
+  created --> preparing: load event metadata
+  preparing --> unsupported: captcha/auth or unsupported bundle
+  preparing --> waiting: missing user data
+  preparing --> waiting: approval required
+  preparing --> executing: ready data + auto policy
+  waiting --> preparing: user provides missing data
+  waiting --> executing: user approves
+  executing --> succeeded: execution succeeded
+  executing --> failed: execution failed
+  preparing --> failed: bundle/data failure
+  waiting --> cancelled
+  preparing --> expired
+  waiting --> expired
+  executing --> failed: timeout/rejected/form changed
+  succeeded --> [*]
+  failed --> [*]
+  unsupported --> [*]
+  cancelled --> [*]
+  expired --> [*]</pre>
+      </div>
+
+      <h3>5. Service Ownership Map</h3>
+      <div class="diagram">
+        <pre class="mermaid">flowchart LR
+  subgraph ES[Events-service]
+    E1[Event identity]
+    E2[Event type]
+    E3[Application URL metadata]
+  end
+
+  subgraph APS[Application-process-service]
+    A1[Application job]
+    A2[User policy]
+    A3[Notifications]
+    A4[Reference-only decisions]
+  end
+
+  subgraph UDS[User-data-service]
+    U1[User data storage]
+    U2[Contract fulfillment]
+    U3[Missing data details]
+    U4[Review preview]
+    U5[Scoped execution access]
+  end
+
+  subgraph AFS[Autofill-service]
+    F1[Bundle generation]
+    F2[Bundle storage]
+    F3[Execution queue]
+    F4[Playwright fill-and-submit]
+    F5[Evidence artifacts]
+  end
+
+  APS -->|loads event metadata| ES
+  APS -->|requests bundle/execution| AFS
+  APS -->|requests data package/preview/grant| UDS
+  AFS -->|uses scoped grant| UDS
+  AFS -->|reports discovered type| APS
+  APS -->|forwards discovered type| ES</pre>
+      </div>
+    </section>
+
+    <section id="events">
+      <h2>Event Types</h2>
+      <p>Events-service owns event type:</p>
+      <p><span class="tag green">regular</span><span class="tag red">with_captcha</span><span class="tag red">with_auth</span><span class="tag amber">unknown</span></p>
+      <p>V1 proceeds only for <code>regular</code> and <code>unknown</code>. If Autofill-service discovers CAPTCHA or auth during bundle generation, it reports the discovered type to Application-process-service. Application-process-service forwards the update to Events-service, marks the application job as <code>unsupported</code>, and notifies the user.</p>
+    </section>
+
+    <section id="identity">
+      <h2>Application Identity</h2>
+      <p>Application identity and active-job dedupe key:</p>
+      <pre><code>user_id + event_id + application_type</code></pre>
+      <p><code>application_type</code> is a minimal enum:</p>
+      <p><span class="tag">speaker</span><span class="tag">attendee</span><span class="tag">sponsor</span><span class="tag">volunteer</span><span class="tag">other</span></p>
+    </section>
+
+    <section id="bundle">
+      <h2>Automation Bundle</h2>
+      <p>An automation bundle automates one application form for one event and application type.</p>
+      <pre><code>Bundle identity = event_id + application_type + version</code></pre>
+      <div class="grid two">
+        <div class="card"><h3>Minimal fields</h3><ul><li>bundle_id</li><li>event_id</li><li>application_type</li><li>version</li><li>status</li><li>playwright_script_ref</li><li>user_data_contract</li><li>metadata</li><li>created_at / updated_at</li></ul></div>
+        <div class="card"><h3>Status behavior</h3><table><tbody><tr><td><code>not found</code></td><td>request async bundle generation</td></tr><tr><td><code>generating</code></td><td>wait/poll</td></tr><tr><td><code>ready</code></td><td>request user data</td></tr><tr><td><code>unsupported</code></td><td>mark job unsupported</td></tr><tr><td><code>failed</code></td><td>fail job or escalate</td></tr></tbody></table></div>
+      </div>
+      <p class="note">Each bundle version is immutable. Its <code>user_data_contract</code> is also immutable. If the form changes, Autofill-service creates a new bundle version with a new contract.</p>
+    </section>
+
+    <section id="contract">
+      <h2>User Data Contract</h2>
+      <div class="grid three">
+        <div class="card"><h3>UserDataContract</h3><ul><li>contract_id or contract_hash</li><li>fields[]</li></ul></div>
+        <div class="card"><h3>ContractField</h3><ul><li>field_id</li><li>label</li><li>semantic_type</li><li>required</li><li>value_type</li><li>validation</li><li>risk_level</li><li>help_text / purpose optional</li></ul></div>
+        <div class="card"><h3>Supported value types</h3><p><span class="tag">string</span><span class="tag">number</span><span class="tag">boolean</span><span class="tag">enum</span><span class="tag">date</span><span class="tag">asset</span></p></div>
+      </div>
+      <h3>Validation may include</h3>
+      <p><span class="tag violet">max_length</span><span class="tag violet">format</span><span class="tag violet">enum_options</span><span class="tag violet">accepted_file_types</span><span class="tag violet">max_file_size</span></p>
+      <h3>Example</h3>
+      <pre><code>{
+  "field_id": "speaker_bio",
+  "label": "Speaker bio",
+  "semantic_type": "professional_bio",
+  "required": true,
+  "value_type": "string",
+  "validation": { "max_length": 500 },
+  "risk_level": "normal"
+}</code></pre>
+    </section>
+
+    <section id="job">
+      <h2>Application Job</h2>
+      <p>Application job is owned by Application-process-service. It is the user-facing application state machine and orchestration record.</p>
+      <div class="grid two">
+        <div class="card"><h3>Minimal fields</h3><ul><li>application_job_id</li><li>user_id</li><li>event_id</li><li>application_type</li><li>status</li><li>blocking_reason</li><li>user_policy</li><li>bundle_id / bundle_version</li><li>data_request_id / data_package_id</li><li>autofill_execution_id</li><li>approval_status / approved_at / approved_by</li><li>approved_data_package_id / approved_contract_hash</li><li>terminal_reason</li><li>submitted_at</li><li>evidence_ref</li><li>created_at / updated_at</li></ul></div>
+        <div class="card"><h3>Status and blockers</h3><p><strong>Status:</strong> <code>created</code>, <code>preparing</code>, <code>waiting</code>, <code>executing</code>, <code>succeeded</code>, <code>failed</code>, <code>unsupported</code>, <code>cancelled</code>, <code>expired</code>.</p><p><strong>Blocking reason:</strong> <code>bundle_generation</code>, <code>user_data_resolution</code>, <code>user_data</code>, <code>approval</code>, <code>autofill_execution</code>, <code>unsupported_event_type</code>, <code>operator</code>, <code>none</code>.</p></div>
+      </div>
+    </section>
+
+    <section id="policy">
+      <h2>User Application Policy</h2>
+      <div class="grid three">
+        <div class="card"><h3><code>review_all</code></h3><p>Always requires user approval after user data is ready and before autofill execution is queued.</p></div>
+        <div class="card"><h3><code>review_risky</code></h3><p>Requires approval only if the data package contains risky fields such as low confidence, sensitive data, required consent, or confirmation flags.</p></div>
+        <div class="card"><h3><code>auto</code></h3><p>Queues autofill execution automatically if all required data is available, valid, and allowed to use. System safety rules may still override.</p></div>
+      </div>
+    </section>
+
+    <section id="data-request">
+      <h2>User Data Request</h2>
+      <p>User-data-service owns data resolution and package creation. Application-process-service creates an async data request using <code>user_id</code>, <code>application_job_id</code>, <code>event_id</code>, <code>application_type</code>, <code>bundle_id</code>, <code>bundle_version</code>, and <code>user_data_contract</code>.</p>
+      <table><thead><tr><th>Status</th><th>Meaning</th><th>Application-process behavior</th></tr></thead><tbody><tr><td><code>ready</code></td><td><code>data_package_id</code> is available and contract is fulfilled.</td><td>Evaluate application policy.</td></tr><tr><td><code>pending</code></td><td>User-data-service is still resolving/extracting data automatically.</td><td><code>status=preparing</code>, <code>blocking_reason=user_data_resolution</code>.</td></tr><tr><td><code>incomplete</code></td><td>User action is needed to update/provide data.</td><td><code>status=waiting</code>, <code>blocking_reason=user_data</code>, notify user.</td></tr><tr><td><code>failed</code></td><td>System error or contract cannot be processed.</td><td><code>status=failed</code>.</td></tr></tbody></table>
+      <p>User-data-service does not notify the user directly; it returns structured missing-data/action information to Application-process-service, which owns user notifications.</p>
+    </section>
+
+    <section id="references">
+      <h2>Data Package References and Review Preview</h2>
+      <ol>
+        <li>User-data-service creates a data package.</li>
+        <li>User-data-service returns <code>data_package_id</code> and metadata to Application-process-service.</li>
+        <li>Application-process-service evaluates policy using package metadata and preview APIs.</li>
+        <li>Application-process-service sends only a package reference and scoped access grant to Autofill-service.</li>
+        <li>Autofill-service fetches execution data directly from User-data-service.</li>
+      </ol>
+      <h3>Review preview API</h3>
+      <pre><code>GET /user-data/packages/{data_package_id}/preview</code></pre>
+      <p>Preview contains display-safe fields: contract field id, label, display value, source, confidence, risk flags, sensitive category, and confirmation requirements. Application-process-service stores only approval decision/reference fields.</p>
+    </section>
+
+    <section id="execution">
+      <h2>Autofill Execution</h2>
+      <p>Autofill-service owns execution queue and execution state. Production execution is always fill-and-submit. If user review is required, it happens before execution is queued.</p>
+      <div class="grid two">
+        <div class="card"><h3>CreateExecutionRequest</h3><ul><li>application_job_id</li><li>bundle_id</li><li>bundle_version</li><li>data_package_id</li><li>data_access_grant</li></ul><p>The grant must be job-scoped, bundle/version-scoped, contract-scoped, read-only, and short-lived.</p></div>
+        <div class="card"><h3>Execution statuses</h3><p><span class="tag">queued</span><span class="tag">running</span><span class="tag green">succeeded</span><span class="tag red">failed</span></p><p>Failure reasons: <code>site_unreachable</code>, <code>form_changed</code>, <code>validation_error</code>, <code>submission_rejected</code>, <code>timeout</code>, <code>unknown</code>.</p></div>
+      </div>
+      <h3>Execution evidence</h3>
+      <p>Autofill-service owns detailed browser evidence and artifacts. Application-process-service stores only summary references such as <code>autofill_execution_id</code>, terminal status/reason, <code>submitted_at</code>, and <code>evidence_ref</code> or <code>screenshot_ref</code>.</p>
+    </section>
+
+    <section id="workflow">
+      <h2>Minimal Workflow</h2>
+      <ol>
+        <li><strong>Create application job.</strong> Create or return an active deduplicated job by <code>user_id + event_id + application_type</code>.</li>
+        <li><strong>Load event metadata.</strong> Stop as unsupported for <code>with_captcha</code> or <code>with_auth</code>; continue for <code>regular</code> or <code>unknown</code>.</li>
+        <li><strong>Get or create automation bundle.</strong> Request async bundle generation if no ready bundle exists; handle <code>ready</code>, <code>generating</code>, <code>unsupported</code>, and <code>failed</code>.</li>
+        <li><strong>Request user data.</strong> Create an async data request using the bundle's immutable contract; handle <code>ready</code>, <code>pending</code>, <code>incomplete</code>, and <code>failed</code>.</li>
+        <li><strong>Evaluate application policy.</strong> Fetch preview and wait for approval when required; otherwise continue automatically.</li>
+        <li><strong>Queue autofill execution.</strong> Send <code>application_job_id</code>, bundle id/version, <code>data_package_id</code>, and a scoped data access grant.</li>
+        <li><strong>Poll execution and notify.</strong> Store evidence summary and notify on success/failure.</li>
+      </ol>
+    </section>
+
+    <section id="ownership">
+      <h2>Service Ownership Summary</h2>
+      <table><thead><tr><th>Area</th><th>Owner</th></tr></thead><tbody><tr><td>Event identity</td><td>Events-service</td></tr><tr><td>Event type</td><td>Events-service</td></tr><tr><td>Application URL metadata</td><td>Events-service</td></tr><tr><td>Application job</td><td>Application-process-service</td></tr><tr><td>User policy</td><td>Application-process-service</td></tr><tr><td>Notifications</td><td>Application-process-service</td></tr><tr><td>Bundle generation/storage</td><td>Autofill-service</td></tr><tr><td>Playwright execution queue</td><td>Autofill-service</td></tr><tr><td>Execution artifacts/evidence</td><td>Autofill-service</td></tr><tr><td>User data storage</td><td>User-data-service</td></tr><tr><td>Data contract fulfillment</td><td>User-data-service</td></tr><tr><td>Missing data details</td><td>User-data-service</td></tr><tr><td>Review preview data</td><td>User-data-service</td></tr><tr><td>Scoped execution data access</td><td>User-data-service</td></tr></tbody></table>
+    </section>
+
+    <section id="non-goals">
+      <h2>V1 Non-Goals</h2>
+      <ul>
+        <li>CAPTCHA application pipeline.</li>
+        <li>Authenticated application pipeline.</li>
+        <li>Browser-session resume after interruption.</li>
+        <li>Post-fill browser preview before submit.</li>
+        <li>Application-process-service storing long-lived resolved user data.</li>
+        <li>Cross-job learning from executions.</li>
+        <li>Multiple application forms without explicit <code>application_type</code>.</li>
+      </ul>
+    </section>
+  </main>
+
+  <footer>Generated from <code>docs/autofill-agent-minimal-architecture.md</code>. Diagrams are rendered with Mermaid UML-style notation.</footer>
+  <script type="module">
+    import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: 'base',
+      securityLevel: 'strict',
+      themeVariables: {
+        background: '#ffffff',
+        mainBkg: '#f8fafc',
+        primaryColor: '#eaf0ff',
+        primaryTextColor: '#111827',
+        primaryBorderColor: '#3157d5',
+        secondaryColor: '#e7f6ef',
+        tertiaryColor: '#fff4df',
+        lineColor: '#475569',
+        textColor: '#111827',
+        nodeTextColor: '#111827',
+        clusterBkg: '#f8fafc',
+        clusterBorder: '#cbd5e1',
+        edgeLabelBackground: '#ffffff',
+        actorBkg: '#eef2ff',
+        actorBorder: '#3157d5',
+        actorTextColor: '#111827',
+        actorLineColor: '#94a3b8',
+        signalColor: '#475569',
+        signalTextColor: '#111827',
+        labelBoxBkgColor: '#ffffff',
+        labelBoxBorderColor: '#cbd5e1',
+        labelTextColor: '#111827',
+        loopTextColor: '#111827',
+        activationBkgColor: '#e2e8f0',
+        activationBorderColor: '#64748b',
+        noteBkgColor: '#fff7ed',
+        noteBorderColor: '#f59e0b',
+        noteTextColor: '#111827',
+        sequenceNumberColor: '#2563eb',
+        classText: '#111827',
+        fontFamily: 'Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif'
+      },
+      flowchart: { htmlLabels: true },
+      sequence: { showSequenceNumbers: false }
+    });
+  </script>
+</body>
+</html>
