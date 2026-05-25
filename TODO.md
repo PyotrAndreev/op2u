@@ -33,3 +33,7 @@ updated: 2026-05-03
     - prompt парсинга файлов
     - сохранение в BD (?применить [AgentWiki](https://agentwiki.org/))
 - убрать генерацию излишних файлов в `docs/agent_analysis`
+
+
+# Good to do:
+- сравнить потраченные токены: zeroshot (codex) vs. PlayWrite shot
