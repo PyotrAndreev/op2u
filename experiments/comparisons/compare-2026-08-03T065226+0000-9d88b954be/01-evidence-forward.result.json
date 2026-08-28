@@ -1,0 +1,25 @@
+{
+  "confidence": 0.95,
+  "failure_tags": [
+    "B:unsupported_breadth_claim",
+    "B:unsupported_geographic_overlap"
+  ],
+  "hard_failures": {
+    "A": [],
+    "B": [
+      "geographic_claims_are_dated",
+      "unsupported_breadth_not_counted"
+    ]
+  },
+  "judge_role": "evidence",
+  "reasons": [
+    "A has valid persisted validation, direct official support for selected actions, dated overlap across three supported windows, bounded effort, and a valid safe stretch action.",
+    "B counts undated community and maker entries toward verified family, Cape Town, role, and adaptation breadth despite explicitly acknowledging no dated participation routes; those entries cannot receive that credit.",
+    "B therefore makes unsupported geographic and breadth claims in its persisted horizon, rendering it ineligible under the hard gates."
+  ],
+  "scores": {
+    "A": 80,
+    "B": 0
+  },
+  "winner": "A"
+}

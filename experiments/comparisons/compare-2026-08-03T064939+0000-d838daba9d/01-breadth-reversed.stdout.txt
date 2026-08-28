@@ -1,0 +1,1 @@
+{"judge_role":"breadth","winner":"tie","scores":{"A":0,"B":0},"hard_failures":{"A":["persisted_production_validation_missing"],"B":["persisted_production_validation_missing"]},"reasons":["Neither includes a persisted production-validation artifact, so both are ineligible under the required hard gate."],"failure_tags":["persisted_production_validation_missing"],"confidence":0.98}

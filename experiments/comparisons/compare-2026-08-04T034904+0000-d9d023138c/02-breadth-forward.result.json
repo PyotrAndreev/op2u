@@ -1,0 +1,25 @@
+{
+  "confidence": 0.91,
+  "failure_tags": [
+    "B_narrow_verified_breadth",
+    "B_cross_artifact_breadth_inconsistency",
+    "B_limited_adaptation_belonging_depth"
+  ],
+  "hard_failures": {
+    "A": [],
+    "B": []
+  },
+  "judge_role": "breadth",
+  "reasons": [
+    "A sustains five evidence-backed distinct horizon families, versus B's persisted report count of two.",
+    "A covers Hong Kong, the first Shanghai window, and South Africa with dated, supported participation paths; B has three stronger verification-stage families but its final persisted report removes the South Africa item from counted breadth.",
+    "A offers more concrete role expansion: attendee, governance/community participant, grant applicant, and speaker/workshop proposer.",
+    "Both respect effort limits, zero-effort monitors, eligibility uncertainty, and include safe bounded stretch actions.",
+    "B's Hong Kong demo route is particularly direct and actionable, but its narrower verified portfolio and cross-artifact breadth inconsistency reduce the overall result."
+  ],
+  "scores": {
+    "A": 91,
+    "B": 68
+  },
+  "winner": "A"
+}

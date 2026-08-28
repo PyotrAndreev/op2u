@@ -1,0 +1,51 @@
+{
+  "updated_at": "2026-08-02T16:14:32+00:00",
+  "status": "provisional_profile_scoped_frontier",
+  "recommended_default": {
+    "variant": "G2_M1",
+    "production_prompt": "prompts/find_opportunities_recommended.md",
+    "production_prompt_sha256": "186da80eaa4682298871453cd2597d164174c593013ad24ff868c93c498a2165",
+    "parent": "G1_M3",
+    "controlled_runs": [
+      "2026-08-02T155136+0000-96133818abdf",
+      "2026-08-02T155302+0000-2bc8b8a5c893",
+      "2026-08-02T155420+0000-91d4a29ccb62"
+    ],
+    "hard_gate_eligible_repeats": "3/3",
+    "scheduled_week_upper_bounds_minutes": [
+      150,
+      150,
+      165
+    ],
+    "promotion_basis": [
+      "removed recurring weekly-effort hard failure",
+      "identical reused prefix through actionability",
+      "no hard failures in three controlled repeats",
+      "parent-child pairwise: 4 child votes, 2 ties, no losses",
+      "retained over G3_M3 by 6/6 order-stable votes"
+    ],
+    "caveats": [
+      "parent-child actionability/evidence pairwise outcomes were order-sensitive between tie and child",
+      "evidence completeness remains variable",
+      "no genuine holdout",
+      "no behavioral outcomes"
+    ],
+    "tested_variant_prompt": "prompts/variants/G2_M1.md",
+    "tested_variant_prompt_sha256": "960eed75df03e44bdedd873e4770e96d90e78a095088af0a2cbb6fc2d0991ec3",
+    "production_prompt_evaluation": "not_run; standalone derivation, requires PROD live evaluation",
+    "production_validation": "runner-enforced for PROD; smoke-tested only"
+  },
+  "pareto_dimensions": {
+    "actionable_top3_precision": "proxy only; no behavioral labels",
+    "evidence_correctness": "improved hard-gate compliance; secondary unsupported details remain",
+    "retrospective_bridge_recall": "not established; known case was not a clean immutable profile fact",
+    "genericity_penalty": "qualitatively reduced by bridge gates; not fully isolated",
+    "cost": "$2.388421 total experiment; per-variant costs in run artifacts"
+  },
+  "stopping_reason": [
+    "three-hour operational window reached",
+    "generation 3 produced no evidence improvement",
+    "G2_M1 unanimously retained over G3_M3"
+  ],
+  "holdout_evaluation": "not_run_no_genuine_holdout"
+}

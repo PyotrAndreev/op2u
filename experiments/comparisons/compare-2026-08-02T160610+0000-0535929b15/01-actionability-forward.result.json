@@ -1,0 +1,19 @@
+{
+  "confidence": 0.68,
+  "failure_tags": [],
+  "hard_failures": {
+    "A": [],
+    "B": []
+  },
+  "judge_role": "actionability",
+  "reasons": [
+    "Both provide a strong causal bridge from reusable project assets plus systems/reproducibility experience and offer an atomic, time-bounded ACT_NOW deliverable.",
+    "A is marginally more actionable because it schedules a low-cost, reusable funding-preparation artifact alongside the urgent abstract while remaining well below the weekly effort cap.",
+    "B’s narrower allocation is defensible, but deferring the concrete preparation artifact leaves usable capacity unconverted into progress."
+  ],
+  "scores": {
+    "A": 97,
+    "B": 96
+  },
+  "winner": "A"
+}

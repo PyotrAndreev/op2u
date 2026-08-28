@@ -1,0 +1,22 @@
+{
+  "confidence": 0.82,
+  "failure_tags": [
+    "A:near_duplicate_opportunity_types",
+    "A:generic_recommendation"
+  ],
+  "hard_failures": {
+    "A": [],
+    "B": []
+  },
+  "judge_role": "actionability",
+  "reasons": [
+    "B provides stronger causal bridges using multiple reusable technical signals and diversifies across visibility, funding preparation, and monitoring.",
+    "B’s first actions are atomic, deliverable-based, time-bounded, and feasible within seven days.",
+    "A’s actions are executable but largely duplicate the same conference-CFP strategy and rely on a narrower, repeated bridge to the same project concept."
+  ],
+  "scores": {
+    "A": 78,
+    "B": 86
+  },
+  "winner": "B"
+}

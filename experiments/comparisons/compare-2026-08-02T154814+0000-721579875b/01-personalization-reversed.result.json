@@ -1,0 +1,22 @@
+{
+  "confidence": 0.9,
+  "failure_tags": [
+    "A:duplicate_opportunity_type",
+    "A:weak_multi_signal_bridge"
+  ],
+  "hard_failures": {
+    "A": [],
+    "B": []
+  },
+  "judge_role": "personalization",
+  "reasons": [
+    "B provides stronger causal bridges from multiple relevant signals and balances visibility, funding preparation, and monitoring.",
+    "A concentrates on two near-duplicate conference CFPs and relies on a narrower project-based bridge.",
+    "B has higher strategic value and portfolio diversity while retaining concrete, low-effort first actions."
+  ],
+  "scores": {
+    "A": 84,
+    "B": 97
+  },
+  "winner": "B"
+}

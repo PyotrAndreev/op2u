@@ -1,0 +1,71 @@
+{
+  "status": "provisional_cross_profile_frontier",
+  "updated_at": "2026-08-04T04:47:00+00:00",
+  "variant": "T14_QUOTED_GEOGRAPHY",
+  "prompt": "prompts/find_opportunities_general_recommended.md",
+  "prompt_sha256": "5479cd31f7e002ba39719f48ae840c66aec8ad72a3aa9d7f8267bab8623ccd36",
+  "runner_requirements": [
+    "direction_effort_cap from immutable direction snapshot",
+    "semantic stage artifact validation",
+    "evidence_records or evidence_ledger projection",
+    "deterministic exact quote/url/retrieved_at matching",
+    "deterministic claim-year versus quote-year filtering",
+    "selected status plus temporal evidence normalization",
+    "quote-bounded geographic credit"
+  ],
+  "profiles": {
+    "original_breadth_profile": {
+      "strong_run": "2026-08-04T043420+0000-45439953034f",
+      "conservative_repeat": "2026-08-04T043017+0000-49a87bbbddc6",
+      "strong_metrics": {
+        "production_validation": "PASS",
+        "verified_horizon_families": 5,
+        "verified_geographic_hits": 4,
+        "scheduled_upper_minutes": 205,
+        "stretch": "PASS",
+        "judge_hard_failures": 0,
+        "evidence": "24/24",
+        "actionability": "16/16",
+        "family_diversity": "15/15",
+        "geography": "8/10"
+      },
+      "repeat_limitation": "The conservative repeat passed all hard gates but retained only one verified family and zero geographic credit."
+    },
+    "sofiya_academic_profile": {
+      "run": "2026-08-04T043904+0000-22d8821ba413",
+      "independent_research_prefix": "2026-08-04T031327+0000-e1201c9ff784",
+      "metrics": {
+        "production_validation": "PASS",
+        "selected_route": "University of Barcelona Brainlab VariSoA eligibility-and-fit preparation",
+        "scheduled_upper_minutes": 60,
+        "judge_hard_failures": 0,
+        "evidence": "20/20",
+        "actionability": "15/15",
+        "funding_completeness": "4/12",
+        "graduate_route_depth": "8/15",
+        "person_specific_network_paths": "5/10"
+      },
+      "limitations": [
+        "EU citizenship and 300 ECTS including a Master's degree are unresolved and likely material.",
+        "The official fully-funded label does not establish tuition, stipend, living support, or residual gap.",
+        "No verified October Cape Town route.",
+        "No target-program TOEFL score or complete B2-to-C1 plan."
+      ]
+    }
+  },
+  "pairwise": {
+    "t14_vs_bh7_original": {
+      "comparison_id": "compare-2026-08-04T044322+0000-24ba5aabe6",
+      "result": "8/8 mapped votes for T14; 4/4 role outcomes order-stable"
+    },
+    "t13_parent_vs_bh7_original": {
+      "comparison_id": "compare-2026-08-04T034904+0000-d9d023138c",
+      "result": "16/16 mapped votes for T13; all role/repeat outcomes order-stable"
+    },
+    "t13_parent_vs_bh7_sofiya": {
+      "comparison_id": "compare-2026-08-04T035601+0000-3095ac07eb",
+      "result": "16/16 mapped votes for T13; all role/repeat outcomes order-stable"
+    }
+  },
+  "promotion_caveat": "Evidence safety generalized across two visible profiles; discovery recall did not stabilize across original-profile repeats. This is not hidden-holdout evidence."
+}

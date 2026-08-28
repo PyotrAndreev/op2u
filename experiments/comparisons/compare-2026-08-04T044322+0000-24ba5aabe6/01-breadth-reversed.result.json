@@ -1,0 +1,26 @@
+{
+  "confidence": 0.9,
+  "failure_tags": [
+    "A:limited_verified_family_diversity",
+    "A:limited_adaptation_belonging_value",
+    "A:report_artifact_inconsistency",
+    "B:unresolved_fit_or_cost_uncertainties"
+  ],
+  "hard_failures": {
+    "A": [],
+    "B": []
+  },
+  "judge_role": "breadth",
+  "reasons": [
+    "B provides five evidence-backed, materially distinct horizon families versus A's normalized report horizon of two.",
+    "B has stronger role expansion through attendee, grant-applicant, speaker/workshop-proposer, and local-community pathways.",
+    "B offers substantially stronger dated South Africa/Cape Town coverage and contribution-capable adaptation routes.",
+    "Both preserve uncertainty, keep monitors at zero effort, satisfy selected-effort limits, and include safe bounded stretch actions.",
+    "A's persisted report removes support for one selected adaptation path and reports a narrower normalized horizon despite broader upstream artifacts."
+  ],
+  "scores": {
+    "A": 64,
+    "B": 86
+  },
+  "winner": "B"
+}

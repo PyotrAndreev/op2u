@@ -1,0 +1,25 @@
+{
+  "confidence": 0.93,
+  "failure_tags": [
+    "B_limited_verified_breadth",
+    "B_delayed_trigger",
+    "B_report_consistency"
+  ],
+  "hard_failures": {
+    "A": [],
+    "B": []
+  },
+  "judge_role": "actionability",
+  "reasons": [
+    "A provides more evidence-backed, distinct selected routes with bounded verb-led actions, concrete deliverables, explicit blockers, and credible time limits.",
+    "A covers five verified horizon families and dated overlap across Hong Kong, the first Shanghai window, and South Africa; unsupported leads are correctly excluded.",
+    "B has only two verified families in the persisted report and weaker internal consistency around the South Africa route.",
+    "B's South Africa selected action is triggered beyond seven days, reducing immediate actionability.",
+    "Both respect effort limits, give monitors zero effort, disclose uncertainty, and include a bounded reversible stretch action."
+  ],
+  "scores": {
+    "A": 88,
+    "B": 70
+  },
+  "winner": "A"
+}

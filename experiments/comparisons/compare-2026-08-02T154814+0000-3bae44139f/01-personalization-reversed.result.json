@@ -1,0 +1,24 @@
+{
+  "confidence": 0.93,
+  "failure_tags": [
+    "A:weak_opportunity_bridge",
+    "A:limited_strategic_value",
+    "A:vague_deferred_actions"
+  ],
+  "hard_failures": {
+    "A": [],
+    "B": []
+  },
+  "judge_role": "personalization",
+  "reasons": [
+    "B provides a stronger causal bridge between profile assets and a timely opportunity.",
+    "B offers a concrete, atomic seven-day deliverable with clear effort estimates.",
+    "B has better strategic value through immediate visibility and a preparation path toward funding.",
+    "A is evidence-conscious and constraint-aware but its primary action is less distinctive and less strategically actionable."
+  ],
+  "scores": {
+    "A": 77,
+    "B": 90
+  },
+  "winner": "B"
+}

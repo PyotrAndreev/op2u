@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://op2u.local/schemas/judge_result.schema.json",
+  "title": "JudgeResult",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["judge_role", "hard_failures", "dimension_scores", "penalties", "verdict", "reasons", "failure_tags"],
+  "properties": {
+    "judge_role": {"enum": ["evidence", "actionability", "personalization", "pairwise", "calibration"]},
+    "hard_failures": {"type": "array", "items": {"type": "string"}},
+    "dimension_scores": {"type": "object", "additionalProperties": {"type": ["number", "null"], "minimum": 0}},
+    "penalties": {"type": "object", "additionalProperties": {"type": "number", "minimum": 0}},
+    "score": {"type": ["number", "null"]},
+    "verdict": {"enum": ["accept", "conditional", "reject", "A", "B", "tie"]},
+    "winner": {"enum": ["A", "B", "tie", null]},
+    "reasons": {"type": "array", "items": {"type": "string"}},
+    "failure_tags": {"type": "array", "items": {"type": "string"}},
+    "selected_ids": {"type": "array", "items": {"type": "string"}},
+    "order_stable": {"type": "boolean"}
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "confidence": 0.82,
+  "failure_tags": [
+    "A:weekly_effort_limit"
+  ],
+  "hard_failures": {
+    "A": [
+      "Selected actions' stated effort ranges can total 6–11 hours, exceeding the six-hour weekly limit."
+    ],
+    "B": []
+  },
+  "judge_role": "evidence",
+  "reasons": [
+    "A has stronger official evidence, deadline specificity, and opportunity bridges.",
+    "A is hard-gated by its inconsistent weekly-effort accounting.",
+    "B is more conservative: it limits current action to 45 minutes and explicitly marks eligibility, commitment, and total effort as unknown.",
+    "B's ACT_NOW status is officially supported, with a concrete seven-day first action."
+  ],
+  "scores": {
+    "A": 90,
+    "B": 77
+  },
+  "winner": "B"
+}

@@ -1,0 +1,19 @@
+{
+  "confidence": 0.84,
+  "failure_tags": [],
+  "hard_failures": {
+    "A": [],
+    "B": []
+  },
+  "judge_role": "actionability",
+  "reasons": [
+    "Both provide a specific, profile-grounded bridge and an atomic ACT_NOW deliverable within seven days.",
+    "B is more actionable because it also schedules a bounded, reusable preparation artifact for the future opportunity while remaining within the weekly cap.",
+    "A unnecessarily defers that concrete preparation step despite ample stated capacity."
+  ],
+  "scores": {
+    "A": 95,
+    "B": 97
+  },
+  "winner": "B"
+}

@@ -1,0 +1,39 @@
+{
+  "confidence": 0.78,
+  "failure_tags": [],
+  "hard_failures": {
+    "A": [],
+    "B": []
+  },
+  "judge_role": "personalization",
+  "reasons": [
+    "Both provide a well-supported, concrete urgent path with a strong bridge to reusable technical work and stated uncertainty.",
+    "A better converts available weekly capacity into a bounded reusable funding-preparation asset while remaining comfortably within the effort limit.",
+    "B's deferral is cautious but leaves substantial capacity unused despite a concrete future window and a low-cost, strategically reusable preparation action."
+  ],
+  "scores": {
+    "A": {
+      "context_intersection_quality": 7,
+      "evidence_correctness": 25,
+      "first_step_executability": 15,
+      "liveness_and_eligibility": 15,
+      "opportunity_bridge_quality": 15,
+      "portfolio_diversity": 5,
+      "strategic_value": 11,
+      "total": 98,
+      "uncertainty_hygiene_and_compactness": 5
+    },
+    "B": {
+      "context_intersection_quality": 7,
+      "evidence_correctness": 25,
+      "first_step_executability": 15,
+      "liveness_and_eligibility": 15,
+      "opportunity_bridge_quality": 15,
+      "portfolio_diversity": 5,
+      "strategic_value": 9,
+      "total": 96,
+      "uncertainty_hygiene_and_compactness": 5
+    }
+  },
+  "winner": "A"
+}

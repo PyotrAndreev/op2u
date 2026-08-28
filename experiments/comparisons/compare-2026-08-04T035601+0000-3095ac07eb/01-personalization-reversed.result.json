@@ -1,0 +1,29 @@
+{
+  "confidence": 0.96,
+  "failure_tags": [
+    "weekly_capacity_mismatch",
+    "unsupported_breadth_claim",
+    "irrelevant_original_profile_branch"
+  ],
+  "hard_failures": {
+    "A": [
+      "shared_weekly_capacity",
+      "exact_primary_evidence",
+      "no_irrelevant_hardcoded_geography"
+    ],
+    "B": []
+  },
+  "judge_role": "personalization",
+  "reasons": [
+    "B provides one exact-primary-supported, dated direct-PhD route with a bounded eligibility-and-fit action, while explicitly preserving eligibility and funding-package uncertainty.",
+    "B uses the shared 240-minute capacity; A persists a 360-minute capacity declaration and schedules an out-of-window South Africa event.",
+    "B’s person-specific paths are evidence-grounded thematic monitors without implying access, supervision, or introductions.",
+    "A has useful profile bridges and uncertainty labeling, but schedules a research-Master action despite its report identifying missing exact temporal/status support, and its first step can exceed 60 minutes.",
+    "Neither provides a verified Cape Town-October route or a specific TOEFL appointment; B handles these as zero-effort leads appropriately."
+  ],
+  "scores": {
+    "A": 31,
+    "B": 61
+  },
+  "winner": "B"
+}

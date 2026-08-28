@@ -1,0 +1,19 @@
+{
+  "confidence": 0.68,
+  "failure_tags": [],
+  "hard_failures": {
+    "A": [],
+    "B": []
+  },
+  "judge_role": "personalization",
+  "reasons": [
+    "Both provide strong, profile-specific bridges and a diversified visibility/funding/monitoring portfolio.",
+    "A more clearly operationalizes portfolio diversity and avoids assigning weekly work to the closed monitoring path.",
+    "A states multiple reusable technical signals in its opportunity bridge; B is similarly strong but slightly narrower."
+  ],
+  "scores": {
+    "A": 93,
+    "B": 91
+  },
+  "winner": "A"
+}

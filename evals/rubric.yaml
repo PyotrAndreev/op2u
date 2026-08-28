@@ -1,0 +1,86 @@
+version: 2
+name: opportunity_discovery_rubric
+snapshot_policy: evaluate_liveness_at_run_time
+scoring:
+  scale: 100
+  rule: Score dimensions before penalties; a hard-gated report is ineligible regardless of prose quality.
+  dimensions:
+    evidence_correctness:
+      max: 25
+      owner: evidence
+      test: Every material ACT_NOW claim has an official URL, quoted support, and retrieval time.
+    liveness_and_eligibility:
+      max: 15
+      owner: evidence
+      test: Status, deadline, and explicit eligibility are supported at the snapshot date; unknowns stay unknown.
+    opportunity_bridge_quality:
+      max: 15
+      owner: actionability
+      test: The recommendation gives a causal bridge from at least two profile signals or reusable assets.
+    first_step_executability:
+      max: 15
+      owner: actionability
+      test: A concrete, atomic deliverable can be started within seven days with a credible time estimate.
+    strategic_value:
+      max: 12
+      owner: personalization
+      test: The path plausibly advances validation, collaborators, users, funding, or visibility.
+    context_intersection_quality:
+      max: 8
+      owner: personalization
+      test: The opportunity exploits a meaningful intersection of current context, trajectory, geography, or side path.
+    portfolio_diversity:
+      max: 5
+      owner: personalization
+      test: The selected set avoids duplicate organizations and near-duplicate opportunity types where alternatives exist.
+    uncertainty_hygiene_and_compactness:
+      max: 5
+      owner: evidence
+      test: Assumptions and unknowns are explicit and the report is selective and decision-oriented.
+hard_gates:
+  - id: no_job_or_internship_in_act_now
+    rule: ACT_NOW contains no job, internship, recruiter program, or generic employment move unless explicitly requested.
+  - id: official_evidence_for_act_now
+    rule: Every ACT_NOW status and deadline claim has evidence from an official source.
+  - id: no_closed_or_stale_act_now
+    rule: A closed, expired, or unsupported opportunity cannot be ACT_NOW.
+  - id: shortlist_limits
+    rule: ACT_NOW <= 3 and PREPARE_NEXT <= 4.
+  - id: weekly_effort_limit
+    rule: Total estimated user effort for selected actions <= 6 hours per week.
+  - id: seven_day_first_action
+    rule: At least one selected path has a concrete first action deliverable within seven days.
+penalties:
+  generic_recommendation: 2
+  unsupported_claim: 5
+  stale_opportunity: 5
+  vague_next_action: 2
+  ignored_known_constraint: 4
+  excessive_report_length: 0.5
+judge_roles:
+  evidence:
+    owns: [evidence_correctness, liveness_and_eligibility, uncertainty_hygiene_and_compactness]
+    must_not_infer: [status, deadline, eligibility, compensation, legal_or_visa_facts]
+  actionability:
+    owns: [opportunity_bridge_quality, first_step_executability]
+  personalization:
+    owns: [strategic_value, context_intersection_quality, portfolio_diversity]
+  pairwise:
+    compares: [meaningful_first_action, evidence, bridge, effort, diversity, ranking]
+promotion:
+  minimum_valid_repeats: 2
+  material_score_improvement: 5
+  evidence_regression_forbidden: true
+  require_order_stable_pairwise_result: true
+  require_not_pareto_dominated: true
+convergence:
+  generations_without_promotable_variant: 2
+  stop_on_wall_clock_hours: 3
+  report_incomplete_repeats: true
+visible_fixture_policy:
+  known_cases_are_regression_diagnostics: true
+  never_treat_visible_cases_as_holdout: true
+holdout_policy:
+  sealed: true
+  accessible_to: []
+  limitation: No behavioral labels or holdout contents are available to prompt authors, workers, or judges; conclusions are proxy-quality and profile-scoped.

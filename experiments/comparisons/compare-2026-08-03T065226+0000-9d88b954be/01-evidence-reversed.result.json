@@ -1,0 +1,24 @@
+{
+  "confidence": 0.93,
+  "failure_tags": [
+    "unsupported_breadth_claim",
+    "ineligible"
+  ],
+  "hard_failures": {
+    "A": [
+      "unsupported_breadth_not_counted"
+    ],
+    "B": []
+  },
+  "judge_role": "evidence",
+  "reasons": [
+    "A counts undated, no-participation-route entries toward verified horizon breadth and adaptation/geographic framing, violating the unsupported-breadth gate.",
+    "B has direct official support for its selected immediate action, dated Hong Kong, first-Shanghai, and Cape Town paths, and bounded effort.",
+    "B's verified portfolio is only three distinct families and its Cape Town path is event-based rather than recurring contribution, limiting breadth and belonging credit."
+  ],
+  "scores": {
+    "A": 0,
+    "B": 74
+  },
+  "winner": "B"
+}

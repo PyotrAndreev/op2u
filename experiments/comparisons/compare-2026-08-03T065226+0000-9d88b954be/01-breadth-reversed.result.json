@@ -1,0 +1,24 @@
+{
+  "confidence": 0.94,
+  "failure_tags": [
+    "unsupported_breadth_claim",
+    "artifact_inconsistency"
+  ],
+  "hard_failures": {
+    "A": [
+      "unsupported_breadth_not_counted"
+    ],
+    "B": []
+  },
+  "judge_role": "breadth",
+  "reasons": [
+    "B provides three evidence-backed, dated participation paths across Hong Kong, first-window Shanghai, and Cape Town, including a valid bounded public-demo stretch action.",
+    "A explicitly counts undated or no-participation-route monitors toward its verified five-family horizon, which violates the unsupported-breadth gate.",
+    "B has stronger selected-action liveness, geographic coverage, role expansion, and actionable specificity; its Cape Town item does not establish the recurring contribution route needed for high adaptation credit."
+  ],
+  "scores": {
+    "A": 28,
+    "B": 82
+  },
+  "winner": "B"
+}

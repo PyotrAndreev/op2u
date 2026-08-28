@@ -1,0 +1,25 @@
+{
+  "confidence": 0.84,
+  "failure_tags": [
+    "B:unsupported_status_evidence",
+    "B:near_duplicate_opportunity_types"
+  ],
+  "hard_failures": {
+    "A": [],
+    "B": [
+      "official_evidence_for_act_now"
+    ]
+  },
+  "judge_role": "personalization",
+  "reasons": [
+    "A provides a stronger bridge from reusable technical assets and experience to both visibility and prospective funding.",
+    "A offers a more diverse portfolio across live visibility, funding preparation, and monitoring.",
+    "B's two immediate paths are near-duplicate conference CFPs and reuse essentially the same abstract.",
+    "B does not quote official support for its asserted open status; its quotes establish closing times but not that the calls are currently open."
+  ],
+  "scores": {
+    "A": 89,
+    "B": 70
+  },
+  "winner": "A"
+}

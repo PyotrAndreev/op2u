@@ -1,0 +1,20 @@
+{
+  "confidence": 0.94,
+  "failure_tags": [],
+  "hard_failures": {
+    "A": [],
+    "B": []
+  },
+  "judge_role": "actionability",
+  "reasons": [
+    "Both provide a concrete, seven-day deliverable with credible 45–60 minute estimates.",
+    "Both establish a causal bridge from the project’s reproducibility/portable-environment assets and orchestration/distributed-systems experience.",
+    "Both keep selected weekly actions within the stated effort limit and separate the live path from preparation and monitoring.",
+    "Both appropriately retain uncertainty about exact fit, requirements, and eligibility."
+  ],
+  "scores": {
+    "A": 91,
+    "B": 91
+  },
+  "winner": "tie"
+}

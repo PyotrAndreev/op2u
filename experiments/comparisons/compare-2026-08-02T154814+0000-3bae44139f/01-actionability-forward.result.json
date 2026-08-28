@@ -1,0 +1,42 @@
+{
+  "confidence": 0.91,
+  "failure_tags": [
+    "B:eligibility_uncertainty",
+    "B:unknown_total_effort",
+    "A:fit_interpretation_uncertainty"
+  ],
+  "hard_failures": {
+    "A": [],
+    "B": []
+  },
+  "judge_role": "actionability",
+  "reasons": [
+    "A provides a stronger causal bridge from multiple profile assets to a specific opportunity.",
+    "A's first action is more atomic, concrete, and directly submission-oriented.",
+    "A supplies stronger explicit status, deadline, and eligibility evidence for its ACT_NOW item.",
+    "B's main path has uncertain total commitment and incomplete admission/eligibility details, weakening practical actionability."
+  ],
+  "scores": {
+    "A": {
+      "context_intersection_quality": 7,
+      "evidence_correctness": 24,
+      "first_step_executability": 14,
+      "liveness_and_eligibility": 14,
+      "opportunity_bridge_quality": 14,
+      "portfolio_diversity": 4,
+      "strategic_value": 10,
+      "uncertainty_hygiene_and_compactness": 4
+    },
+    "B": {
+      "context_intersection_quality": 6,
+      "evidence_correctness": 18,
+      "first_step_executability": 12,
+      "liveness_and_eligibility": 10,
+      "opportunity_bridge_quality": 11,
+      "portfolio_diversity": 5,
+      "strategic_value": 9,
+      "uncertainty_hygiene_and_compactness": 4
+    }
+  },
+  "winner": "A"
+}

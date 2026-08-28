@@ -1,0 +1,24 @@
+{
+  "confidence": 0.98,
+  "failure_tags": [
+    "missing_production_validation"
+  ],
+  "hard_failures": {
+    "A": [
+      "persisted_production_validation"
+    ],
+    "B": [
+      "persisted_production_validation"
+    ]
+  },
+  "judge_role": "breadth",
+  "reasons": [
+    "Neither artifact includes a latest persisted production validation establishing validity, so both are ineligible under the mandatory hard gate.",
+    "B otherwise shows stronger dated, participation-backed geographic and role coverage; A is more conservative about unsupported routes, but neither advantage can overcome ineligibility."
+  ],
+  "scores": {
+    "A": 0,
+    "B": 0
+  },
+  "winner": "tie"
+}

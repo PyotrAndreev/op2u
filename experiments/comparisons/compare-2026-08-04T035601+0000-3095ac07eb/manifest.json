@@ -1,0 +1,18 @@
+{
+  "comparison_id": "compare-2026-08-04T035601+0000-3095ac07eb",
+  "created_at": "2026-08-04T03:56:01+00:00",
+  "dry_run": false,
+  "input_hashes": {
+    "left": "03acbaf422c0d9f3652443f1e79011fc32af022afb1ba911ddf2035118ae2a77",
+    "right": "26a7dc979de26e14913a121f25cf7dda807f83bbf86aca020adf1546c3ac323d"
+  },
+  "judge_model": "openai-codex/gpt-5.6-terra",
+  "repeats": 2,
+  "roles": [
+    "evidence",
+    "actionability",
+    "personalization",
+    "academic_depth"
+  ],
+  "target": "report"
+}

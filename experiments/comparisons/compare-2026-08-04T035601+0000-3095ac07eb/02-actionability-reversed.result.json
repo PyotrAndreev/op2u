@@ -1,0 +1,26 @@
+{
+  "confidence": 0.95,
+  "failure_tags": [
+    "A:weekly_capacity_mismatch",
+    "A:first_step_over_60_minutes"
+  ],
+  "hard_failures": {
+    "A": [
+      "shared_weekly_capacity"
+    ],
+    "B": []
+  },
+  "judge_role": "actionability",
+  "reasons": [
+    "B uses the required 240-minute capacity and schedules one bounded, user-controlled 40–60 minute action with a tangible output and dated trigger.",
+    "B's selected route has direct official support for a current route, stated requirements, and a future call window; eligibility and funding-package gaps are explicitly retained.",
+    "A declares and applies a 360-minute weekly cap, violating the shared 240-minute capacity hard gate.",
+    "A schedules a selected first action up to 90 minutes, exceeding the rubric's <=60-minute first-step standard.",
+    "Both retain unsupported programme, contact, exam, and Cape Town items as monitors/leads and avoid unsupported supervision or exam claims."
+  ],
+  "scores": {
+    "A": 32,
+    "B": 62
+  },
+  "winner": "B"
+}

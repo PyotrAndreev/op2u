@@ -1,0 +1,29 @@
+{
+  "confidence": 0.88,
+  "failure_tags": [],
+  "hard_failures": {
+    "A": [],
+    "B": []
+  },
+  "judge_role": "evidence",
+  "reasons": [
+    "Both retain only one officially supported open ACT_NOW item, exclude stale items, state uncertainty without inferring eligibility, and meet shortlist and weekly-effort constraints.",
+    "A provides a more directly auditable report-level evidence trail: official URLs, verbatim quotes, and retrieval times are all included alongside the recommendations.",
+    "B's report-level citations summarize support but omit the quotes and retrieval times, although those details exist elsewhere in its saved verification artifact."
+  ],
+  "scores": {
+    "A": {
+      "evidence_correctness": 25,
+      "liveness_and_eligibility": 15,
+      "total": 44.5,
+      "uncertainty_hygiene_and_compactness": 4.5
+    },
+    "B": {
+      "evidence_correctness": 24,
+      "liveness_and_eligibility": 15,
+      "total": 43.5,
+      "uncertainty_hygiene_and_compactness": 4.5
+    }
+  },
+  "winner": "A"
+}

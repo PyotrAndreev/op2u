@@ -1,0 +1,19 @@
+{
+  "confidence": 0.72,
+  "failure_tags": [],
+  "hard_failures": {
+    "A": [],
+    "B": []
+  },
+  "judge_role": "evidence",
+  "reasons": [
+    "Both satisfy the evidence hard gates: the sole ACT_NOW item has an official URL, direct quoted status/deadline support, snapshot retrieval time, and explicit institutional eligibility.",
+    "Both correctly keep future, closed, and stale items outside ACT_NOW and state eligibility unknown where not verified.",
+    "B presents the official quotes and retrieval times more directly in its final citation layer and gives a bounded, explicitly budgeted preparation action while remaining below the weekly cap."
+  ],
+  "scores": {
+    "A": 96,
+    "B": 97
+  },
+  "winner": "B"
+}

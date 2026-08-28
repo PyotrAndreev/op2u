@@ -1,0 +1,26 @@
+{
+  "confidence": 0.84,
+  "failure_tags": [
+    "limited_recurring_adaptation_path",
+    "report_artifact_inconsistency",
+    "unresolved_eligibility_and_cost"
+  ],
+  "hard_failures": {
+    "A": [],
+    "B": []
+  },
+  "judge_role": "evidence",
+  "reasons": [
+    "B provides five evidence-backed, materially distinct horizon families versus A's three, including funding and a speaker/workshop proposal route.",
+    "Both provide dated official overlap across Hong Kong, the first Shanghai window, and South Africa, while correctly leaving the later Shanghai window unsupported.",
+    "B has stronger role expansion through attendee, governance/community participant, grant applicant, and speaker/workshop-proposer paths.",
+    "B's bounded CFP-abstract stretch action is explicitly reversible and safe; both portfolios disclose important eligibility, cost, and attendance uncertainties.",
+    "A is more effort-efficient, but its verified portfolio is narrower and its South Africa path is only a one-off event rather than a recurring contribution-capable belonging route.",
+    "B contains report-stage projection/classification inconsistency for one Shanghai item, reducing evidence-artifact coherence, but the final selected immediate action remains directly supported."
+  ],
+  "scores": {
+    "A": 68,
+    "B": 82
+  },
+  "winner": "B"
+}

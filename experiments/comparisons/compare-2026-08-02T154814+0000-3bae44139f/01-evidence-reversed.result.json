@@ -1,0 +1,25 @@
+{
+  "confidence": 0.88,
+  "failure_tags": [
+    "A:weak_explicit_eligibility",
+    "A:limited_bridge_specificity",
+    "B:fit_interpretation",
+    "B:total_effort_uncertainty"
+  ],
+  "hard_failures": {
+    "A": [],
+    "B": []
+  },
+  "judge_role": "evidence",
+  "reasons": [
+    "B provides stronger official evidence for a live opportunity, including explicit eligibility, deadline, quoted support, and retrieval time.",
+    "B offers a more concrete seven-day deliverable and a clearer bridge across multiple reusable assets or profile signals.",
+    "A is careful about uncertainty but its primary path has weaker explicit eligibility evidence and a less developed opportunity bridge.",
+    "Both remain within shortlist and stated initial-action effort limits, with no employment or stale opportunity promoted to ACT_NOW."
+  ],
+  "scores": {
+    "A": 74,
+    "B": 89
+  },
+  "winner": "B"
+}

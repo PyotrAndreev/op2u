@@ -1,0 +1,22 @@
+{
+  "confidence": 0.84,
+  "failure_tags": [
+    "A:weekly_effort_ambiguity"
+  ],
+  "hard_failures": {
+    "A": [],
+    "B": []
+  },
+  "judge_role": "actionability",
+  "reasons": [
+    "Both provide strong causal bridges from reproducibility/portable environments and distributed-systems experience to concrete opportunities.",
+    "Both provide atomic, deliverable-based first actions within seven days.",
+    "B is more executable because it explicitly schedules only two actions this week, caps them at 150 minutes, and defers the closed monitor item.",
+    "A's stated effort treatment is less clear because its selected paths include broader 3–6 and 2–4 hour estimates while reporting only initial-action time."
+  ],
+  "scores": {
+    "A": 87,
+    "B": 92
+  },
+  "winner": "B"
+}

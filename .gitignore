@@ -2,3 +2,20 @@ usr/*
 !usr/.gitkeep
 
 .codex
+
+# Personal profiles and complete production runs stay local.
+runs/
+exports/
+
+# Private links from anonymized comparison IDs to source profiles.
+experiments/**/aggregate.private.json
+experiments/**/mapping.private.json
+
+# Raw experiment traces can contain the evaluated profiles; retain only outcomes.
+experiments/**/*.call.json
+experiments/**/*.input.json
+experiments/**/*.prompt.txt
+
+# Python build artifacts
+__pycache__/
+*.py[cod]

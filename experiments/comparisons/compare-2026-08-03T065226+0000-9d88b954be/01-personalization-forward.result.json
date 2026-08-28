@@ -1,0 +1,22 @@
+{
+  "confidence": 0.94,
+  "failure_tags": [
+    "unsupported_breadth_claim"
+  ],
+  "hard_failures": {
+    "A": [],
+    "B": [
+      "unsupported_breadth_not_counted"
+    ]
+  },
+  "judge_role": "personalization",
+  "reasons": [
+    "A provides evidence-backed, geographically dated roles with concrete profile bridges, bounded actions, disclosed uncertainties, and a valid safe stretch action.",
+    "B counts undated, no-participation-path monitor entries toward verified family, geographic, adaptation, and role breadth despite explicitly acknowledging the missing evidence."
+  ],
+  "scores": {
+    "A": 82,
+    "B": 0
+  },
+  "winner": "A"
+}

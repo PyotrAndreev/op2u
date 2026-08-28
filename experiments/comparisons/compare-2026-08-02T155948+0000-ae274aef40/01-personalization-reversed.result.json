@@ -1,0 +1,19 @@
+{
+  "confidence": 0.82,
+  "failure_tags": [],
+  "hard_failures": {
+    "A": [],
+    "B": []
+  },
+  "judge_role": "personalization",
+  "reasons": [
+    "Both provide strong, profile-specific bridges and a diversified portfolio.",
+    "B more clearly separates this-week actions from monitoring, with an explicit 150-minute scheduled budget.",
+    "B better preserves strategic focus by not assigning work to the closed monitoring path."
+  ],
+  "scores": {
+    "A": 91,
+    "B": 94
+  },
+  "winner": "B"
+}

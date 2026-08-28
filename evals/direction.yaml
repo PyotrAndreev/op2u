@@ -1,0 +1,43 @@
+primary_objective:
+  - maximize_meaningful_first_actions_within_7_days
+  - find_high_value_context_intersections
+
+preferences:
+  career_value: high
+  international_visibility: high
+  geographic_synergy: high
+  education: medium
+  funding: high
+  side_interests: medium
+  novelty: medium
+
+constraints:
+  exclude_jobs_by_default: true
+  max_act_now: 3
+  max_prepare_next: 4
+  primary_sources_required: true
+  no_stale_opportunities: true
+  max_total_user_effort_hours_per_week: 6
+
+execution:
+  wall_clock_limit_hours: 3
+  optimize_until_external_judge_convergence: true
+  no_improvement_generations: 2
+  population_per_generation: 3
+  repeats_per_variant: 3
+  max_generations: null
+  max_total_research_runs: null
+  worker_models:
+    - openai-codex/gpt-5.6-luna
+    - openai-codex/gpt-5.6-terra
+  judge_models:
+    - openai-codex/gpt-5.6-luna
+    - openai-codex/gpt-5.6-terra
+
+penalties:
+  generic_recommendation: 2.0
+  unsupported_claim: 5.0
+  stale_opportunity: 5.0
+  vague_next_action: 2.0
+  ignored_known_constraint: 4.0
+  excessive_report_length: 0.5

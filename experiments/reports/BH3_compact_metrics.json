@@ -1,0 +1,119 @@
+{
+  "candidate_and_horizon_counts": {
+    "candidate_statuses": {
+      "ACT_NOW": 3,
+      "MONITOR": 3,
+      "PREPARE_NEXT": 1
+    },
+    "candidates": 7,
+    "horizon": 7
+  },
+  "distinct_families": {
+    "horizon": [
+      "adaptation",
+      "community",
+      "funding",
+      "place_event",
+      "teaching",
+      "visibility"
+    ],
+    "horizon_count": 6,
+    "verified_actionable": [
+      "place_event",
+      "visibility"
+    ],
+    "verified_actionable_count": 2
+  },
+  "monitor_effort_violations": {
+    "count": 0,
+    "items": []
+  },
+  "scheduled_effort": {
+    "cap_minutes": 360,
+    "computed_selected_action_max_minutes": 225,
+    "declared_max_minutes": 225,
+    "matches_declared": true,
+    "within_cap": true
+  },
+  "schema_validity": {
+    "local_contract_errors": [],
+    "local_contract_valid": true,
+    "production_validation_file": "production_validation.attempt-02.json",
+    "production_validation_schema_errors": [
+      "schema: $.evidence_ledger[2].verification_artifact_hash: shorter than minLength"
+    ],
+    "production_validation_valid": false,
+    "report_file": "report.attempt-02.result.json",
+    "valid": false
+  },
+  "selected_family_geography_duplication": {
+    "action_portfolio": {
+      "family": [],
+      "geography": [
+        {
+          "candidate_ids": [
+            "opp-1",
+            "opp-3"
+          ],
+          "extra_items": 1,
+          "value": "south africa 2026-09-25\u20132026-12-31"
+        }
+      ]
+    },
+    "all_selected_including_monitor": {
+      "family": [
+        {
+          "candidate_ids": [
+            "opp-6",
+            "opp-7"
+          ],
+          "extra_items": 1,
+          "value": "community"
+        }
+      ],
+      "geography": [
+        {
+          "candidate_ids": [
+            "opp-1",
+            "opp-3",
+            "opp-6",
+            "opp-7"
+          ],
+          "extra_items": 3,
+          "value": "south africa 2026-09-25\u20132026-12-31"
+        }
+      ]
+    }
+  },
+  "stretch_real_action_status": {
+    "candidate_id": "opp-1",
+    "real_action": false,
+    "reasons": [
+      "seven-day trigger is not explicit"
+    ],
+    "status": "FAIL"
+  },
+  "uncertainty_counts": {
+    "candidate_uncertainties": 13,
+    "candidates_with_uncertainties": 7,
+    "profile_unknowns": 3,
+    "report_summary": 6
+  },
+  "verified_geographic_windows": {
+    "count": 3,
+    "hits": [
+      {
+        "candidate_id": "opp-4",
+        "window": "shanghai_2026-09-06_2026-09-10"
+      },
+      {
+        "candidate_id": "opp-1",
+        "window": "south_africa_2026-09-25_2026-12-31"
+      },
+      {
+        "candidate_id": "opp-6",
+        "window": "south_africa_2026-09-25_2026-12-31"
+      }
+    ]
+  }
+}

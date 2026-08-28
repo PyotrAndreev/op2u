@@ -1,0 +1,9 @@
+# Placeholder holdout template, not a genuine unseen holdout.
+# The runner may read this only during final evaluation. Never pass it to mutation agents.
+cases:
+  - id: reusable_research_asset
+    hidden: true
+    expected_pattern:
+      - Connect an existing technical research asset with a current open call.
+      - Prefer opportunities requiring adaptation rather than creation from scratch.
+    caveat: This pattern came from the initial specification and cannot measure true generalization.

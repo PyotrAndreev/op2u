@@ -1,0 +1,24 @@
+{
+  "confidence": 0.94,
+  "failure_tags": [
+    "weekly_capacity_mismatch"
+  ],
+  "hard_failures": {
+    "A": [
+      "shared_weekly_capacity: uses a legacy 360-minute weekly cap rather than the required shared 240-minute capacity."
+    ],
+    "B": []
+  },
+  "judge_role": "academic_depth",
+  "reasons": [
+    "B provides a directly supported, upcoming direct-PhD route with explicit eligibility barriers, funding-label caveats, and a bounded fit-matrix action.",
+    "B distinguishes the funded label from unverified tuition, stipend, duration, and living-support components rather than treating package completeness as established.",
+    "A has a well-supported research-Master fit route, but lacks direct-PhD or research-bridge depth and violates the shared-capacity gate.",
+    "Both preserve uncertainty around supervisor access, language-test logistics, and non-overlapping Cape Town options; neither establishes a substantive measurable language-practice path."
+  ],
+  "scores": {
+    "A": 34,
+    "B": 63
+  },
+  "winner": "B"
+}

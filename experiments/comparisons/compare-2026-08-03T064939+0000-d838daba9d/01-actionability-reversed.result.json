@@ -1,0 +1,25 @@
+{
+  "confidence": 0.98,
+  "failure_tags": [
+    "persisted_production_validation",
+    "unsupported_breadth_claim"
+  ],
+  "hard_failures": {
+    "A": [
+      "missing_persisted_production_validation"
+    ],
+    "B": [
+      "missing_persisted_production_validation"
+    ]
+  },
+  "judge_role": "actionability",
+  "reasons": [
+    "Both are ineligible because no persisted production validation artifact is supplied.",
+    "Absent the hard-gate failure, A presents stronger bounded selected actions; B improperly counts unsupported monitor pathways toward breadth."
+  ],
+  "scores": {
+    "A": 0,
+    "B": 0
+  },
+  "winner": "tie"
+}

@@ -1,0 +1,108 @@
+{
+  "candidate_and_horizon_counts": {
+    "candidate_statuses": {
+      "ACT_NOW": 1,
+      "MONITOR": 6,
+      "PREPARE_NEXT": 1
+    },
+    "candidates": 8,
+    "horizon": 8
+  },
+  "distinct_families": {
+    "horizon": [
+      "adaptation",
+      "community",
+      "creative",
+      "place_event",
+      "visibility"
+    ],
+    "horizon_count": 5,
+    "verified_actionable": [
+      "place_event"
+    ],
+    "verified_actionable_count": 1
+  },
+  "monitor_effort_violations": {
+    "count": 0,
+    "items": []
+  },
+  "scheduled_effort": {
+    "cap_minutes": 360,
+    "computed_selected_action_max_minutes": 45,
+    "declared_max_minutes": 45,
+    "matches_declared": true,
+    "within_cap": true
+  },
+  "schema_validity": {
+    "local_contract_errors": [],
+    "local_contract_valid": true,
+    "production_validation_file": "production_validation.attempt-02.json",
+    "production_validation_schema_errors": [],
+    "production_validation_valid": true,
+    "valid": true
+  },
+  "selected_family_geography_duplication": {
+    "action_portfolio": {
+      "family": [],
+      "geography": []
+    },
+    "all_selected_including_monitor": {
+      "family": [
+        {
+          "candidate_ids": [
+            "opp-5",
+            "opp-6",
+            "opp-8"
+          ],
+          "extra_items": 2,
+          "value": "creative"
+        },
+        {
+          "candidate_ids": [
+            "opp-1",
+            "opp-2"
+          ],
+          "extra_items": 1,
+          "value": "place_event"
+        }
+      ],
+      "geography": [
+        {
+          "candidate_ids": [
+            "opp-4",
+            "opp-5",
+            "opp-6",
+            "opp-7",
+            "opp-8"
+          ],
+          "extra_items": 4,
+          "value": "cape town from 2026-09-25"
+        }
+      ]
+    }
+  },
+  "stretch_real_action_status": {
+    "real_action": false,
+    "reasons": [],
+    "status": "EMPTY"
+  },
+  "uncertainty_counts": {
+    "candidate_uncertainties": 12,
+    "candidates_with_uncertainties": 8,
+    "profile_unknowns": 3,
+    "report_summary": 5
+  },
+  "verified_geographic_windows": {
+    "count": 2,
+    "hits": [
+      {
+        "candidate_id": "opp-2",
+        "window": "hong_kong_2026-08-25_2026-09-06"
+      },
+      {
+        "candidate_id": "opp-1",
+        "window": "shanghai_2026-09-06_2026-09-10"
+      }
+    ]
+  }
+}

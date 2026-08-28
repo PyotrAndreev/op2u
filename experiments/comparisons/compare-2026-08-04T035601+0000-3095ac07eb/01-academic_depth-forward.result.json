@@ -1,0 +1,29 @@
+{
+  "confidence": 0.97,
+  "failure_tags": [
+    "weekly_capacity_mismatch",
+    "irrelevant_original_profile_branch",
+    "unsupported_temporal_claim"
+  ],
+  "hard_failures": {
+    "A": [],
+    "B": [
+      "shared_weekly_capacity",
+      "irrelevant_hardcoded_geography",
+      "exact_primary_evidence"
+    ]
+  },
+  "judge_role": "academic_depth",
+  "reasons": [
+    "A preserves strict evidence boundaries, treats incomplete funding as unresolved, and schedules only a supported preparation action within 240 minutes.",
+    "A distinguishes direct-PhD, research-Master’s, person-specific fit, and exam leads without converting exploration pages into verified routes.",
+    "B declares a 360-minute weekly capacity, contrary to the shared 240-minute limit.",
+    "B relies on an unsupported broader South Africa window and schedules a non-overlapping event.",
+    "B represents an undated May 1 source excerpt as a 2027-05-01 deadline for a selected route."
+  ],
+  "scores": {
+    "A": 56,
+    "B": 0
+  },
+  "winner": "A"
+}

@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://op2u.local/schemas/evaluation.schema.json",
+  "title": "Evaluation",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["judge_role", "hard_failures", "dimension_scores", "penalties", "verdict", "reasoning"],
+  "properties": {
+    "judge_role": {"enum": ["actionability", "evidence", "personalization", "pairwise"]},
+    "hard_failures": {"type": "array", "items": {"type": "string"}},
+    "dimension_scores": {
+      "type": "object",
+      "additionalProperties": {"type": ["number", "null"], "minimum": 0}
+    },
+    "penalties": {
+      "type": "object",
+      "additionalProperties": {"type": "number", "minimum": 0}
+    },
+    "score": {"type": ["number", "null"]},
+    "verdict": {"enum": ["accept", "conditional", "reject", "A", "B", "tie"]},
+    "reasoning": {"type": "array", "items": {"type": "string"}},
+    "failure_tags": {"type": "array", "items": {"type": "string"}},
+    "winner": {"enum": ["A", "B", "tie", null]},
+    "candidate_ids": {"type": "array", "items": {"type": "string"}},
+    "order_stable": {"type": "boolean"}
+  }
+}

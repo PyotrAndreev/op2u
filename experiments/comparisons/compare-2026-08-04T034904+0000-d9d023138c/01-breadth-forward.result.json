@@ -1,0 +1,24 @@
+{
+  "confidence": 0.93,
+  "failure_tags": [
+    "B_narrow_verified_portfolio",
+    "B_report_verification_projection_inconsistency",
+    "B_nonseven_day_selected_trigger"
+  ],
+  "hard_failures": {
+    "A": [],
+    "B": []
+  },
+  "judge_role": "breadth",
+  "reasons": [
+    "A has five evidence-backed, materially distinct horizon families versus B's persisted report count of two.",
+    "A provides stronger cross-window coverage and distinct contributor, attendee, funding, and speaking roles.",
+    "A's selected actions are consistently bounded, triggered within seven days, and supported with disclosed uncertainties.",
+    "B has lower scheduled effort but narrower verified breadth; its Cape Town selected item is not retained as verified in the persisted report and its trigger is later than seven days."
+  ],
+  "scores": {
+    "A": 88,
+    "B": 71
+  },
+  "winner": "A"
+}
