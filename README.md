@@ -14,6 +14,7 @@ The current scope is **discovery**: profile interpretation, search, primary-sour
 - [Discovery MVP specification](docs/product/discovery-mvp.md)
 - [User profile, consent, and automation boundary](docs/product/user-profile-and-consent.md)
 - [Competitive landscape](docs/research/competitive-landscape.md)
+- [EUSP literature synthesis: exploration under an insufficient verified portfolio](docs/research/eusp-exploration-discovery-agents.md)
 - [Development conventions](docs/dev/development.md)
 - [Repository structure](docs/dev/repository-structure.md)
 - [Evaluation](docs/dev/evaluation.md)
