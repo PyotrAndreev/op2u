@@ -1,0 +1,38 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://op2u.local/schemas/eusp_p1_hidden_traits_judge_packet.schema.json",
+  "title": "EUSP P1 synthetic evaluator-only hidden-traits judge packet",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "fixture_id", "evaluator_only", "pipeline_packet_sha256", "pipeline_packet", "hidden_traits", "measurement"],
+  "properties": {
+    "schema_version": {"const": "eusp-p1-hidden-traits-judge-packet/v1"},
+    "fixture_id": {"type": "string"},
+    "evaluator_only": {"const": true},
+    "pipeline_packet_sha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+    "pipeline_packet": {"type": "object"},
+    "hidden_traits": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "label", "evaluation_question"],
+        "properties": {
+          "id": {"type": "string", "pattern": "^ht-v1-[a-z0-9-]+$"},
+          "label": {"type": "string", "minLength": 1},
+          "evaluation_question": {"type": "string", "minLength": 1}
+        }
+      }
+    },
+    "measurement": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["primary_metric", "trait_alignment_is_secondary"],
+      "properties": {
+        "primary_metric": {"const": "portfolio_readiness_to_act"},
+        "trait_alignment_is_secondary": {"const": true}
+      }
+    }
+  }
+}

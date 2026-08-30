@@ -78,4 +78,5 @@ The synthetic fixture and live-source variability limit conclusions to this prot
 
 - [Evaluation conventions](evaluation.md)
 - [P1 synthetic-neutral record](../../experiments/analyses/eusp_p1_synthetic_neutral_record.md)
+- [Synthetic evaluator-only hidden-traits protocol](eusp-p1-hidden-traits-protocol.md)
 - [Discovery MVP specification](../product/discovery-mvp.md)

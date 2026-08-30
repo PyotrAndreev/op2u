@@ -1,0 +1,40 @@
+{
+  "snapshot_date": "2026-08-30",
+  "candidates": [
+    {
+      "candidate_id": "synthetic-frontier-1",
+      "title": "Synthetic documentation contribution clinic",
+      "organization": "Synthetic Example Collective",
+      "type": "community",
+      "status": "ACT_NOW",
+      "claim_ids": ["frontier-status", "frontier-timing", "frontier-route"],
+      "material_claims": [
+        {"id": "frontier-status", "kind": "status"},
+        {"id": "frontier-timing", "kind": "timing"},
+        {"id": "frontier-route", "kind": "participation_route"}
+      ],
+      "profile_bridge": [
+        {"profile_signal": "Maintains a small open-source documentation project", "why_it_matters": "The clinic's contribution outline is a bounded way to reuse that explicit project experience."},
+        {"profile_signal": "Recently facilitated an online peer-learning session", "why_it_matters": "The clinic's public contribution route can connect that explicit facilitation experience to a peer-facing activity."}
+      ],
+      "first_action": {
+        "action": "Draft a one-page contribution outline",
+        "deliverable": "one-page outline",
+        "start_by_or_trigger": "Start from the public clinic instructions",
+        "start_date": "2026-08-31",
+        "minutes_min": 30,
+        "minutes_max": 45
+      },
+      "scheduled_week_effort_minutes": {"min": 30, "max": 45},
+      "blockers": ["Final fit remains unknown until the outline is reviewed."],
+      "uncertainties": []
+    }
+  ],
+  "selected_ids": {"act_now": ["synthetic-frontier-1"], "prepare_next": [], "monitor": []},
+  "weekly_allocation": {"cap_minutes": 360, "scheduled_min_minutes": 30, "scheduled_max_minutes": 45, "residual_upper_minutes": 315},
+  "evidence_ledger": [
+    {"ledger_id": "frontier-ledger-status", "candidate_id": "synthetic-frontier-1", "claim_id": "frontier-status", "claim": "The clinic is open.", "source_type": "official_primary", "entailment": "direct", "quote": "The synthetic clinic is open for contributions.", "url": "https://example.test/synthetic-clinic", "retrieved_at": "2026-08-30T10:00:00+00:00", "current_status": "open", "temporal": {"kind": null, "date": null, "start_date": null, "end_date": null}, "supports": ["status"]},
+    {"ledger_id": "frontier-ledger-timing", "candidate_id": "synthetic-frontier-1", "claim_id": "frontier-timing", "claim": "The contribution window ends on 31 August 2026.", "source_type": "official_primary", "entailment": "direct", "quote": "Submit a contribution outline by 31 August 2026.", "url": "https://example.test/synthetic-clinic", "retrieved_at": "2026-08-30T10:00:00+00:00", "current_status": "open", "temporal": {"kind": "deadline", "date": "2026-08-31", "start_date": null, "end_date": null}, "supports": ["deadline"]},
+    {"ledger_id": "frontier-ledger-route", "candidate_id": "synthetic-frontier-1", "claim_id": "frontier-route", "claim": "The official form is the participation route.", "source_type": "official_primary", "entailment": "direct", "quote": "Use the official form to submit a contribution outline.", "url": "https://example.test/synthetic-clinic", "retrieved_at": "2026-08-30T10:00:00+00:00", "current_status": "open", "temporal": {"kind": null, "date": null, "start_date": null, "end_date": null}, "supports": ["participation_route"]}
+  ]
+}

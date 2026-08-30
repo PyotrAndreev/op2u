@@ -1,0 +1,47 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://op2u.local/schemas/eusp_p1_hidden_traits_judge_result.schema.json",
+  "title": "EUSP P1 synthetic hidden-traits readiness result",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "judge_role", "arms", "winner", "reasons"],
+  "properties": {
+    "schema_version": {"const": "eusp-p1-hidden-traits-judge-result/v1"},
+    "judge_role": {"const": "readiness_hidden_traits"},
+    "winner": {"enum": ["A", "B", "tie"]},
+    "reasons": {"type": "array", "items": {"type": "string"}},
+    "arms": {
+      "type": "object",
+      "required": ["A", "B"],
+      "properties": {
+        "A": {"$ref": "#/$defs/arm"},
+        "B": {"$ref": "#/$defs/arm"}
+      }
+    }
+  },
+  "$defs": {
+    "arm": {
+      "type": "object",
+      "required": ["grounding_gate", "liveness_gate", "other_hard_gate_failures", "per_candidate_readiness", "portfolio_readiness_to_act", "hidden_trait_matches"],
+      "properties": {
+        "grounding_gate": {"enum": ["pass", "fail"]},
+        "liveness_gate": {"enum": ["pass", "fail"]},
+        "other_hard_gate_failures": {"type": "array", "items": {"type": "string"}},
+        "per_candidate_readiness": {"type": "array", "items": {"type": "object"}},
+        "portfolio_readiness_to_act": {"type": "number", "minimum": 0, "maximum": 100},
+        "hidden_trait_matches": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["trait_id", "matched", "reason"],
+            "properties": {
+              "trait_id": {"type": "string"},
+              "matched": {"type": "boolean"},
+              "reason": {"type": "string"}
+            }
+          }
+        }
+      }
+    }
+  }
+}
