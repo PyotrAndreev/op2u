@@ -70,8 +70,6 @@ So what? `op2u` is not entering one market. It is entering a workflow gap left b
 | Impact and UN careers | 4 | 3 | 4 | 3 | 2 | 3 | 13 | 7 |
 | Broad AI job automation | 4 | 3 | 2 | 4 | 5 | 5 | 13 | 8 |
 
-![Market wedge matrix](market_wedge_matrix.svg)
-
 So what? Broad jobs look tempting because automation is feasible, but that wedge is crowded and policy-sensitive. Funded mobility has better fragmentation, better strategic value, and weaker end-to-end competition.
 
 ## 5. The MVP should own scoring, deadlines, and document reuse, not autonomous submission.
@@ -92,13 +90,9 @@ Current workflow: Search -> filter -> decide -> rewrite -> apply -> track manual
 
 Target workflow: Profile -> ingest -> score -> shortlist -> application pack -> approve/submit -> status -> improve
 
-![Workflow comparison](workflow_comparison.svg)
-
 So what? The first durable moat is not crawling more pages. It is reducing the total coordination cost of opportunities that already exist.
 
 ## 6. op2u can own broad scope with medium autonomy if it stays human-in-the-loop.
-
-![Breadth vs autonomy](breadth_vs_autonomy.svg)
 
 | Pain | Manual | Directories | Vertical tools | Bots | op2u |
 | --- | --- | --- | --- | --- | --- |
@@ -108,8 +102,6 @@ So what? The first durable moat is not crawling more pages. It is reducing the t
 | Application support | 1 | 1 | 4 | 3 | 4 |
 | Tracking | 1 | 1 | 4 | 2 | 5 |
 | Strategy | 1 | 1 | 2 | 1 | 4 |
-
-![Pain heatmap](pain_solution_heatmap.svg)
 
 So what? Directories win at awareness, bots win at volume, and workflow tools win inside one vertical. `op2u` should sit above them as the user-owned operating layer.
 
@@ -134,8 +126,6 @@ So what? A subscription can work, but only after the product proves it materiall
 | Weak ranking quality | High | Users reject top matches as irrelevant | Compare expert vs algorithmic shortlists | Keep scoring interpretable and preference-aware. |
 | Automation / policy risk | Medium | Submission automation breaks on target sites or damages accounts | Delay auto-submit and log friction manually | Stay human-in-the-loop early. |
 | International eligibility complexity | Medium | Too many false positives by country, visa, or status | Track rejection reasons per opportunity | Model hard constraints explicitly before ranking. |
-
-![Threat matrix](threat_matrix.svg)
 
 Validation plan:
 - `7 days`: interviews, manual shortlists, and a paid-concierge ask.
