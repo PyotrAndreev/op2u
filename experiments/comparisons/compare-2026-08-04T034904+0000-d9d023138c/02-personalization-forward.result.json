@@ -1,0 +1,25 @@
+{
+  "confidence": 0.94,
+  "failure_tags": [
+    "B_limited_verified_family_diversity",
+    "B_artifact_inconsistency",
+    "B_limited_adaptation_belonging_depth"
+  ],
+  "hard_failures": {
+    "A": [],
+    "B": []
+  },
+  "judge_role": "personalization",
+  "reasons": [
+    "A has five evidence-backed distinct horizon families versus B's final normalized horizon of two.",
+    "A provides stronger role expansion through attendee, contributor-community, grant-applicant, and speaker/workshop routes.",
+    "A has more complete dated geographic coverage across Hong Kong, the first Shanghai window, and South Africa, while explicitly withholding unsupported later-Shanghai credit.",
+    "Both retain unresolved eligibility and cost as uncertainties and keep monitor effort at zero.",
+    "B has a strong bounded demonstrator stretch action, but its persisted artifacts narrow the counted horizon and show inconsistent treatment of the South Africa adaptation candidate."
+  ],
+  "scores": {
+    "A": 88,
+    "B": 67
+  },
+  "winner": "A"
+}

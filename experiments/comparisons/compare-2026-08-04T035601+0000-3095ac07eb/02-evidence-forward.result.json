@@ -1,0 +1,30 @@
+{
+  "confidence": 0.98,
+  "failure_tags": [
+    "B:weekly_capacity_mismatch",
+    "B:unsupported_2027_liveness",
+    "B:irrelevant_original_profile_branch",
+    "B:unsupported_breadth_claim"
+  ],
+  "hard_failures": {
+    "A": [],
+    "B": [
+      "shared_weekly_capacity",
+      "exact_primary_evidence",
+      "no_irrelevant_hardcoded_geography"
+    ]
+  },
+  "judge_role": "evidence",
+  "reasons": [
+    "A limits its selected horizon to the sole exact-primary-supported upcoming route, explicitly preserves unresolved eligibility and funding-package gaps, and schedules only 60 maximum minutes within the 240-minute capacity.",
+    "B represents an undated May 1 excerpt as a 2027 deadline and schedules preparation for it despite lacking exact evidence of a 2027 cycle.",
+    "B uses a broader South Africa window and selects a November event outside the permitted October Cape Town window.",
+    "B retains a legacy 360-minute weekly-capacity contract, which violates the shared 240-minute capacity gate.",
+    "Both lack verified Cape Town-October participation, programme-specific TOEFL requirements or appointments, and complete funding evidence; A handles these gaps more safely."
+  ],
+  "scores": {
+    "A": 46,
+    "B": 18
+  },
+  "winner": "A"
+}

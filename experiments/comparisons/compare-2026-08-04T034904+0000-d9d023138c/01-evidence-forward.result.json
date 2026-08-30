@@ -1,0 +1,25 @@
+{
+  "confidence": 0.91,
+  "failure_tags": [
+    "B_inconsistent_evidence_projection",
+    "B_limited_verified_family_diversity",
+    "B_one_off_adaptation_path"
+  ],
+  "hard_failures": {
+    "A": [],
+    "B": []
+  },
+  "judge_role": "evidence",
+  "reasons": [
+    "A provides five evidence-backed, materially distinct horizon families versus B's smaller and internally inconsistent verified horizon.",
+    "A has dated, supported coverage across Hong Kong, the first Shanghai window, and South Africa, while explicitly excluding unsupported later-Shanghai leads.",
+    "A's selected actions have direct ledger support, bounded deliverables, disclosed blockers, and compliant effort; its stretch action is real, reversible, and time-bounded.",
+    "B has strong evidence for its Hong Kong demo and first-Shanghai route, but fewer verified families and only a one-off South Africa adaptation path.",
+    "B's final report removes South Africa from its verified horizon despite a supported candidate elsewhere in its persisted artifacts, weakening consistency and breadth credit."
+  ],
+  "scores": {
+    "A": 86,
+    "B": 70
+  },
+  "winner": "A"
+}

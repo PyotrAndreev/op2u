@@ -1,0 +1,18 @@
+{
+  "completed_stages": [
+    "actionability",
+    "discovery",
+    "profile",
+    "ranking",
+    "report",
+    "search_plan",
+    "triggers",
+    "verification"
+  ],
+  "dry_run": false,
+  "finished_at": "2026-08-02T15:31:11+00:00",
+  "path": "/data/data/com.termux/files/home/op2u/runs/2026-08-02T152558+0000-3ffc2da1c50c",
+  "run_id": "2026-08-02T152558+0000-3ffc2da1c50c",
+  "state": "complete",
+  "variant": "G2_M1"
+}

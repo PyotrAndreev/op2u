@@ -1,0 +1,87 @@
+{
+  "candidate_and_horizon_counts": {
+    "candidate_statuses": {
+      "ACT_NOW": 1,
+      "MONITOR": 1,
+      "PREPARE_NEXT": 2,
+      "REJECT": 1
+    },
+    "candidates": 5,
+    "horizon": 3
+  },
+  "distinct_families": {
+    "horizon": [
+      "adaptation",
+      "community",
+      "visibility"
+    ],
+    "horizon_count": 3,
+    "verified_actionable": [
+      "adaptation",
+      "community",
+      "visibility"
+    ],
+    "verified_actionable_count": 3
+  },
+  "monitor_effort_violations": {
+    "count": 0,
+    "items": []
+  },
+  "scheduled_effort": {
+    "cap_minutes": 360,
+    "computed_selected_action_max_minutes": 135,
+    "declared_max_minutes": 135,
+    "matches_declared": true,
+    "within_cap": true
+  },
+  "schema_validity": {
+    "local_contract_errors": [],
+    "local_contract_valid": true,
+    "production_validation_file": "production_validation.json",
+    "production_validation_schema_errors": [],
+    "production_validation_valid": false,
+    "report_file": "report.result.json",
+    "valid": false
+  },
+  "selected_family_geography_duplication": {
+    "action_portfolio": {
+      "family": [],
+      "geography": []
+    },
+    "all_selected_including_monitor": {
+      "family": [],
+      "geography": []
+    }
+  },
+  "stretch_real_action_status": {
+    "candidate_id": "opp-1",
+    "real_action": false,
+    "reasons": [
+      "seven-day trigger is not explicit"
+    ],
+    "status": "FAIL"
+  },
+  "uncertainty_counts": {
+    "candidate_uncertainties": 10,
+    "candidates_with_uncertainties": 5,
+    "profile_unknowns": 3,
+    "report_summary": 6
+  },
+  "verified_geographic_windows": {
+    "count": 3,
+    "hits": [
+      {
+        "candidate_id": "opp-1",
+        "window": "hong_kong_2026-08-25_2026-09-06"
+      },
+      {
+        "candidate_id": "opp-2",
+        "window": "shanghai_2026-09-06_2026-09-10"
+      },
+      {
+        "candidate_id": "opp-4",
+        "window": "south_africa_2026-09-25_2026-12-31"
+      }
+    ]
+  }
+}

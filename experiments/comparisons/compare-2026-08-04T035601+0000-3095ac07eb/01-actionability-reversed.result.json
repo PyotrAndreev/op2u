@@ -1,0 +1,24 @@
+{
+  "confidence": 0.96,
+  "failure_tags": [
+    "weekly_capacity_mismatch"
+  ],
+  "hard_failures": {
+    "A": [
+      "shared_weekly_capacity"
+    ],
+    "B": []
+  },
+  "judge_role": "actionability",
+  "reasons": [
+    "B reconciles scheduled effort to the shared 240-minute capacity and provides a bounded, user-controlled 40–60-minute eligibility-and-fit deliverable with a seven-day trigger.",
+    "B's selected route has direct official support for an upcoming doctoral pathway, stated eligibility constraints, and a future call window, while retaining unresolved funding components and eligibility as explicit uncertainties.",
+    "A declares and applies a 360-minute weekly capacity, which is a stated hard-gate direction-contract failure despite scheduling only 150 minutes.",
+    "Both preserve uncertainty around supervision, exam logistics, and unsupported exploration leads; neither establishes a usable Cape Town-October or specific TOEFL action."
+  ],
+  "scores": {
+    "A": 32,
+    "B": 69
+  },
+  "winner": "B"
+}

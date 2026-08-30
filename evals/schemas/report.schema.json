@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://op2u.local/schemas/report.schema.json",
+  "title": "OpportunityReport",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["variant", "snapshot_date", "act_now", "prepare_next", "portfolio_rationale", "weekly_effort_hours", "unknowns"],
+  "properties": {
+    "variant": {"type": "string", "pattern": "^V[1-7]$"},
+    "snapshot_date": {"type": "string", "format": "date"},
+    "act_now": {"type": "array", "maxItems": 3, "items": {"$ref": "candidate.schema.json"}},
+    "prepare_next": {"type": "array", "maxItems": 4, "items": {"$ref": "candidate.schema.json"}},
+    "portfolio_rationale": {"type": "string"},
+    "weekly_effort_hours": {"type": "number", "minimum": 0, "maximum": 6},
+    "unknowns": {"type": "array", "items": {"type": "string"}},
+    "excluded": {"type": "array", "items": {"type": "object", "required": ["candidate_id", "reason"], "properties": {"candidate_id": {"type": "string"}, "reason": {"type": "string"}}, "additionalProperties": false}}
+  }
+}

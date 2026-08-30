@@ -1,0 +1,19 @@
+{
+  "confidence": 0.9,
+  "failure_tags": [],
+  "hard_failures": {
+    "A": [],
+    "B": []
+  },
+  "judge_role": "actionability",
+  "reasons": [
+    "A preserves more evidence-backed, distinct actionable paths while retaining bounded actions, deliverables, triggers, effort limits, and blockers.",
+    "A has broader supported role routes across attendance, community participation, funding evaluation, speaking/workshopping, and local adaptation.",
+    "B has a particularly concrete immediate demo-submission action and safe stretch, but its verified horizon is materially narrower."
+  ],
+  "scores": {
+    "A": 89,
+    "B": 78
+  },
+  "winner": "A"
+}

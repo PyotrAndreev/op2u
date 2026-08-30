@@ -1,0 +1,26 @@
+{
+  "confidence": 0.96,
+  "failure_tags": [
+    "unsupported_breadth_claim",
+    "unsupported_geographic_overlap"
+  ],
+  "hard_failures": {
+    "A": [],
+    "B": [
+      "unsupported_breadth_not_counted",
+      "geographic_claims_are_dated"
+    ]
+  },
+  "judge_role": "actionability",
+  "reasons": [
+    "A provides one fully supported immediate action, bounded selected preparation actions, accurate zero-effort monitoring, and a valid reversible stretch action.",
+    "B credits undated or route-unsupported monitor entries as verified family, adaptation, creative, and geographic breadth despite explicitly acknowledging those evidence gaps.",
+    "B's scheduled preparation actions are concrete but have unresolved participation routes; one is an inquiry draft rather than a supported participation path.",
+    "Both disclose material eligibility and cost uncertainty and remain within selection and effort limits."
+  ],
+  "scores": {
+    "A": 82,
+    "B": 24
+  },
+  "winner": "A"
+}

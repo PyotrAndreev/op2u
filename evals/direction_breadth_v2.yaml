@@ -1,0 +1,80 @@
+primary_objective:
+  - maximize_meaningful_first_actions_within_7_days
+  - reveal_width_of_plausible_high_value_opportunities
+  - create_geographic_and_temporal_intersections
+  - include_safe_growth_challenges
+
+portfolio_products:
+  action_portfolio:
+    max_act_now: 3
+    max_prepare_next: 4
+    max_scheduled_minutes_per_week: 360
+  opportunity_horizon:
+    target_verified_items: 6-10
+    target_distinct_families: 4
+    may_schedule_effort: false
+  stretch_challenge:
+    max_items: 1
+    max_first_step_minutes: 60
+    physical_legal_financial_risk_forbidden: true
+
+opportunity_families:
+  - project_funding
+  - speaking_visibility
+  - research_standards_residencies
+  - selective_communities
+  - place_and_date_events
+  - adaptation_belonging_volunteering
+  - teaching
+  - creative_side_paths
+  - outdoors
+
+geographic_windows:
+  - place: Hong Kong
+    from: 2026-08-25
+    through: 2026-09-06
+  - place: Shanghai
+    from: 2026-09-06
+    through: 2026-09-10
+  - place: Shanghai
+    from: 2026-09-20
+    through: 2026-09-25
+  - place: South Africa
+    preferred_city: Cape Town
+    exact_city_schedule_known: false
+    from: 2026-09-25
+    through: 2026-12-31
+
+ranking_dimensions:
+  - strategic_value
+  - seven_day_actionability
+  - evidence_correctness
+  - profile_bridge
+  - date_place_overlap
+  - belonging_and_adaptation_value
+  - useful_novelty
+  - opportunity_surface_expansion
+  - stretch_growth_upside
+  - reversibility_of_first_step
+
+anti_collapse:
+  duplicate_test_axes:
+    - opportunity_family
+    - geography_and_presence_window
+    - participation_mode
+    - intended_outcome
+  near_duplicate_when_matching_axes_at_least: 3
+  same_family_alone_is_not_duplicate: true
+  distinct_hong_kong_and_shanghai_events_are_distinct_geographic_experiments: true
+  peermux_grants_and_peermux_cfps_are_related_when_geography_mode_and_outcome_also_overlap: true
+  preferred_selected_mix:
+    - main_trajectory
+    - geographic_or_adaptation
+    - distinct_side_path_or_stretch
+
+constraints:
+  exclude_jobs_by_default: true
+  primary_sources_required: true
+  no_stale_opportunities: true
+  no_dangerous_or_illegal_challenges: true
+  no_legal_tax_immigration_banking_medical_military_advice: true

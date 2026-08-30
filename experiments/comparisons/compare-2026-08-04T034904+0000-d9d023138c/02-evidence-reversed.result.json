@@ -1,0 +1,27 @@
+{
+  "confidence": 0.9,
+  "failure_tags": [
+    "A:limited_verified_family_diversity",
+    "A:limited_adaptation_belonging",
+    "B:conditional_funding_fit",
+    "B:later_window_participation_gap",
+    "both:cost_unknown"
+  ],
+  "hard_failures": {
+    "A": [],
+    "B": []
+  },
+  "judge_role": "evidence",
+  "reasons": [
+    "B provides five evidence-backed distinct horizon families versus A's three, including funding and an open speaking/workshop route.",
+    "B has stronger evidence-backed role expansion across attendee, governance/community participant, grant applicant, speaker/workshop proposer, and local-community pathways.",
+    "Both satisfy validation, evidence-liveness, effort, monitor, eligibility, dated-geography, and safe-stretch gates.",
+    "A has sound selected evidence and actions but weaker adaptation/belonging depth and fewer verified families.",
+    "B explicitly retains unsupported later-window and teaching items only as zero-effort monitors or gaps; it does not count them as verified breadth."
+  ],
+  "scores": {
+    "A": 75,
+    "B": 88
+  },
+  "winner": "B"
+}

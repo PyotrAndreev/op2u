@@ -1,0 +1,23 @@
+{
+  "confidence": 0.8,
+  "failure_tags": [
+    "B:unsupported_claim",
+    "B:near_duplicate_opportunities"
+  ],
+  "hard_failures": {
+    "A": [],
+    "B": []
+  },
+  "judge_role": "evidence",
+  "reasons": [
+    "A provides quoted official support, URLs, and retrieval times for its live status and deadline claim, with clearer source-to-claim traceability.",
+    "B supports both live deadlines with official URLs, quotes, and retrieval times, but several additional suitability statements are not directly quoted.",
+    "Both preserve unknown eligibility rather than inferring legal, travel, or residency facts and keep closed opportunities out of ACT_NOW.",
+    "B's two ACT_NOW selections are near-duplicate conference-CFP actions built from the same abstract, reducing portfolio diversity."
+  ],
+  "scores": {
+    "A": 88,
+    "B": 82
+  },
+  "winner": "A"
+}

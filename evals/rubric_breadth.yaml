@@ -1,0 +1,100 @@
+version: 1
+name: breadth_opportunity_portfolio_rubric
+scope: Breadth evaluation for the expanded profile and direction_breadth_v2 snapshot.
+snapshot_policy: Evaluate only persisted report, verification, and validation artifacts; judges do not browse or repair evidence.
+scoring:
+  scale: 100
+  rule: Apply hard gates first. Score only evidence-backed candidates; unsupported horizon items earn no breadth, geography, role, adaptation, or stretch credit.
+  dimensions:
+    evidence_liveness:
+      max: 24
+      owner: evidence
+      test: Selected actions and any item counted as verified have direct, primary-source ledger support, current status, and a supported deadline, rolling window, or event date. Unknown eligibility remains unknown.
+    actionable_quality:
+      max: 16
+      owner: actionability
+      test: Selected ACT_NOW/PREPARE_NEXT items have an explicit profile bridge, verb-led bounded first action, tangible deliverable, seven-day trigger, credible upper-minute estimate, and disclosed blockers.
+    verified_family_diversity:
+      max: 15
+      owner: breadth
+      test: Credit materially distinct opportunity families only where each counted horizon item is evidence-backed and has a credible participation or dated-window path. Family labels alone, duplicate organizations, and unsupported monitors do not count.
+    geographic_window_coverage:
+      max: 10
+      owner: breadth
+      test: Credit only official event/participation dates that overlap supplied Hong Kong, Shanghai, or South Africa windows. Distinguish the two Shanghai windows; do not infer presence in gaps.
+    identity_role_expansion:
+      max: 10
+      owner: personalization
+      test: Evidence-backed horizon items reveal concrete, profile-grounded roles beyond a single main-project path (for example attendee, speaker, contributor, teacher, maker, volunteer, researcher, or collaborator), with a stated value route.
+    adaptation_belonging_value:
+      max: 10
+      owner: personalization
+      test: Credit recurring, contribution-capable South Africa/Cape Town pathways with a real participation route and an explicit adaptation or belonging rationale. One-off tourism and unsupported organization descriptions earn no credit.
+    stretch_quality:
+      max: 5
+      owner: actionability
+      test: Empty is acceptable. A non-empty stretch item earns credit only when evidence-backed, safe, reversible, and a real action within seven days and 60 minutes; monitor/save/wait actions are invalid.
+    genericity_control:
+      max: 5
+      owner: personalization
+      test: Earn credit for specific causal bridges using explicit profile signals, distinct participation modes/outcomes, and concrete value routes. Generic networking, generic job advice, and interchangeable event lists earn zero.
+    cost:
+      max: 5
+      owner: operations
+      test: Favor equal-or-better gated outcomes at lower persisted research/judging cost and duration. Unknown cost is reported as unknown, not assumed cheap.
+hard_gates:
+  - id: persisted_production_validation
+    rule: The latest persisted production validation must be valid; a missing, malformed, or failed validation makes the report ineligible.
+  - id: selected_evidence_and_liveness
+    rule: Every ACT_NOW item has direct official ledger support for status plus deadline, rolling window, or overlapping event date; closed, stale, or status-unsupported items cannot be ACT_NOW.
+  - id: selection_and_effort_limits
+    rule: ACT_NOW <= 3, PREPARE_NEXT <= 4, scheduled selected upper-minute sum equals the declared allocation and is <= 360.
+  - id: monitor_has_no_weekly_effort
+    rule: Every MONITOR candidate and selected monitor has zero scheduled weekly effort and explicitly receives no action this week.
+  - id: no_jobs_or_unresolved_eligibility_as_immediate
+    rule: No job/internship/recruiter move is selected, and an unresolved eligibility assumption cannot be represented as an immediate action.
+  - id: geographic_claims_are_dated
+    rule: An item counted for geographic coverage has direct evidence for a dated event or participation window that overlaps a supplied presence window.
+  - id: stretch_is_real_and_safe
+    rule: A non-empty stretch slot is a real reversible <=60-minute action within seven days, not monitor/save/wait, and has no physical, legal, financial, or eligibility recklessness.
+  - id: unsupported_breadth_not_counted
+    rule: Unsupported, stale, or no-participation-path horizon entries may be retained only as explicit search gaps/uncertainties; they cannot satisfy verified-family, geography, role, adaptation, or stretch criteria.
+penalties:
+  unsupported_breadth_claim: 8
+  unsupported_geographic_overlap: 6
+  generic_recommendation: 3
+  duplicate_selected_family_or_geography: 3
+  monitor_effort_violation: 8
+  hidden_or_mismatched_effort: 6
+  invented_eligibility_or_liveness: 8
+measurement_contract:
+  automated_metrics: tools/score_breadth.py
+  required_metrics:
+    - schema_validity
+    - candidate_and_horizon_counts
+    - distinct_families
+    - verified_geographic_windows
+    - selected_family_geography_duplication
+    - scheduled_effort
+    - stretch_real_action_status
+    - monitor_effort_violations
+    - uncertainty_counts
+  interpretation: Automated metrics are deterministic diagnostics, not evidence repair. Human judges score only saved artifacts.
+promotion:
+  minimum_valid_repeats: 2
+  require_all_hard_gates: true
+  require_evidence_liveness_non_regression: true
+  require_not_pareto_dominated: true
+  require_order_stable_pairwise_result: true
+  material_score_improvement: 5
+convergence:
+  generations_without_promotable_variant: 2
+  stop_on_wall_clock_hours: 3
+  stop_if_remaining_changes_only_add_unsupported_breadth: true
+visible_fixture_policy:
+  known_cases_are_regression_diagnostics: true
+  never_treat_visible_cases_as_holdout: true
+holdout_policy:
+  sealed: true
+  accessible_to: []
+  limitation: Conclusions are proxy-quality and profile-scoped; breadth counts do not demonstrate hidden-holdout performance.

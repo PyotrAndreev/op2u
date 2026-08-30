@@ -1,0 +1,22 @@
+{
+  "confidence": 0.79,
+  "failure_tags": [
+    "A:weekly_effort_ambiguity"
+  ],
+  "hard_failures": {
+    "A": [],
+    "B": []
+  },
+  "judge_role": "evidence",
+  "reasons": [
+    "Both provide official URLs, quoted status/deadline support, and retrieval times for the live ACT_NOW item.",
+    "B more clearly distinguishes scheduled weekly actions from informational completion effort and explicitly budgets the scheduled work below six hours.",
+    "B has cleaner liveness and uncertainty presentation: the future window is not portrayed as open and the closed item has no requested action.",
+    "A's claimed weekly-limit compliance is less auditable because it includes broader effort estimates while separately reporting only initial-action time."
+  ],
+  "scores": {
+    "A": 88,
+    "B": 93
+  },
+  "winner": "B"
+}

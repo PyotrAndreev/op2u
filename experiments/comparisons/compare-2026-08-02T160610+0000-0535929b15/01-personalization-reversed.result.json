@@ -1,0 +1,23 @@
+{
+  "confidence": 0.84,
+  "failure_tags": [
+    "A:underutilized_capacity",
+    "A:reduced_funding_readiness"
+  ],
+  "hard_failures": {
+    "A": [],
+    "B": []
+  },
+  "judge_role": "personalization",
+  "reasons": [
+    "Both provide a strong, profile-specific bridge from reproducibility, orchestration, distributed systems, and peermux to a visibility path and a potential funding path.",
+    "B is more strategically useful because it schedules a bounded reusable funding-preparation artifact this week while remaining well within the effort limit.",
+    "A unnecessarily defers that concrete, high-leverage concept note despite available capacity, reducing near-term validation and funding-readiness value.",
+    "Both maintain a diverse portfolio across visibility, funding preparation, and monitoring without duplicating organizations or opportunity types."
+  ],
+  "scores": {
+    "A": 86,
+    "B": 90
+  },
+  "winner": "B"
+}

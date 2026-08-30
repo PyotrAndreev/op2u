@@ -1,0 +1,23 @@
+{
+  "confidence": 0.91,
+  "failure_tags": [
+    "unsupported_claim",
+    "duplicate_opportunity_type"
+  ],
+  "hard_failures": {
+    "A": [],
+    "B": []
+  },
+  "judge_role": "evidence",
+  "reasons": [
+    "Both satisfy the ACT_NOW evidence, shortlist, weekly-effort, and seven-day-action gates.",
+    "B provides exact official quotes, URLs, and retrieval times for each status/deadline assertion, while explicitly retaining eligibility unknowns.",
+    "A's claim that first-time speakers are welcome is not paired with a quoted supporting passage, despite being presented as evidence.",
+    "B has a stronger causal bridge and a more diverse set across immediate visibility, funding preparation, and monitoring; A's two immediate recommendations are near-duplicate CFP paths."
+  ],
+  "scores": {
+    "A": 83,
+    "B": 95
+  },
+  "winner": "B"
+}

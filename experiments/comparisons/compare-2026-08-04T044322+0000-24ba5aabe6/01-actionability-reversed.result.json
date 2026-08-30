@@ -1,0 +1,24 @@
+{
+  "confidence": 0.9,
+  "failure_tags": [
+    "A:limited_verified_breadth",
+    "A:limited_role_and_adaptation_coverage",
+    "B:artifact_inconsistency"
+  ],
+  "hard_failures": {
+    "A": [],
+    "B": []
+  },
+  "judge_role": "actionability",
+  "reasons": [
+    "B provides more evidence-backed, bounded selected actions across funding, visibility, community, geographic, and adaptation paths.",
+    "B has stronger role expansion through attendee, grant-applicant, and speaker/workshop-proposer routes, plus a valid safe stretch action.",
+    "A is coherent and safely actionable but its persisted report retains only two verified horizon families and excludes the adaptation item from verified breadth.",
+    "Both respect effort limits, assign zero weekly effort to monitors, disclose uncertainties, and avoid immediate job or eligibility claims."
+  ],
+  "scores": {
+    "A": 66,
+    "B": 87
+  },
+  "winner": "B"
+}

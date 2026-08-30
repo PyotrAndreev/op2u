@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://op2u.local/schemas/trigger_hypotheses.schema.json",
+  "title": "TriggerHypotheses",
+  "type": "array",
+  "minItems": 1,
+  "items": {
+    "type": "object",
+    "additionalProperties": false,
+    "required": ["id", "signals", "hypothesis", "search_direction", "expected_bridge", "track", "confidence"],
+    "properties": {
+      "id": {"type": "string"},
+      "signals": {"type": "array", "minItems": 2, "items": {"type": "string"}},
+      "hypothesis": {"type": "string"},
+      "search_direction": {"type": "string"},
+      "expected_bridge": {"type": "string"},
+      "track": {"enum": ["main", "side"]},
+      "confidence": {"enum": ["low", "medium", "high"]}
+    }
+  }
+}

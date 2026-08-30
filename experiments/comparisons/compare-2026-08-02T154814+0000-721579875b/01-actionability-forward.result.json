@@ -1,0 +1,23 @@
+{
+  "confidence": 0.83,
+  "failure_tags": [
+    "B:near_duplicate_opportunity_types",
+    "B:limited_portfolio_diversity"
+  ],
+  "hard_failures": {
+    "A": [],
+    "B": []
+  },
+  "judge_role": "actionability",
+  "reasons": [
+    "A provides a stronger causal bridge using multiple reusable technical signals and pairs it with a distinct funding-preparation path.",
+    "Both offer concrete sub-seven-day abstract deliverables within the weekly effort limit; B is slightly more operationally scheduled.",
+    "B's two immediate paths are near-duplicate conference-proposal actions, with the second largely an adaptation of the first, reducing portfolio diversity.",
+    "A more clearly separates live action, future preparation, and closed-call monitoring while explicitly preserving unknown eligibility."
+  ],
+  "scores": {
+    "A": 91,
+    "B": 81
+  },
+  "winner": "A"
+}

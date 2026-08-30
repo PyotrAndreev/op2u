@@ -1,0 +1,32 @@
+{
+  "confidence": 0.99,
+  "failure_tags": [
+    "eligibility_support_not_quoted"
+  ],
+  "hard_failures": {
+    "A": [],
+    "B": []
+  },
+  "judge_role": "evidence",
+  "reasons": [
+    "Both provide official URLs, quoted status/deadline support, and retrieval times for the live action.",
+    "Both correctly retain only the verified open opportunity as ACT_NOW and explicitly preserve unresolved fit and eligibility questions.",
+    "Both meet shortlist, weekly-effort, and seven-day concrete-first-action requirements.",
+    "Eligibility is stated for the live action but lacks a directly quoted eligibility passage; this is an equal minor evidence limitation."
+  ],
+  "scores": {
+    "A": {
+      "evidence_correctness": 23,
+      "liveness_and_eligibility": 13,
+      "total": 93,
+      "uncertainty_hygiene_and_compactness": 5
+    },
+    "B": {
+      "evidence_correctness": 23,
+      "liveness_and_eligibility": 13,
+      "total": 93,
+      "uncertainty_hygiene_and_compactness": 5
+    }
+  },
+  "winner": "tie"
+}

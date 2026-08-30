@@ -1,0 +1,18 @@
+{
+  "completed_stages": [
+    "actionability",
+    "discovery",
+    "profile",
+    "ranking",
+    "report",
+    "search_plan",
+    "triggers",
+    "verification"
+  ],
+  "dry_run": false,
+  "finished_at": "2026-08-03T05:48:11+00:00",
+  "path": "/data/data/com.termux/files/home/op2u/runs/2026-08-03T050542+0000-dc2b4bc61e6b",
+  "run_id": "2026-08-03T050542+0000-dc2b4bc61e6b",
+  "state": "complete",
+  "variant": "BH2"
+}

@@ -1,0 +1,11 @@
+{
+  "completed_stages": [
+    "report"
+  ],
+  "dry_run": false,
+  "finished_at": "2026-08-02T14:10:54+00:00",
+  "path": "/data/data/com.termux/files/home/op2u/runs/2026-08-02T140821+0000-bd2c4cb81dfc",
+  "run_id": "2026-08-02T140821+0000-bd2c4cb81dfc",
+  "state": "complete",
+  "variant": "V2"
+}

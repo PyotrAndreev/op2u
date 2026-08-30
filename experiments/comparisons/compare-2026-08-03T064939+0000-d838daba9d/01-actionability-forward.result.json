@@ -1,0 +1,23 @@
+{
+  "confidence": 0.99,
+  "failure_tags": [
+    "missing_production_validation"
+  ],
+  "hard_failures": {
+    "A": [
+      "persisted_production_validation: missing valid persisted production validation artifact"
+    ],
+    "B": [
+      "persisted_production_validation: missing valid persisted production validation artifact"
+    ]
+  },
+  "judge_role": "actionability",
+  "reasons": [
+    "Both reports are ineligible under the required production-validation hard gate; no scoreable comparison remains."
+  ],
+  "scores": {
+    "A": 0,
+    "B": 0
+  },
+  "winner": "tie"
+}

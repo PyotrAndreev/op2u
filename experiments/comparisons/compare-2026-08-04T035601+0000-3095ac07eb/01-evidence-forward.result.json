@@ -1,0 +1,29 @@
+{
+  "confidence": 0.96,
+  "failure_tags": [
+    "B:weekly_capacity_mismatch",
+    "B:unsupported_breadth_claim",
+    "B:irrelevant_original_profile_branch"
+  ],
+  "hard_failures": {
+    "A": [],
+    "B": [
+      "shared_weekly_capacity",
+      "exact_primary_evidence",
+      "no_irrelevant_hardcoded_geography"
+    ]
+  },
+  "judge_role": "evidence",
+  "reasons": [
+    "A uses directly entailing official-primary ledger support for its sole selected route, preserves unresolved eligibility and funding-package gaps, and schedules only 40–60 minutes within the 240-minute capacity.",
+    "A correctly confines unsupported programmes, person-specific pages, and exam information to zero-effort monitoring or exploration.",
+    "B declares and uses a 360-minute weekly capacity, violating the required shared 240-minute cap.",
+    "B represents an undated May 1 source as a 2027 deadline and selects it despite no exact dated current-cycle support.",
+    "B retains and schedules a non-Cape-Town broader South Africa branch despite the profile-supported geographic window being Cape Town only in October."
+  ],
+  "scores": {
+    "A": 55,
+    "B": 12
+  },
+  "winner": "A"
+}

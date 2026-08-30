@@ -1,0 +1,140 @@
+{
+  "calls": [
+    {
+      "mapped_winner": "right",
+      "name": "01-evidence-forward",
+      "orientation": "forward",
+      "repeat": 1,
+      "role": "evidence",
+      "status": "complete",
+      "winner_by_blinded_label": "A"
+    },
+    {
+      "mapped_winner": "right",
+      "name": "01-evidence-reversed",
+      "orientation": "reversed",
+      "repeat": 1,
+      "role": "evidence",
+      "status": "complete",
+      "winner_by_blinded_label": "B"
+    },
+    {
+      "mapped_winner": "right",
+      "name": "01-actionability-forward",
+      "orientation": "forward",
+      "repeat": 1,
+      "role": "actionability",
+      "status": "complete",
+      "winner_by_blinded_label": "A"
+    },
+    {
+      "mapped_winner": "right",
+      "name": "01-actionability-reversed",
+      "orientation": "reversed",
+      "repeat": 1,
+      "role": "actionability",
+      "status": "complete",
+      "winner_by_blinded_label": "B"
+    },
+    {
+      "mapped_winner": "right",
+      "name": "01-personalization-forward",
+      "orientation": "forward",
+      "repeat": 1,
+      "role": "personalization",
+      "status": "complete",
+      "winner_by_blinded_label": "A"
+    },
+    {
+      "mapped_winner": "right",
+      "name": "01-personalization-reversed",
+      "orientation": "reversed",
+      "repeat": 1,
+      "role": "personalization",
+      "status": "complete",
+      "winner_by_blinded_label": "B"
+    },
+    {
+      "mapped_winner": "right",
+      "name": "01-breadth-forward",
+      "orientation": "forward",
+      "repeat": 1,
+      "role": "breadth",
+      "status": "complete",
+      "winner_by_blinded_label": "A"
+    },
+    {
+      "mapped_winner": "right",
+      "name": "01-breadth-reversed",
+      "orientation": "reversed",
+      "repeat": 1,
+      "role": "breadth",
+      "status": "complete",
+      "winner_by_blinded_label": "B"
+    }
+  ],
+  "comparison_id": "compare-2026-08-03T065226+0000-9d88b954be",
+  "finished_at": "2026-08-03T06:56:45+00:00",
+  "mapped_votes_by_stable_identity": {
+    "invalid": 0,
+    "left": 0,
+    "right": 8,
+    "tie": 0
+  },
+  "path": "/data/data/com.termux/files/home/op2u/experiments/comparisons/compare-2026-08-03T065226+0000-9d88b954be",
+  "repeat_role_results": [
+    {
+      "mapped_outcomes": {
+        "forward": "right",
+        "reversed": "right"
+      },
+      "order_stability": "order_stable",
+      "repeat": 1,
+      "role": "evidence",
+      "stable_pairwise_winner": "right"
+    },
+    {
+      "mapped_outcomes": {
+        "forward": "right",
+        "reversed": "right"
+      },
+      "order_stability": "order_stable",
+      "repeat": 1,
+      "role": "actionability",
+      "stable_pairwise_winner": "right"
+    },
+    {
+      "mapped_outcomes": {
+        "forward": "right",
+        "reversed": "right"
+      },
+      "order_stability": "order_stable",
+      "repeat": 1,
+      "role": "personalization",
+      "stable_pairwise_winner": "right"
+    },
+    {
+      "mapped_outcomes": {
+        "forward": "right",
+        "reversed": "right"
+      },
+      "order_stability": "order_stable",
+      "repeat": 1,
+      "role": "breadth",
+      "stable_pairwise_winner": "right"
+    }
+  ],
+  "stable_pairwise_wins": {
+    "left": 0,
+    "right": 4,
+    "tie": 0
+  },
+  "state": "complete",
+  "valid_calls": 8,
+  "wins_by_blinded_label": {
+    "A": 4,
+    "B": 4,
+    "invalid": 0,
+    "tie": 0
+  }
+}

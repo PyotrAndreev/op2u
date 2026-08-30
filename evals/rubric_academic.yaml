@@ -1,0 +1,98 @@
+version: 1
+name: academic_opportunity_portfolio_rubric
+scope: Opportunity discovery for the Sofya Balanina 2026-08-03 profile snapshot and 2027 graduate-study trajectory.
+snapshot_policy: Evaluate only persisted profile, direction, report, verification, and validation artifacts; judges do not browse or repair evidence.
+shared_framework_contract:
+  profile_agnostic_core:
+    - evidence_and_liveness
+    - bounded_actionability
+    - explicit_profile_bridges
+    - route_and_role_diversity
+    - uncertainty_hygiene
+    - effort_reconciliation
+  profile_overlay:
+    - graduate_route_depth
+    - funding_completeness
+    - person_specific_network_paths
+    - TOEFL_and_language_progress
+    - Cape_Town_and_Europe_windows
+scoring:
+  scale: 100
+  rule: Apply hard gates first. Score only exact official-primary supported opportunities. Exploration leads may preserve awareness but earn no verified breadth or liveness credit.
+  dimensions:
+    evidence_liveness:
+      max: 20
+      owner: evidence
+      test: Every selected/current item and every verified-horizon item has exact primary-source support for status plus a relevant date, cycle, deadline, or rolling participation window. Programme existence alone does not prove 2027 admission, supervisor availability, eligibility, or funding.
+    actionable_quality:
+      max: 15
+      owner: actionability
+      test: Selected actions have causal profile bridges, verb-led <=60-minute first steps, tangible outputs, seven-day triggers, explicit blockers, and effort reconciled within the shared 240-minute weekly capacity.
+    graduate_route_depth:
+      max: 15
+      owner: academic_depth
+      test: The horizon distinguishes direct PhD, research Master’s, pre-doc/RA, person-specific research connection, methods/conference routes, and explains what uncertainty each resolves. Programme lists without curriculum/admission fit earn little credit.
+    funding_completeness:
+      max: 12
+      owner: academic_depth
+      test: Funding claims distinguish tuition, stipend/living support, duration, eligibility, deadlines, and unresolved gap. Nearly-full funding is prioritized; partial scholarships are not mislabeled funded.
+    person_specific_network_paths:
+      max: 10
+      owner: personalization
+      test: Cleeremans, Ivanchei, and Mentec are used only through evidence-grounded person/publication/programme paths and bounded user-controlled outreach hypotheses. No warm introduction, reply, endorsement, or supervision availability is assumed. Broad lab catalogues do not earn credit.
+    language_and_exam_path:
+      max: 10
+      owner: academic_depth
+      test: Target-program TOEFL acceptance and score requirements precede exam optimization; B2-to-C1 preparation includes measurable academic practice. Kazakhstan/Armenia sessions count only with official test-center/date/format evidence and no inferred travel eligibility.
+    geographic_context_value:
+      max: 8
+      owner: personalization
+      test: Cape Town opportunities have dates overlapping 1–31 October 2026 and a research/application/language or belonging value route. Europe travel opportunities respect a preferred 7–10 day duration. Generic tourism earns zero.
+    identity_and_stretch:
+      max: 5
+      owner: actionability
+      test: Empty is acceptable. A non-empty challenge is evidence-backed, safe, reversible, <=60 minutes, and expands a relevant role such as English-language presenter, prospective researcher, applicant, or scholarly correspondent.
+    cost:
+      max: 5
+      owner: operations
+      test: Favor equal-or-better gated outcomes at lower persisted research/judging duration and cost; unknown provider cost remains unknown.
+hard_gates:
+  - id: persisted_production_validation
+    rule: Latest production validation is present and valid.
+  - id: exact_primary_evidence
+    rule: Selected ACT_NOW and all counted verified items use exact ledger rows projected from saved official-primary verification.
+  - id: no_invented_admission_or_supervision
+    rule: Programme existence is not represented as 2027 openness, user eligibility, admission likelihood, or supervisor availability without direct evidence.
+  - id: no_invented_funding
+    rule: Funding is not called full/nearly full unless the supported components and remaining gap are explicit.
+  - id: shared_weekly_capacity
+    rule: Scheduled actions total <=240 minutes; monitor/exploration items schedule zero minutes. A legacy 360-minute declaration is a direction-contract failure even when production schema accepts it.
+  - id: person_contact_safety
+    rule: No contact is represented as warm, willing, endorsing, supervising, or able to introduce without supplied facts.
+  - id: exam_claim_safety
+    rule: TOEFL acceptance, required score, test-center status/date/format, identification, payment, and travel feasibility are not inferred.
+  - id: no_irrelevant_hardcoded_geography
+    rule: Hong Kong, Shanghai, and the original profile's South Africa window are not searched or reported unless independently supported by this profile; Cape Town is only 1–31 October 2026.
+  - id: unsupported_breadth_not_counted
+    rule: Generic programme, person, organization, or event pages without a current route remain exploration leads and earn no verified diversity credit.
+penalties:
+  irrelevant_original_profile_branch: 8
+  programme_list_without_route_depth: 4
+  invented_supervisor_availability: 10
+  incomplete_funding_called_funded: 8
+  generic_networking_advice: 4
+  generic_language_practice: 3
+  exam_session_without_official_evidence: 8
+  weekly_capacity_mismatch: 8
+  unsupported_breadth_claim: 8
+promotion:
+  minimum_valid_repeats: 2
+  require_all_hard_gates: true
+  require_evidence_liveness_non_regression: true
+  require_improvement_in_at_least_two_academic_overlay_dimensions: true
+  require_cross_profile_regression_run: true
+  require_order_stable_pairwise_result: true
+holdout_policy:
+  sealed: true
+  accessible_to: []
+  limitation: This second visible profile is a transfer case, not a hidden holdout.

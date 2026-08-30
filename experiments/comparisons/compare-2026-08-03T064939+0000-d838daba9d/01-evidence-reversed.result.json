@@ -1,0 +1,26 @@
+{
+  "confidence": 0.98,
+  "failure_tags": [
+    "missing_production_validation",
+    "unsupported_breadth_claim"
+  ],
+  "hard_failures": {
+    "A": [
+      "persisted_production_validation: no valid persisted production validation is provided."
+    ],
+    "B": [
+      "persisted_production_validation: no valid persisted production validation is provided."
+    ]
+  },
+  "judge_role": "evidence",
+  "reasons": [
+    "Both are ineligible under the required production-validation gate.",
+    "A otherwise keeps selected actions tied to direct official evidence and does not count its unsupported monitor.",
+    "B counts undated or no-participation-path monitor entries toward verified family, geographic, role, and adaptation breadth, contrary to the unsupported-breadth gate."
+  ],
+  "scores": {
+    "A": 0,
+    "B": 0
+  },
+  "winner": "tie"
+}

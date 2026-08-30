@@ -1,0 +1,25 @@
+{
+  "confidence": 0.96,
+  "failure_tags": [
+    "weekly_capacity_mismatch"
+  ],
+  "hard_failures": {
+    "A": [
+      "shared_weekly_capacity"
+    ],
+    "B": []
+  },
+  "judge_role": "evidence",
+  "reasons": [
+    "B provides a directly supported upcoming doctoral route with explicit status, timing, eligibility constraints, and a bounded 40–60 minute action within the required 240-minute capacity.",
+    "B preserves uncertainty around eligibility, funding-package components, supervision, TOEFL logistics, and person-specific access.",
+    "A declares and uses a 360-minute weekly-capacity contract, violating the required shared 240-minute capacity.",
+    "A also schedules a 90-minute first action, exceeding the rubric's <=60-minute action standard.",
+    "Both portfolios have limited verified breadth and no verified October Cape Town, specific TOEFL appointment, or actionable person-specific route."
+  ],
+  "scores": {
+    "A": 30,
+    "B": 55
+  },
+  "winner": "B"
+}

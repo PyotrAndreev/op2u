@@ -1,0 +1,26 @@
+{
+  "confidence": 0.89,
+  "failure_tags": [
+    "A:limited_verified_family_diversity",
+    "A:weak_adaptation_participation_route",
+    "B:unresolved_funding_fit",
+    "B:nonrecurring_adaptation_path",
+    "B:higher_scheduled_effort"
+  ],
+  "hard_failures": {
+    "A": [],
+    "B": []
+  },
+  "judge_role": "personalization",
+  "reasons": [
+    "B provides more evidence-backed, materially distinct families, roles, and geographic paths while retaining unsupported leads as non-counted monitors.",
+    "B has stronger profile-specific bridges and a verified speaking/workshop route alongside funding, community, and adaptation experiments.",
+    "A is concise and low-effort but has only two verified horizon families in its persisted report and weaker adaptation participation support.",
+    "Both preserve unknown eligibility and costs, respect effort limits, and use valid bounded stretch actions."
+  ],
+  "scores": {
+    "A": 67,
+    "B": 86
+  },
+  "winner": "B"
+}

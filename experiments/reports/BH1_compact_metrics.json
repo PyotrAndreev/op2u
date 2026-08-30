@@ -1,0 +1,113 @@
+{
+  "candidate_and_horizon_counts": {
+    "candidate_statuses": {
+      "ACT_NOW": 3,
+      "MONITOR": 3
+    },
+    "candidates": 6,
+    "horizon": 6
+  },
+  "distinct_families": {
+    "horizon": [
+      "adaptation",
+      "community",
+      "creative",
+      "funding",
+      "place_event"
+    ],
+    "horizon_count": 5,
+    "verified_actionable": [
+      "creative",
+      "place_event"
+    ],
+    "verified_actionable_count": 2
+  },
+  "monitor_effort_violations": {
+    "count": 0,
+    "items": []
+  },
+  "scheduled_effort": {
+    "cap_minutes": 360,
+    "computed_selected_action_max_minutes": 115,
+    "declared_max_minutes": 115,
+    "matches_declared": true,
+    "within_cap": true
+  },
+  "schema_validity": {
+    "local_contract_errors": [],
+    "local_contract_valid": true,
+    "production_validation_file": "production_validation.attempt-03.json",
+    "production_validation_schema_errors": [],
+    "production_validation_valid": false,
+    "report_file": "report.attempt-03.result.json",
+    "valid": false
+  },
+  "selected_family_geography_duplication": {
+    "action_portfolio": {
+      "family": [],
+      "geography": [
+        {
+          "candidate_ids": [
+            "opp-1",
+            "opp-3"
+          ],
+          "extra_items": 1,
+          "value": "south africa 2026-09-25 to 2026-12-31; cape town"
+        }
+      ]
+    },
+    "all_selected_including_monitor": {
+      "family": [
+        {
+          "candidate_ids": [
+            "opp-1",
+            "opp-4"
+          ],
+          "extra_items": 1,
+          "value": "place_event"
+        }
+      ],
+      "geography": [
+        {
+          "candidate_ids": [
+            "opp-1",
+            "opp-3"
+          ],
+          "extra_items": 1,
+          "value": "south africa 2026-09-25 to 2026-12-31; cape town"
+        }
+      ]
+    }
+  },
+  "stretch_real_action_status": {
+    "candidate_id": "opp-3",
+    "real_action": false,
+    "reasons": [
+      "seven-day trigger is not explicit"
+    ],
+    "status": "FAIL"
+  },
+  "uncertainty_counts": {
+    "candidate_uncertainties": 7,
+    "candidates_with_uncertainties": 6,
+    "profile_unknowns": 3,
+    "report_summary": 5
+  },
+  "verified_geographic_windows": {
+    "count": 3,
+    "hits": [
+      {
+        "candidate_id": "opp-4",
+        "window": "shanghai_2026-09-06_2026-09-10"
+      },
+      {
+        "candidate_id": "opp-1",
+        "window": "south_africa_2026-09-25_2026-12-31"
+      },
+      {
+        "candidate_id": "opp-3",
+        "window": "south_africa_2026-09-25_2026-12-31"
+      }
+    ]
+  }
+}

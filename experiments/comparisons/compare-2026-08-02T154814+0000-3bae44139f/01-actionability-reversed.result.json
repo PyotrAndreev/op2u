@@ -1,0 +1,24 @@
+{
+  "confidence": 0.9,
+  "failure_tags": [
+    "A:underpowered_selection",
+    "A:weaker_opportunity_bridge",
+    "B:eligibility_and_scope_uncertainty"
+  ],
+  "hard_failures": {
+    "A": [],
+    "B": []
+  },
+  "judge_role": "actionability",
+  "reasons": [
+    "B provides a more concrete, atomic seven-day deliverable tied to a live deadline.",
+    "B makes a stronger causal bridge across multiple profile assets and offers a credible visibility or funding pathway.",
+    "A is more conservative and has excellent uncertainty hygiene, but its single immediate path is less strategically specific and leaves substantial opportunity capacity unused.",
+    "Both satisfy the hard gates, including evidence, shortlist limits, effort budget, and a seven-day first action."
+  ],
+  "scores": {
+    "A": 78,
+    "B": 86
+  },
+  "winner": "B"
+}

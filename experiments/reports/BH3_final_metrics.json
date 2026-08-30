@@ -1,0 +1,97 @@
+{
+  "candidate_and_horizon_counts": {
+    "candidate_statuses": {
+      "MONITOR": 6,
+      "PREPARE_NEXT": 2
+    },
+    "candidates": 8,
+    "horizon": 8
+  },
+  "distinct_families": {
+    "horizon": [
+      "adaptation",
+      "creative",
+      "funding",
+      "place_event",
+      "research",
+      "visibility"
+    ],
+    "horizon_count": 6,
+    "verified_actionable": [],
+    "verified_actionable_count": 0
+  },
+  "monitor_effort_violations": {
+    "count": 0,
+    "items": []
+  },
+  "scheduled_effort": {
+    "cap_minutes": 360,
+    "computed_selected_action_max_minutes": 105,
+    "declared_max_minutes": 105,
+    "matches_declared": true,
+    "within_cap": true
+  },
+  "schema_validity": {
+    "local_contract_errors": [],
+    "local_contract_valid": true,
+    "production_validation_file": "production_validation.attempt-02.json",
+    "production_validation_schema_errors": [],
+    "production_validation_valid": true,
+    "report_file": "report.attempt-02.result.json",
+    "valid": true
+  },
+  "selected_family_geography_duplication": {
+    "action_portfolio": {
+      "family": [],
+      "geography": []
+    },
+    "all_selected_including_monitor": {
+      "family": [
+        {
+          "candidate_ids": [
+            "opp-2",
+            "opp-5",
+            "opp-7"
+          ],
+          "extra_items": 2,
+          "value": "research"
+        }
+      ],
+      "geography": [
+        {
+          "candidate_ids": [
+            "opp-2",
+            "opp-7"
+          ],
+          "extra_items": 1,
+          "value": "global_or_online"
+        },
+        {
+          "candidate_ids": [
+            "opp-4",
+            "opp-5",
+            "opp-6",
+            "opp-8"
+          ],
+          "extra_items": 3,
+          "value": "south africa 2026-09-25 through 2026-12-31"
+        }
+      ]
+    }
+  },
+  "stretch_real_action_status": {
+    "real_action": false,
+    "reasons": [],
+    "status": "EMPTY"
+  },
+  "uncertainty_counts": {
+    "candidate_uncertainties": 13,
+    "candidates_with_uncertainties": 8,
+    "profile_unknowns": 4,
+    "report_summary": 7
+  },
+  "verified_geographic_windows": {
+    "count": 0,
+    "hits": []
+  }
+}

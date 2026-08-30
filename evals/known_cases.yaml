@@ -1,0 +1,24 @@
+cases:
+  - id: pycon_za_2026
+    snapshot_date: 2026-07-24
+    available_signals:
+      - User had prepared a PyCon-level talk.
+      - User planned to be in Cape Town in October 2026.
+      - User wanted more international professional visibility.
+      - The talk could be adapted into English.
+    expected_discovery_pattern:
+      - Search for Python conferences and open CFPs in South Africa.
+      - Identify PyCon ZA as a high-actionability match.
+      - Notice the approaching CFP deadline.
+      - Recommend adapting the existing talk rather than creating a new proposal.
+    expected_classification: ACT_NOW
+    expected_bridge:
+      - existing talk
+      - planned Cape Town presence
+      - close CFP deadline
+      - low marginal submission effort
+    invalid_shortcuts:
+      - Hard-code PyCon ZA into a production prompt.
+      - Recommend it without verifying CFP status and deadline.
+    acceptable_alternatives:
+      - Another verified South African Python or developer-tools CFP with an equally strong bridge.

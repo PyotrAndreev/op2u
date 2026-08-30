@@ -1,0 +1,34 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://op2u.local/schemas/profile_interpretation.schema.json",
+  "title": "ProfileInterpretation",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["durable_facts", "active_trajectories", "current_context", "current_commitments", "recent_events", "planned_geography", "reusable_assets", "constraints", "application_readiness", "open_decisions", "missing_information", "assumptions"],
+  "properties": {
+    "durable_facts": {"type": "array", "items": {"type": "string"}},
+    "active_trajectories": {"type": "array", "items": {"type": "string"}},
+    "current_context": {"type": "array", "items": {"type": "string"}},
+    "current_commitments": {"type": "array", "items": {"type": "string"}},
+    "recent_events": {"type": "array", "items": {"type": "string"}},
+    "planned_geography": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["place", "date_or_window", "certainty"],
+        "properties": {
+          "place": {"type": "string"},
+          "date_or_window": {"type": ["string", "null"]},
+          "certainty": {"enum": ["explicit", "possible", "unknown"]}
+        }
+      }
+    },
+    "reusable_assets": {"type": "array", "items": {"type": "string"}},
+    "constraints": {"type": "array", "items": {"type": "string"}},
+    "application_readiness": {"type": "array", "items": {"type": "string"}},
+    "open_decisions": {"type": "array", "items": {"type": "string"}},
+    "missing_information": {"type": "array", "items": {"type": "string"}},
+    "assumptions": {"type": "array", "items": {"type": "string"}}
+  }
+}

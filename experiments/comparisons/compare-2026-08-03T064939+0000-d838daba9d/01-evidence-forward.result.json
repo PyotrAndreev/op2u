@@ -1,0 +1,24 @@
+{
+  "confidence": 0.99,
+  "failure_tags": [
+    "missing_production_validation"
+  ],
+  "hard_failures": {
+    "A": [
+      "persisted_production_validation"
+    ],
+    "B": [
+      "persisted_production_validation"
+    ]
+  },
+  "judge_role": "evidence",
+  "reasons": [
+    "Neither submission includes a valid persisted production-validation artifact, making both ineligible under the mandatory hard gate.",
+    "No score can be awarded after hard-gate ineligibility."
+  ],
+  "scores": {
+    "A": 0,
+    "B": 0
+  },
+  "winner": "tie"
+}

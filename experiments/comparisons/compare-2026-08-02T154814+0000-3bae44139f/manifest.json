@@ -1,0 +1,17 @@
+{
+  "comparison_id": "compare-2026-08-02T154814+0000-3bae44139f",
+  "created_at": "2026-08-02T15:48:14+00:00",
+  "dry_run": false,
+  "input_hashes": {
+    "left": "5f875759a02845806a6dc991e0f71ac8cd277c5fa9bd6273d86b13cdb3f883b5",
+    "right": "6e3dcef1ce440afb42356ee594fd99a995ac647a2132de0460865a3b7fc56884"
+  },
+  "judge_model": "openai-codex/gpt-5.6-luna",
+  "repeats": 1,
+  "roles": [
+    "actionability",
+    "evidence",
+    "personalization"
+  ],
+  "target": "report"
+}

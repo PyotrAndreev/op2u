@@ -1,0 +1,28 @@
+{
+  "confidence": 0.96,
+  "failure_tags": [
+    "A:weekly_capacity_mismatch",
+    "A:first_action_over_60_minutes",
+    "both:limited_verified_route_diversity",
+    "both:language_path_incomplete",
+    "both:no_cape_town_october_route"
+  ],
+  "hard_failures": {
+    "A": [
+      "shared_weekly_capacity: persisted weekly cap is 360 minutes rather than the required shared 240-minute capacity"
+    ],
+    "B": []
+  },
+  "judge_role": "personalization",
+  "reasons": [
+    "B preserves a verified, directly supported funded doctoral route with explicit eligibility uncertainty, a bounded 40–60 minute fit-matrix action, and a compliant 240-minute weekly allocation.",
+    "B handles person-specific paths, TOEFL logistics, funding-package gaps, and Cape Town non-overlap conservatively.",
+    "A uses a legacy 360-minute weekly-cap declaration, failing the shared-capacity hard gate; its main preparation action also permits 90 minutes, exceeding the rubric's <=60-minute first-step standard.",
+    "Both portfolios have weak verified breadth, no verified October Cape Town route, and limited language-path evidence."
+  ],
+  "scores": {
+    "A": 32,
+    "B": 59
+  },
+  "winner": "B"
+}

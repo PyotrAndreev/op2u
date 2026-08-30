@@ -1,0 +1,25 @@
+{
+  "confidence": 0.89,
+  "failure_tags": [
+    "limited_adaptation_recurrence",
+    "inconsistent_artifact_projection",
+    "insufficient_verified_family_breadth"
+  ],
+  "hard_failures": {
+    "A": [],
+    "B": []
+  },
+  "judge_role": "personalization",
+  "reasons": [
+    "A provides five evidence-backed, materially distinct horizon families versus B's smaller final verified horizon.",
+    "A offers stronger role expansion across attendee, contributor-community participant, grant applicant, speaker/workshop proposer, and local-community participant.",
+    "A has broader dated geographic coverage across Hong Kong, the first Shanghai window, and South Africa, while explicitly preserving the later Shanghai gap as unsupported.",
+    "Both disclose uncertainty, keep monitors at zero effort, stay within effort limits, and include safe bounded stretch actions.",
+    "B has a particularly concrete demonstrator pathway, but its South Africa adaptation path is primarily one-off ecosystem exploration and its persisted final report removes it from verified horizon credit."
+  ],
+  "scores": {
+    "A": 88,
+    "B": 72
+  },
+  "winner": "A"
+}

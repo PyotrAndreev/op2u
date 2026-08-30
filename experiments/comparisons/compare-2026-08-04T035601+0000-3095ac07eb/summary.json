@@ -1,0 +1,252 @@
+{
+  "calls": [
+    {
+      "mapped_winner": "right",
+      "name": "01-evidence-forward",
+      "orientation": "forward",
+      "repeat": 1,
+      "role": "evidence",
+      "status": "complete",
+      "winner_by_blinded_label": "A"
+    },
+    {
+      "mapped_winner": "right",
+      "name": "01-evidence-reversed",
+      "orientation": "reversed",
+      "repeat": 1,
+      "role": "evidence",
+      "status": "complete",
+      "winner_by_blinded_label": "B"
+    },
+    {
+      "mapped_winner": "right",
+      "name": "01-actionability-forward",
+      "orientation": "forward",
+      "repeat": 1,
+      "role": "actionability",
+      "status": "complete",
+      "winner_by_blinded_label": "A"
+    },
+    {
+      "mapped_winner": "right",
+      "name": "01-actionability-reversed",
+      "orientation": "reversed",
+      "repeat": 1,
+      "role": "actionability",
+      "status": "complete",
+      "winner_by_blinded_label": "B"
+    },
+    {
+      "mapped_winner": "right",
+      "name": "01-personalization-forward",
+      "orientation": "forward",
+      "repeat": 1,
+      "role": "personalization",
+      "status": "complete",
+      "winner_by_blinded_label": "A"
+    },
+    {
+      "mapped_winner": "right",
+      "name": "01-personalization-reversed",
+      "orientation": "reversed",
+      "repeat": 1,
+      "role": "personalization",
+      "status": "complete",
+      "winner_by_blinded_label": "B"
+    },
+    {
+      "mapped_winner": "right",
+      "name": "01-academic_depth-forward",
+      "orientation": "forward",
+      "repeat": 1,
+      "role": "academic_depth",
+      "status": "complete",
+      "winner_by_blinded_label": "A"
+    },
+    {
+      "mapped_winner": "right",
+      "name": "01-academic_depth-reversed",
+      "orientation": "reversed",
+      "repeat": 1,
+      "role": "academic_depth",
+      "status": "complete",
+      "winner_by_blinded_label": "B"
+    },
+    {
+      "mapped_winner": "right",
+      "name": "02-evidence-forward",
+      "orientation": "forward",
+      "repeat": 2,
+      "role": "evidence",
+      "status": "complete",
+      "winner_by_blinded_label": "A"
+    },
+    {
+      "mapped_winner": "right",
+      "name": "02-evidence-reversed",
+      "orientation": "reversed",
+      "repeat": 2,
+      "role": "evidence",
+      "status": "complete",
+      "winner_by_blinded_label": "B"
+    },
+    {
+      "mapped_winner": "right",
+      "name": "02-actionability-forward",
+      "orientation": "forward",
+      "repeat": 2,
+      "role": "actionability",
+      "status": "complete",
+      "winner_by_blinded_label": "A"
+    },
+    {
+      "mapped_winner": "right",
+      "name": "02-actionability-reversed",
+      "orientation": "reversed",
+      "repeat": 2,
+      "role": "actionability",
+      "status": "complete",
+      "winner_by_blinded_label": "B"
+    },
+    {
+      "mapped_winner": "right",
+      "name": "02-personalization-forward",
+      "orientation": "forward",
+      "repeat": 2,
+      "role": "personalization",
+      "status": "complete",
+      "winner_by_blinded_label": "A"
+    },
+    {
+      "mapped_winner": "right",
+      "name": "02-personalization-reversed",
+      "orientation": "reversed",
+      "repeat": 2,
+      "role": "personalization",
+      "status": "complete",
+      "winner_by_blinded_label": "B"
+    },
+    {
+      "mapped_winner": "right",
+      "name": "02-academic_depth-forward",
+      "orientation": "forward",
+      "repeat": 2,
+      "role": "academic_depth",
+      "status": "complete",
+      "winner_by_blinded_label": "A"
+    },
+    {
+      "mapped_winner": "right",
+      "name": "02-academic_depth-reversed",
+      "orientation": "reversed",
+      "repeat": 2,
+      "role": "academic_depth",
+      "status": "complete",
+      "winner_by_blinded_label": "B"
+    }
+  ],
+  "comparison_id": "compare-2026-08-04T035601+0000-3095ac07eb",
+  "finished_at": "2026-08-04T04:01:19+00:00",
+  "mapped_votes_by_stable_identity": {
+    "invalid": 0,
+    "left": 0,
+    "right": 16,
+    "tie": 0
+  },
+  "path": "/data/data/com.termux/files/home/op2u/experiments/comparisons/compare-2026-08-04T035601+0000-3095ac07eb",
+  "repeat_role_results": [
+    {
+      "mapped_outcomes": {
+        "forward": "right",
+        "reversed": "right"
+      },
+      "order_stability": "order_stable",
+      "repeat": 1,
+      "role": "evidence",
+      "stable_pairwise_winner": "right"
+    },
+    {
+      "mapped_outcomes": {
+        "forward": "right",
+        "reversed": "right"
+      },
+      "order_stability": "order_stable",
+      "repeat": 1,
+      "role": "actionability",
+      "stable_pairwise_winner": "right"
+    },
+    {
+      "mapped_outcomes": {
+        "forward": "right",
+        "reversed": "right"
+      },
+      "order_stability": "order_stable",
+      "repeat": 1,
+      "role": "personalization",
+      "stable_pairwise_winner": "right"
+    },
+    {
+      "mapped_outcomes": {
+        "forward": "right",
+        "reversed": "right"
+      },
+      "order_stability": "order_stable",
+      "repeat": 1,
+      "role": "academic_depth",
+      "stable_pairwise_winner": "right"
+    },
+    {
+      "mapped_outcomes": {
+        "forward": "right",
+        "reversed": "right"
+      },
+      "order_stability": "order_stable",
+      "repeat": 2,
+      "role": "evidence",
+      "stable_pairwise_winner": "right"
+    },
+    {
+      "mapped_outcomes": {
+        "forward": "right",
+        "reversed": "right"
+      },
+      "order_stability": "order_stable",
+      "repeat": 2,
+      "role": "actionability",
+      "stable_pairwise_winner": "right"
+    },
+    {
+      "mapped_outcomes": {
+        "forward": "right",
+        "reversed": "right"
+      },
+      "order_stability": "order_stable",
+      "repeat": 2,
+      "role": "personalization",
+      "stable_pairwise_winner": "right"
+    },
+    {
+      "mapped_outcomes": {
+        "forward": "right",
+        "reversed": "right"
+      },
+      "order_stability": "order_stable",
+      "repeat": 2,
+      "role": "academic_depth",
+      "stable_pairwise_winner": "right"
+    }
+  ],
+  "stable_pairwise_wins": {
+    "left": 0,
+    "right": 8,
+    "tie": 0
+  },
+  "state": "complete",
+  "valid_calls": 16,
+  "wins_by_blinded_label": {
+    "A": 8,
+    "B": 8,
+    "invalid": 0,
+    "tie": 0
+  }
+}

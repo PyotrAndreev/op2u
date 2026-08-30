@@ -1,0 +1,29 @@
+{
+  "confidence": 0.98,
+  "failure_tags": [
+    "weekly_capacity_mismatch",
+    "unsupported_breadth_claim",
+    "irrelevant_original_profile_branch"
+  ],
+  "hard_failures": {
+    "A": [],
+    "B": [
+      "shared_weekly_capacity",
+      "exact_primary_evidence",
+      "no_irrelevant_hardcoded_geography"
+    ]
+  },
+  "judge_role": "personalization",
+  "reasons": [
+    "A confines selected preparation to the sole current, officially supported route, explicitly preserves eligibility and funding-package uncertainty, and keeps unsupported routes as zero-effort monitors.",
+    "A provides strong profile bridges for the selected route and safe, bounded treatment of person-specific and TOEFL leads.",
+    "B uses a 360-minute weekly-capacity declaration, conflicting with the required 240-minute shared capacity.",
+    "B represents an undated programme deadline as a 2027 deadline and schedules preparation on that basis.",
+    "B reports and relies on a broader South Africa window beyond the confirmed October Cape Town period."
+  ],
+  "scores": {
+    "A": 62,
+    "B": 18
+  },
+  "winner": "A"
+}

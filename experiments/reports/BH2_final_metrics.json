@@ -1,0 +1,89 @@
+{
+  "candidate_and_horizon_counts": {
+    "candidate_statuses": {
+      "MONITOR": 3,
+      "PREPARE_NEXT": 2,
+      "REJECT": 1
+    },
+    "candidates": 6,
+    "horizon": 5
+  },
+  "distinct_families": {
+    "horizon": [
+      "adaptation",
+      "creative",
+      "funding",
+      "place_event",
+      "teaching"
+    ],
+    "horizon_count": 5,
+    "verified_actionable": [
+      "funding",
+      "teaching"
+    ],
+    "verified_actionable_count": 2
+  },
+  "monitor_effort_violations": {
+    "count": 0,
+    "items": []
+  },
+  "scheduled_effort": {
+    "cap_minutes": 360,
+    "computed_selected_action_max_minutes": 110,
+    "declared_max_minutes": 110,
+    "matches_declared": true,
+    "within_cap": true
+  },
+  "schema_validity": {
+    "local_contract_errors": [],
+    "local_contract_valid": true,
+    "production_validation_file": "production_validation.attempt-02.json",
+    "production_validation_schema_errors": [],
+    "production_validation_valid": true,
+    "report_file": "report.attempt-02.result.json",
+    "valid": true
+  },
+  "selected_family_geography_duplication": {
+    "action_portfolio": {
+      "family": [],
+      "geography": []
+    },
+    "all_selected_including_monitor": {
+      "family": [],
+      "geography": [
+        {
+          "candidate_ids": [
+            "opp-4",
+            "opp-5"
+          ],
+          "extra_items": 1,
+          "value": "cape town within south africa 2026-09-25\u20132026-12-31"
+        }
+      ]
+    }
+  },
+  "stretch_real_action_status": {
+    "real_action": false,
+    "reasons": [],
+    "status": "EMPTY"
+  },
+  "uncertainty_counts": {
+    "candidate_uncertainties": 11,
+    "candidates_with_uncertainties": 6,
+    "profile_unknowns": 2,
+    "report_summary": 4
+  },
+  "verified_geographic_windows": {
+    "count": 2,
+    "hits": [
+      {
+        "candidate_id": "opp-2",
+        "window": "shanghai_2026-09-06_2026-09-10"
+      },
+      {
+        "candidate_id": "opp-3",
+        "window": "south_africa_2026-09-25_2026-12-31"
+      }
+    ]
+  }
+}

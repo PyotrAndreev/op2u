@@ -1,0 +1,24 @@
+{
+  "confidence": 0.9,
+  "failure_tags": [
+    "limited_verified_family_diversity",
+    "nonrecurring_adaptation_path",
+    "unresolved_ecosystem_fit"
+  ],
+  "hard_failures": {
+    "A": [],
+    "B": []
+  },
+  "judge_role": "breadth",
+  "reasons": [
+    "B provides more evidence-backed, materially distinct families, participation modes, and profile-grounded roles while retaining dated geographic overlap.",
+    "B has stronger funding, speaking/workshop, Hong Kong, Shanghai, and Cape Town coverage with bounded selected actions.",
+    "A is evidence-conscious and efficient, but its verified horizon is narrower and its Cape Town path is a one-off ecosystem event rather than a recurring contribution-capable belonging route.",
+    "B retains uncertainty around grant fit, cost, access, and Cape Town availability rather than treating them as resolved."
+  ],
+  "scores": {
+    "A": 73,
+    "B": 88
+  },
+  "winner": "B"
+}

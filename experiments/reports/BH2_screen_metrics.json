@@ -1,0 +1,79 @@
+{
+  "candidate_and_horizon_counts": {
+    "candidate_statuses": {},
+    "candidates": 0,
+    "horizon": 0
+  },
+  "distinct_families": {
+    "horizon": [],
+    "horizon_count": 0,
+    "verified_actionable": [],
+    "verified_actionable_count": 0
+  },
+  "monitor_effort_violations": {
+    "count": 0,
+    "items": []
+  },
+  "scheduled_effort": {
+    "cap_minutes": null,
+    "computed_selected_action_max_minutes": 0,
+    "declared_max_minutes": null,
+    "matches_declared": false,
+    "within_cap": false
+  },
+  "schema_validity": {
+    "local_contract_errors": [
+      "missing top-level key: candidates",
+      "missing top-level key: evidence_ledger",
+      "missing top-level key: profile_state",
+      "missing top-level key: rejected_candidates",
+      "missing top-level key: selected_ids",
+      "missing top-level key: snapshot_date",
+      "missing top-level key: trigger_hypotheses",
+      "missing top-level key: uncertainty_summary",
+      "missing top-level key: weekly_allocation",
+      "selected_ids is not an object",
+      "weekly_allocation is not an object"
+    ],
+    "local_contract_valid": false,
+    "production_validation_file": "production_validation.json",
+    "production_validation_schema_errors": [
+      "schema: $: missing required property snapshot_date",
+      "schema: $: missing required property profile_state",
+      "schema: $: missing required property trigger_hypotheses",
+      "schema: $: missing required property candidates",
+      "schema: $: missing required property selected_ids",
+      "schema: $: missing required property weekly_allocation",
+      "schema: $: missing required property evidence_ledger",
+      "schema: $: missing required property rejected_candidates",
+      "schema: $: missing required property uncertainty_summary"
+    ],
+    "production_validation_valid": false,
+    "valid": false
+  },
+  "selected_family_geography_duplication": {
+    "action_portfolio": {
+      "family": [],
+      "geography": []
+    },
+    "all_selected_including_monitor": {
+      "family": [],
+      "geography": []
+    }
+  },
+  "stretch_real_action_status": {
+    "real_action": false,
+    "reasons": [],
+    "status": "EMPTY"
+  },
+  "uncertainty_counts": {
+    "candidate_uncertainties": 0,
+    "candidates_with_uncertainties": 0,
+    "profile_unknowns": 0,
+    "report_summary": 0
+  },
+  "verified_geographic_windows": {
+    "count": 0,
+    "hits": []
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "confidence": 0.93,
+  "failure_tags": [
+    "B:eligibility_unknown",
+    "B:total_effort_unknown"
+  ],
+  "hard_failures": {
+    "A": [],
+    "B": [
+      "ACT_NOW eligibility is not explicitly established.",
+      "Selected commitment effort is unknown, so the weekly-effort hard gate cannot be confirmed."
+    ]
+  },
+  "judge_role": "personalization",
+  "reasons": [
+    "A provides stronger official evidence with quoted support and retrieval times.",
+    "A gives clearer bridges from multiple profile signals to concrete opportunities.",
+    "A’s first action is atomic, time-bounded, and directly tied to a live deadline.",
+    "B’s ACT_NOW path has unresolved eligibility, deadline, and total-effort uncertainty.",
+    "A offers better strategic diversity across visibility, funding preparation, and monitoring."
+  ],
+  "scores": {
+    "A": 88,
+    "B": 58
+  },
+  "winner": "A"
+}

@@ -1,0 +1,23 @@
+{
+  "confidence": 0.99,
+  "failure_tags": [
+    "persisted_production_validation"
+  ],
+  "hard_failures": {
+    "A": [
+      "persisted_production_validation: missing latest persisted production validation"
+    ],
+    "B": [
+      "persisted_production_validation: missing latest persisted production validation"
+    ]
+  },
+  "judge_role": "personalization",
+  "reasons": [
+    "Both are ineligible under the required production-validation hard gate."
+  ],
+  "scores": {
+    "A": 0,
+    "B": 0
+  },
+  "winner": "tie"
+}
