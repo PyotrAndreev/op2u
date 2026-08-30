@@ -17,6 +17,7 @@ The current scope is **discovery**: profile interpretation, search, primary-sour
 - [Development conventions](docs/dev/development.md)
 - [Repository structure](docs/dev/repository-structure.md)
 - [Evaluation](docs/dev/evaluation.md)
+- [EUSP priority-1 experiment charter](docs/dev/eusp-p1-experiment-charter.md)
 - [Architecture decisions](docs/adr/README.md)
 
 `experiments/analyses/` contains retained generated analyses. Current prompts live under `prompts/` and implement the Discovery MVP specification.

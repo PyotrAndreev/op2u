@@ -2,7 +2,7 @@
 
 Evaluation checks whether a discovery run conforms to the Discovery MVP specification, not whether a response merely sounds useful.
 
-`evals/` contains directions, rubrics, schemas, and visible fixtures. `tools/` runs staged discovery, validates structured output, scores it, and compares variants. `experiments/` records variant metadata, run inventories, comparisons, and selected conclusions.
+`evals/` contains directions, rubrics, schemas, and visible fixtures. `tools/` runs staged discovery, validates structured output, scores it, and compares variants. `experiments/` records variant metadata, run inventories, comparisons, and selected conclusions. The fixed EUSP priority-1 protocol is defined in the [EUSP priority-1 experiment charter](eusp-p1-experiment-charter.md).
 
 A deterministic check should validate properties such as schema validity, unique identifiers, required evidence fields, referenced artifacts, classification limits, and weekly effort arithmetic. Semantic judgment remains separate: judges assess evidence quality, liveness, profile bridge, actionability, strategic value, and portfolio diversity.
 
