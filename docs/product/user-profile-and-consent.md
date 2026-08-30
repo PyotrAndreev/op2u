@@ -4,9 +4,9 @@ Opportunity discovery uses personal information. A profile may include biography
 
 ## Profile handling
 
-Only user-supplied facts may enter the profile. Unknown facts remain unknown. A profile should distinguish durable facts, current context, reusable assets, constraints, decisions, preferences, and unanswered questions so that a recommendation can identify its actual basis.
+Only user-supplied facts may enter the profile. Unknown facts remain unknown. A profile should distinguish durable facts, current context, reusable assets, constraints, decisions, preferences, and unanswered questions so that a recommendation can identify its actual basis. The [local EUSP user-profile model](eusp-local-user-profile.md) defines the v1 Markdown ingress, including per-field provenance and explicit geography periods.
 
-Personal profiles and complete production runs stay outside the Git repository. Repository fixtures and reports must be anonymized and must not contain private profile material.
+Personal profiles and complete production runs stay outside the Git repository. `usr/profile.md` is ignored local storage; repository fixtures and reports must be anonymized and must not contain private profile material.
 
 ## Consent boundary
 
