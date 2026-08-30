@@ -19,4 +19,4 @@ The current scope is **discovery**: profile interpretation, search, primary-sour
 - [Evaluation](docs/dev/evaluation.md)
 - [Architecture decisions](docs/adr/README.md)
 
-Earlier generated analyses and prompt versions are retained under `experiments/legacy/` and `prompts/legacy/` for historical reference. They are not current product documentation or production prompts.
+`experiments/analyses/` contains retained generated analyses. Current prompts live under `prompts/` and implement the Discovery MVP specification.
