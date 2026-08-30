@@ -1,0 +1,34 @@
+schema_version: eusp-p1-direction/v1
+fixture_id: eusp_p1_synthetic_neutral
+snapshot_date: 2026-08-30
+timezone: Etc/UTC
+
+primary_metric: readiness_to_act
+primary_objective:
+  - produce_a_small_portfolio_startable_within_7_days
+
+max_scheduled_minutes_per_week: 360
+max_act_now: 3
+max_prepare_next: 4
+
+jobs:
+  explicitly_requested: false
+  allowed_types: []
+  exclude:
+    - internships
+    - recruiter_programs
+    - generic_employment_moves
+
+constraints:
+  primary_sources_required: true
+  no_stale_opportunities: true
+  unresolved_eligibility_is_not_permission_to_act: true
+  first_action_must_start_within_days: 7
+  first_action_max_minutes: 60
+  no_legal_tax_immigration_banking_medical_military_advice: true
+
+evaluation:
+  grounding_is_hard_gate: true
+  liveness_is_hard_gate: true
+  paired_repeats_required: 2
+  readiness_improvement_margin: 5

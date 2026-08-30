@@ -23,10 +23,14 @@ from typing import Any
 ROOT = Path(__file__).resolve().parents[1]
 MODELS = ("openai-codex/gpt-5.6-luna", "openai-codex/gpt-5.6-terra")
 ROLES = ("actionability", "evidence", "personalization")
-ALL_ROLES = ROLES + ("breadth", "academic_depth")
+ALL_ROLES = ROLES + ("breadth", "academic_depth", "readiness")
 STAGED = ("profile", "triggers", "search_plan", "discovery", "verification", "actionability", "ranking", "report")
 VARIANTS = {
     "V0": {"prompt": "prompts/find_opportunities_baseline.md", "stages": ("report",), "mode": "monolithic"},
+    # Priority-1 evaluation arms share only this report-stage serialization contract.
+    # P1_V0 remains one monolithic call and P1_FRONTIER remains the staged frontier.
+    "P1_V0": {"prompt": "prompts/find_opportunities_baseline.md", "report_addenda": ["prompts/variants/P1_REPORT_SERIALIZATION_ADDENDUM.md"], "stages": ("report",), "mode": "monolithic"},
+    "P1_FRONTIER": {"prompt": "prompts/find_opportunities_general_recommended.md", "report_addenda": ["prompts/variants/P1_REPORT_SERIALIZATION_ADDENDUM.md"], "stages": STAGED, "mode": "staged", "normalize_ledger": True, "production_contract": True},
     "V1": {"prompt": "prompts/variants/V1.md", "stages": ("report",), "mode": "monolithic"},
     "V2": {"prompt": "prompts/variants/V2.md", "stages": ("report",), "mode": "monolithic"},
     "V3": {"prompt": "prompts/variants/V3.md", "stages": ("report",), "mode": "monolithic"},
@@ -124,6 +128,22 @@ def git_revision() -> str | None:
         return None
 
 
+def variant_instruction_paths(variant: str, stage: str | None = None) -> list[Path]:
+    """Return immutable prompt parts, adding report-only parts only to final rendering."""
+    config = VARIANTS[variant]
+    paths = [ROOT / config["prompt"]]
+    paths.extend(ROOT / part for part in config.get("addenda", []))
+    if stage is None or stage == "report":
+        paths.extend(ROOT / part for part in config.get("report_addenda", []))
+    return paths
+
+
+def variant_instructions(variant: str, stage: str | None = None) -> str:
+    """Compose variant instructions; snapshots include the final-report contract."""
+    return "\n\n---\n\n".join(path.read_text(encoding="utf-8")
+                              for path in variant_instruction_paths(variant, stage))
+
+
 def snapshot_inputs(run: Path, variant: str, profile_path: Path | None = None,
                     direction_path: Path | None = None, rubric_path: Path | None = None) -> dict[str, str]:
     """Copy the explicitly permitted, non-secret inputs and record content hashes."""
@@ -144,9 +164,9 @@ def snapshot_inputs(run: Path, variant: str, profile_path: Path | None = None,
         destination.parent.mkdir(parents=True, exist_ok=True)
         atomic_write(destination, source.read_text(encoding="utf-8"))
         hashes[relative] = sha256_file(destination)
-    prompt_parts = [ROOT / VARIANTS[variant]["prompt"]]
-    prompt_parts.extend(ROOT / part for part in VARIANTS[variant].get("addenda", []))
-    prompt_content = "\n\n---\n\n".join(part.read_text(encoding="utf-8") for part in prompt_parts)
+    # The snapshot commits to the complete final report contract, including parts
+    # deliberately withheld from non-report staged calls.
+    prompt_content = variant_instructions(variant)
     prompt_destination = run / "inputs/prompt.md"
     atomic_write(prompt_destination, prompt_content)
     hashes["prompt.md"] = sha256_file(prompt_destination)
@@ -308,7 +328,7 @@ def call_pi(prompt: str, model: str, timeout: float, dry_run: bool,
             "parse_error": parse_error, "usage": usage, "command": command}
 
 
-def stage_result_error(stage: str, result: Any) -> str | None:
+def stage_result_error(stage: str, result: Any, p1_packet: bool = False) -> str | None:
     """Reject lifecycle acknowledgments and structurally incomplete stage artifacts."""
     if not isinstance(result, (dict, list)):
         return f"{stage} result is not a JSON object or array"
@@ -336,10 +356,11 @@ def stage_result_error(stage: str, result: Any) -> str | None:
                                              for key in ("evidence_records", "evidence_ledger")):
         return "verification result lacks evidence_records/evidence_ledger array"
     if stage == "report":
-        required = {"snapshot_date", "profile_state", "candidates", "selected_ids",
-                    "weekly_allocation", "evidence_ledger"}
+        required = ({"snapshot_date", "candidates", "selected_ids", "weekly_allocation", "evidence_ledger"}
+                    if p1_packet else {"snapshot_date", "profile_state", "candidates", "selected_ids",
+                                        "weekly_allocation", "evidence_ledger"})
         if not isinstance(result, dict) or not required <= set(result):
-            return "report result lacks the production artifact fields"
+            return "report result lacks the required final artifact fields"
     return None
 
 
@@ -519,14 +540,224 @@ def _schema_errors(value: Any, schema: dict[str, Any], path: str = "$") -> list[
     return errors
 
 
+def direction_scalar(direction: str, key: str) -> str | None:
+    """Read a simple top-level YAML scalar without adding a YAML dependency."""
+    match = re.search(rf"(?m)^\s*{re.escape(key)}\s*:\s*([^#\n]+?)\s*$", direction)
+    if not match:
+        return None
+    return match.group(1).strip().strip('"\'')
+
+
 def direction_effort_cap(direction: str) -> int:
     """Read an explicit shared weekly cap from the immutable direction snapshot."""
-    match = re.search(r"(?m)^\s*max_scheduled_minutes_per_week\s*:\s*(\d+)\s*(?:#.*)?$", direction)
-    if match:
-        cap = int(match.group(1))
+    value = direction_scalar(direction, "max_scheduled_minutes_per_week")
+    if value and value.isdecimal():
+        cap = int(value)
         if 0 < cap <= 10080:
             return cap
     return 360
+
+
+def direction_snapshot_metadata(direction: str) -> tuple[str | None, str | None]:
+    """Return the date and timezone that make a run's liveness judgment reproducible."""
+    return direction_scalar(direction, "snapshot_date"), direction_scalar(direction, "timezone")
+
+
+def direction_bool(direction: str, key: str) -> bool | None:
+    value = direction_scalar(direction, key)
+    if value is None:
+        return None
+    if value.lower() == "true":
+        return True
+    if value.lower() == "false":
+        return False
+    return None
+
+
+def direction_integer(direction: str, key: str) -> int | None:
+    value = direction_scalar(direction, key)
+    return int(value) if value is not None and value.isdecimal() else None
+
+
+def direction_string_list(direction: str, key: str) -> list[str]:
+    """Read a simple indented YAML string list from the saved direction fixture."""
+    match = re.search(rf"(?m)^\s*{re.escape(key)}:\s*$", direction)
+    if match is None:
+        return []
+    values: list[str] = []
+    for line in direction[match.end():].splitlines():
+        item = re.match(r"^\s*-\s+([^#\n]+?)\s*$", line)
+        if item is None:
+            if line.strip():
+                break
+            continue
+        values.append(item.group(1))
+    return values
+
+
+def _string_or_null(value: Any) -> str | None:
+    return value if isinstance(value, str) else None
+
+
+def _integer_or_null(value: Any) -> int | None:
+    return value if isinstance(value, int) and not isinstance(value, bool) else None
+
+
+def _string_list(value: Any) -> list[str]:
+    return [item for item in value if isinstance(item, str)] if isinstance(value, list) else []
+
+
+def build_eusp_p1_judge_packet(profile_markdown: str, direction_yaml: str,
+                                report: Any) -> tuple[dict[str, Any], dict[str, Any]]:
+    """Project a final report into the P1 packet without consulting pipeline artifacts.
+
+    The deliberately lossy projection has stable replacement IDs, so report-stage IDs
+    and staged-pipeline provenance cannot act as treatment hints for a readiness judge.
+    """
+    snapshot_date, timezone = direction_snapshot_metadata(direction_yaml)
+    candidates = report.get("candidates", []) if isinstance(report, dict) else []
+    candidates = [item for item in candidates if isinstance(item, dict)]
+    selected_ids = report.get("selected_ids", {}) if isinstance(report, dict) else {}
+    ordered_ids: list[tuple[Any, str]] = []
+    if isinstance(selected_ids, dict):
+        for bucket, classification in (("act_now", "ACT_NOW"), ("prepare_next", "PREPARE_NEXT")):
+            if isinstance(selected_ids.get(bucket), list):
+                ordered_ids.extend((source_id, classification) for source_id in selected_ids[bucket])
+    by_id = {item.get("candidate_id", item.get("id")): item for item in candidates
+             if item.get("candidate_id", item.get("id")) is not None}
+    selected_source: list[tuple[Any, dict[str, Any], str]] = []
+    selection_errors: list[str] = []
+    seen_ids: set[str] = set()
+    for source_id, classification in ordered_ids:
+        candidate = by_id.get(source_id)
+        marker = str(source_id)
+        if marker in seen_ids:
+            selection_errors.append(f"duplicate selected candidate: {marker}")
+        elif candidate is None:
+            selection_errors.append(f"selected candidate missing from report: {marker}")
+        else:
+            selected_source.append((source_id, candidate, classification))
+            seen_ids.add(marker)
+    # A report may use classifications but omit selected_ids; this does not add a
+    # candidate that was explicitly rejected, and keeps evidence absence visible.
+    if not ordered_ids:
+        for candidate in candidates:
+            classification = _string_or_null(candidate.get("status", candidate.get("classification")))
+            if classification in {"ACT_NOW", "PREPARE_NEXT"}:
+                source_id = candidate.get("candidate_id", candidate.get("id"))
+                marker = str(source_id)
+                if marker not in seen_ids:
+                    selected_source.append((source_id, candidate, classification))
+                    seen_ids.add(marker)
+
+    ledger = report.get("evidence_ledger", report.get("evidence", [])) if isinstance(report, dict) else []
+    ledger = [item for item in ledger if isinstance(item, dict)] if isinstance(ledger, list) else []
+    selected: list[dict[str, Any]] = []
+    evidence: list[dict[str, Any]] = []
+    for number, (source_id, candidate, selected_classification) in enumerate(selected_source, 1):
+        candidate_ref = f"c{number}"
+        original_claim_ids = {str(item) for item in candidate.get("claim_ids", []) if isinstance(item, str)}
+        linked_rows = [row for row in ledger
+                       if str(row.get("candidate_id", row.get("candidate_ref", ""))) == str(source_id)
+                       or str(row.get("claim_id", "")) in original_claim_ids]
+        evidence_ids: list[str] = []
+        evidence_ids_by_source_claim: dict[str, list[str]] = {}
+        for row in linked_rows:
+            evidence_id = f"e{len(evidence) + 1}"
+            source_type = _string_or_null(row.get("source_type"))
+            if source_type not in {"official_primary", "secondary"}:
+                source_type = None
+            evidence.append({
+                "id": evidence_id, "candidate_ref": candidate_ref,
+                "claim": _string_or_null(row.get("claim")), "source_type": source_type,
+                "entailment": _string_or_null(row.get("entailment")),
+                "quote": _string_or_null(row.get("quote", row.get("exact_quote"))),
+                "url": _string_or_null(row.get("url", row.get("official_url"))),
+                "retrieved_at": _string_or_null(row.get("retrieved_at", row.get("checked_at"))),
+                "current_status": _string_or_null(row.get("current_status", row.get("status"))),
+                "temporal": row.get("temporal") if isinstance(row.get("temporal"), dict) else {
+                    "kind": _string_or_null(row.get("temporal_kind")),
+                    "date": _string_or_null(row.get("deadline_date", row.get("event_date"))),
+                    "start_date": _string_or_null(row.get("window_start_date")),
+                    "end_date": _string_or_null(row.get("window_end_date")),
+                },
+                "supports": _string_list(row.get("supports")),
+            })
+            evidence_ids.append(evidence_id)
+            source_claim_id = _string_or_null(row.get("claim_id"))
+            if source_claim_id:
+                evidence_ids_by_source_claim.setdefault(source_claim_id, []).append(evidence_id)
+        source_material_claims = candidate.get("material_claims")
+        source_material_claims = source_material_claims if isinstance(source_material_claims, list) else []
+        material_claims = []
+        for claim_number, material in enumerate(source_material_claims, 1):
+            material = material if isinstance(material, dict) else {}
+            source_claim_id = _string_or_null(material.get("id", material.get("claim_id")))
+            material_claims.append({
+                "id": f"m{number}-{claim_number}",
+                "kind": _string_or_null(material.get("kind")),
+                "evidence_ids": list(evidence_ids_by_source_claim.get(source_claim_id or "", [])),
+            })
+        bridge = candidate.get("profile_bridge", candidate.get("bridge", []))
+        bridge = bridge if isinstance(bridge, list) else []
+        first = candidate.get("first_action") if isinstance(candidate.get("first_action"), dict) else {}
+        effort = candidate.get("scheduled_week_effort_minutes")
+        effort = effort if isinstance(effort, dict) else {}
+        selected.append({
+            "id": candidate_ref, "rank": number,
+            "title": _string_or_null(candidate.get("title")),
+            "organization": _string_or_null(candidate.get("organization")),
+            "type": _string_or_null(candidate.get("type")),
+            # Bucket membership is authoritative; the reported status is retained only
+            # to make a missing or conflicting report status fail closed in preflight.
+            "classification": selected_classification,
+            "reported_classification": _string_or_null(candidate.get("status", candidate.get("classification"))),
+            "profile_bridge": [{"signal": _string_or_null(item.get("signal", item.get("profile_signal"))),
+                                "why": _string_or_null(item.get("why", item.get("why_it_matters")))}
+                               for item in bridge if isinstance(item, dict)],
+            "first_action": {"action": _string_or_null(first.get("action")),
+                             "deliverable": _string_or_null(first.get("deliverable")),
+                             "start_by_or_trigger": _string_or_null(first.get("start_by_or_trigger")),
+                             "start_date": _string_or_null(first.get("start_date", first.get("start_by_date"))),
+                             "minutes_min": _integer_or_null(first.get("minutes_min")),
+                             "minutes_max": _integer_or_null(first.get("minutes_max"))},
+            "scheduled_week_effort_minutes": {"min": _integer_or_null(effort.get("min")),
+                                                "max": _integer_or_null(effort.get("max"))},
+            "blockers": _string_list(candidate.get("blockers")),
+            "uncertainties": _string_list(candidate.get("uncertainties")),
+            "blockers_disclosed": isinstance(candidate.get("blockers"), list),
+            "uncertainties_disclosed": isinstance(candidate.get("uncertainties"), list),
+            "evidence_ids": evidence_ids,
+            "material_claims": material_claims,
+        })
+    allocation = report.get("weekly_allocation") if isinstance(report, dict) and isinstance(report.get("weekly_allocation"), dict) else {}
+    packet = {
+        "schema_version": "eusp-p1-judge-packet/v1",
+        "evaluation_context": {
+            "snapshot_date": snapshot_date, "timezone": timezone,
+            "profile_markdown": profile_markdown,
+            "direction": {"jobs_explicitly_requested": direction_bool(direction_yaml, "explicitly_requested"),
+                          "max_act_now": direction_integer(direction_yaml, "max_act_now"),
+                          "max_prepare_next": direction_integer(direction_yaml, "max_prepare_next"),
+                          "max_scheduled_minutes_per_week": direction_integer(direction_yaml, "max_scheduled_minutes_per_week"),
+                          "first_action_within_days": direction_integer(direction_yaml, "first_action_must_start_within_days"),
+                          "first_action_max_minutes": direction_integer(direction_yaml, "first_action_max_minutes"),
+                          "allowed_job_types": direction_string_list(direction_yaml, "allowed_types"),
+                          "excluded_job_types": direction_string_list(direction_yaml, "exclude")},
+        },
+        "portfolio": {"selected": selected,
+                      "weekly_allocation": {"cap_minutes": _integer_or_null(allocation.get("cap_minutes")),
+                                            "scheduled_min_minutes": _integer_or_null(allocation.get("scheduled_min_minutes")),
+                                            "scheduled_max_minutes": _integer_or_null(allocation.get("scheduled_max_minutes")),
+                                            "residual_upper_minutes": _integer_or_null(allocation.get("residual_upper_minutes"))}},
+        "evidence": evidence,
+    }
+    schema = read_json(ROOT / "evals/schemas/eusp_p1_judge_packet.schema.json")
+    schema_errors = _schema_errors(packet, schema)
+    diagnostics = {"schema_version": "eusp-p1-judge-packet-validation/v1",
+                   "valid": not (schema_errors or selection_errors),
+                   "errors": schema_errors + selection_errors}
+    return packet, diagnostics
 
 
 def normalize_report_ledger(report: dict[str, Any], verification: Any,
@@ -811,6 +1042,10 @@ def run_research(args: argparse.Namespace) -> int:
                 destination.parent.mkdir(parents=True, exist_ok=True)
                 atomic_write(destination, source.read_text(encoding="utf-8"))
         append_jsonl(run / "events.jsonl", {"at": utcnow(), "state": "created", "run_id": run_id})
+    direction_snapshot = (run / "inputs/direction.yaml").read_text(encoding="utf-8")
+    snapshot_date, timezone = direction_snapshot_metadata(direction_snapshot)
+    if args.variant.startswith("P1_") and (not snapshot_date or not timezone):
+        raise SystemExit("P1 runs require snapshot_date and timezone in the saved direction snapshot")
     deadline_at = time.monotonic() + args.deadline_seconds
     previous: dict[str, Any] = {}
     failed = False
@@ -852,9 +1087,12 @@ def run_research(args: argparse.Namespace) -> int:
             failed = True
             continue
         payload = {"run_id": run_id, "stage": stage, "variant": args.variant,
-                   "pipeline_mode": config["mode"], "variant_instructions": (run / "inputs/prompt.md").read_text(encoding="utf-8"),
+                   "pipeline_mode": config["mode"],
+                   # Report-only serialization instructions must not alter upstream staged work.
+                   "variant_instructions": variant_instructions(args.variant, stage),
                    "profile": (run / "inputs/profile.md").read_text(encoding="utf-8"),
-                   "direction": (run / "inputs/direction.yaml").read_text(encoding="utf-8"),
+                   "direction": direction_snapshot,
+                   "snapshot_date": snapshot_date, "timezone": timezone,
                    "prior_artifacts": previous,
                    "prior_artifact_hashes": {prior: sha256_file(completed_result(run, prior))
                                               for prior in prior_stages if completed_result(run, prior) is not None},
@@ -864,7 +1102,7 @@ def run_research(args: argparse.Namespace) -> int:
         call = call_pi(prompt, args.worker_model, min(args.timeout, left), args.dry_run,
                        args.pi_output_mode)
         if not args.dry_run and call.get("parse_error") is None:
-            call["parse_error"] = stage_result_error(stage, call.get("result"))
+            call["parse_error"] = stage_result_error(stage, call.get("result"), args.variant.startswith("P1_"))
         normalization_audit = None
         if (stage == "report" and config.get("normalize_ledger") and isinstance(call.get("result"), dict)
                 and "verification" in previous):
@@ -894,6 +1132,32 @@ def run_research(args: argparse.Namespace) -> int:
         for message in validation_errors:
             append_jsonl(run / "errors.jsonl", {"at": utcnow(), "stage": "production_validation", "error": message})
         failed |= bool(validation_errors)
+    if args.variant.startswith("P1_"):
+        # A packet is derived only from a completed report. Its external diagnostics
+        # bind both immutable artifacts without exposing report/pipeline metadata to
+        # the blinded judge. A resumed, replaced report gets a versioned packet.
+        report_file = completed_result(run, "report")
+        if report_file is not None:
+            report_hash = sha256_file(report_file)
+            current_packet = latest_versioned_artifact(run, "judge_packet")
+            current_diagnostics = (current_packet.with_name(current_packet.name.replace("judge_packet", "judge_packet_validation", 1))
+                                   if current_packet is not None else None)
+            already_bound = False
+            if current_diagnostics is not None and current_diagnostics.is_file():
+                diagnostics = read_json(current_diagnostics)
+                already_bound = isinstance(diagnostics, dict) and diagnostics.get("report_sha256") == report_hash
+            if not already_bound:
+                packet, packet_diagnostics = build_eusp_p1_judge_packet(
+                    (run / "inputs/profile.md").read_text(encoding="utf-8"), direction_snapshot,
+                    read_json(report_file))
+                packet_path = next_versioned_file(run, "judge_packet")
+                diagnostics_path = packet_path.with_name(packet_path.name.replace("judge_packet", "judge_packet_validation", 1))
+                if diagnostics_path.exists():
+                    raise FileExistsError(f"packet diagnostics already exist: {diagnostics_path}")
+                write_json(packet_path, packet)
+                packet_diagnostics["report_sha256"] = report_hash
+                packet_diagnostics["packet_sha256"] = sha256_file(packet_path)
+                write_json(diagnostics_path, packet_diagnostics)
     summary = {"run_id": run_id, "variant": args.variant, "path": str(run), "state": "partial" if failed else "complete",
                "completed_stages": sorted(previous), "finished_at": utcnow(), "dry_run": args.dry_run}
     # Finalization gets separate immutable records, leaving raw calls and manifest untouched.
@@ -945,6 +1209,7 @@ def judge_prompt(role: str, bundle: dict[str, Any], rubric: str) -> str:
         "personalization": "Own only profile bridges, adaptation/belonging value, identity expansion, genericity, and strategy.",
         "breadth": "Own only evidence-backed family diversity, dated geographic-window coverage, participation-role diversity, awareness value, and anti-collapse quality. Do not count unsupported monitors.",
         "academic_depth": "Own only graduate-route depth, complete funding analysis, TOEFL/language path quality, and academic anchor-decision completeness. Do not browse or infer admissions, funding, or exam facts.",
+        "readiness": "Own only P1 gate-first readiness to act: grounding and liveness are hard gates, then score the five equal selected-action readiness checks. Do not reward list length.",
     }[role]
     return f"""You are the {role} judge. {focus}
 This is evaluation only: do NOT research, browse, add facts, or infer facts outside the supplied

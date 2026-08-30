@@ -1,0 +1,34 @@
+schema_version: eusp-p1-rubric/v1
+name: eusp_priority_1_readiness_rubric
+snapshot_policy: evaluate_liveness_at_saved_snapshot
+primary_metric: portfolio_readiness_to_act
+primary_metric_scale: 100
+selected_count: report_only_not_scored
+
+hard_gates:
+  - id: grounding
+    rule: Every selected material status, timing, and route claim has a direct official-primary-source quote, HTTPS URL, and retrieval time.
+  - id: liveness
+    rule: Every ACT_NOW and PREPARE_NEXT has mapped source-backed current/open status and participation route plus a nonexpired deadline, rolling window, or dated event; no stale, closed, or expired item is selected.
+  - id: limits_and_effort
+    rule: ACT_NOW <= 3, PREPARE_NEXT <= 4, and scheduled upper-bound minutes are at most 360.
+  - id: seven_day_action_and_job_policy
+    rule: Every selected item has a user-controlled action startable within seven days; jobs are allowed only because this direction explicitly requests the listed job types, while excluded job types remain excluded.
+
+readiness_checks:
+  equal_weight: true
+  per_selected_act_now_or_prepare_next:
+    - explicit_profile_bridge
+    - user_controlled_atomic_verb_led_action
+    - tangible_deliverable
+    - startable_within_7_days_without_reply_eligibility_or_acceptance
+    - bounded_effort_and_disclosed_blockers_or_unknowns
+scoring:
+  portfolio_readiness_to_act: Mean selected-item readiness score (five equal checks, 20 points each); zero for an empty selected set.
+  gate_failure: An arm failing any hard gate is ineligible regardless of readiness score.
+
+promotion:
+  paired_repeats_required: 2
+  readiness_improvement_margin: 5
+  grounding_and_liveness_must_pass_every_repeat: true
+  require_order_stable_pairwise_result: true

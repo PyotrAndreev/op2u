@@ -6,7 +6,7 @@
   "additionalProperties": false,
   "required": ["judge_role", "hard_failures", "dimension_scores", "penalties", "verdict", "reasons", "failure_tags"],
   "properties": {
-    "judge_role": {"enum": ["evidence", "actionability", "personalization", "pairwise", "calibration"]},
+    "judge_role": {"enum": ["evidence", "actionability", "personalization", "readiness", "pairwise", "calibration"]},
     "hard_failures": {"type": "array", "items": {"type": "string"}},
     "dimension_scores": {"type": "object", "additionalProperties": {"type": ["number", "null"], "minimum": 0}},
     "penalties": {"type": "object", "additionalProperties": {"type": "number", "minimum": 0}},

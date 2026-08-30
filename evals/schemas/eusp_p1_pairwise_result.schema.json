@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://op2u.local/schemas/eusp_p1_pairwise_result.schema.json",
+  "title": "EUSP Priority 1 pairwise readiness result",
+  "type": "object",
+  "required": ["judge_role", "arms", "winner", "reasons"],
+  "properties": {
+    "judge_role": {"const": "readiness"},
+    "arms": {"type": "object", "required": ["A", "B"], "properties": {
+      "A": {"$ref": "#/$defs/arm"}, "B": {"$ref": "#/$defs/arm"}
+    }},
+    "winner": {"enum": ["A", "B", "tie"]}, "reasons": {"type": "array", "items": {"type": "string"}}
+  },
+  "$defs": {"arm": {"type": "object", "required": ["grounding_gate", "liveness_gate", "other_hard_gate_failures", "per_candidate_readiness", "portfolio_readiness_to_act"], "properties": {
+    "grounding_gate": {"enum": ["pass", "fail"]}, "liveness_gate": {"enum": ["pass", "fail"]}, "other_hard_gate_failures": {"type": "array", "items": {"type": "string"}},
+    "per_candidate_readiness": {"type": "array", "items": {"type": "object", "required": ["candidate_id", "explicit_profile_bridge", "atomic_user_controlled_action", "tangible_deliverable", "startable_within_7_days", "bounded_effort_and_disclosed_blockers"], "properties": {"candidate_id": {"type": "string"}, "explicit_profile_bridge": {"type": "boolean"}, "atomic_user_controlled_action": {"type": "boolean"}, "tangible_deliverable": {"type": "boolean"}, "startable_within_7_days": {"type": "boolean"}, "bounded_effort_and_disclosed_blockers": {"type": "boolean"}}}},
+    "portfolio_readiness_to_act": {"type": "number", "minimum": 0, "maximum": 100}
+  }}}
+}

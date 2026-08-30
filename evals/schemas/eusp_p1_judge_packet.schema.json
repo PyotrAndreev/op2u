@@ -1,0 +1,494 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://op2u.local/schemas/eusp_p1_judge_packet.schema.json",
+  "title": "EUSP Priority 1 treatment-neutral judge packet",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "evaluation_context",
+    "portfolio",
+    "evidence"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "eusp-p1-judge-packet/v1"
+    },
+    "evaluation_context": {
+      "type": "object",
+      "required": [
+        "snapshot_date",
+        "timezone",
+        "profile_markdown",
+        "direction"
+      ],
+      "properties": {
+        "snapshot_date": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "timezone": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "profile_markdown": {
+          "type": "string"
+        },
+        "direction": {
+          "type": "object",
+          "required": [
+            "jobs_explicitly_requested",
+            "max_act_now",
+            "max_prepare_next",
+            "max_scheduled_minutes_per_week",
+            "first_action_within_days",
+            "first_action_max_minutes",
+            "allowed_job_types",
+            "excluded_job_types"
+          ],
+          "properties": {
+            "jobs_explicitly_requested": {
+              "type": [
+                "boolean",
+                "null"
+              ]
+            },
+            "max_act_now": {
+              "type": [
+                "integer",
+                "null"
+              ]
+            },
+            "max_prepare_next": {
+              "type": [
+                "integer",
+                "null"
+              ]
+            },
+            "max_scheduled_minutes_per_week": {
+              "type": [
+                "integer",
+                "null"
+              ]
+            },
+            "first_action_within_days": {
+              "type": [
+                "integer",
+                "null"
+              ]
+            },
+            "first_action_max_minutes": {
+              "type": [
+                "integer",
+                "null"
+              ]
+            },
+            "allowed_job_types": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "excluded_job_types": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    "portfolio": {
+      "type": "object",
+      "required": [
+        "selected",
+        "weekly_allocation"
+      ],
+      "properties": {
+        "selected": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "id",
+              "rank",
+              "title",
+              "organization",
+              "type",
+              "classification",
+              "reported_classification",
+              "profile_bridge",
+              "first_action",
+              "scheduled_week_effort_minutes",
+              "blockers",
+              "uncertainties",
+              "blockers_disclosed",
+              "uncertainties_disclosed",
+              "evidence_ids",
+              "material_claims"
+            ],
+            "properties": {
+              "id": {
+                "type": "string",
+                "pattern": "^c[1-9][0-9]*$"
+              },
+              "rank": {
+                "type": "integer",
+                "minimum": 1
+              },
+              "title": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "organization": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "type": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "classification": {
+                "type": "string",
+                "enum": [
+                  "ACT_NOW",
+                  "PREPARE_NEXT"
+                ]
+              },
+              "reported_classification": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "profile_bridge": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "required": [
+                    "signal",
+                    "why"
+                  ],
+                  "properties": {
+                    "signal": {
+                      "type": [
+                        "string",
+                        "null"
+                      ]
+                    },
+                    "why": {
+                      "type": [
+                        "string",
+                        "null"
+                      ]
+                    }
+                  }
+                }
+              },
+              "first_action": {
+                "type": "object",
+                "required": [
+                  "action",
+                  "deliverable",
+                  "start_by_or_trigger",
+                  "start_date",
+                  "minutes_min",
+                  "minutes_max"
+                ],
+                "properties": {
+                  "action": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "deliverable": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "start_by_or_trigger": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "start_date": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "minutes_min": {
+                    "type": [
+                      "integer",
+                      "null"
+                    ]
+                  },
+                  "minutes_max": {
+                    "type": [
+                      "integer",
+                      "null"
+                    ]
+                  }
+                }
+              },
+              "scheduled_week_effort_minutes": {
+                "type": "object",
+                "required": [
+                  "min",
+                  "max"
+                ],
+                "properties": {
+                  "min": {
+                    "type": [
+                      "integer",
+                      "null"
+                    ]
+                  },
+                  "max": {
+                    "type": [
+                      "integer",
+                      "null"
+                    ]
+                  }
+                }
+              },
+              "blockers": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "uncertainties": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "blockers_disclosed": {
+                "type": "boolean"
+              },
+              "uncertainties_disclosed": {
+                "type": "boolean"
+              },
+              "evidence_ids": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "pattern": "^e[1-9][0-9]*$"
+                }
+              },
+              "material_claims": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "required": [
+                    "id",
+                    "kind",
+                    "evidence_ids"
+                  ],
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "pattern": "^m[1-9][0-9]*-[1-9][0-9]*$"
+                    },
+                    "kind": {
+                      "type": [
+                        "string",
+                        "null"
+                      ],
+                      "enum": [
+                        "status",
+                        "timing",
+                        "participation_route",
+                        null
+                      ]
+                    },
+                    "evidence_ids": {
+                      "type": "array",
+                      "items": {
+                        "type": "string",
+                        "pattern": "^e[1-9][0-9]*$"
+                      },
+                      "minItems": 1
+                    }
+                  }
+                },
+                "minItems": 3
+              }
+            }
+          }
+        },
+        "weekly_allocation": {
+          "type": "object",
+          "required": [
+            "cap_minutes",
+            "scheduled_min_minutes",
+            "scheduled_max_minutes",
+            "residual_upper_minutes"
+          ],
+          "properties": {
+            "cap_minutes": {
+              "type": [
+                "integer",
+                "null"
+              ]
+            },
+            "scheduled_min_minutes": {
+              "type": [
+                "integer",
+                "null"
+              ]
+            },
+            "scheduled_max_minutes": {
+              "type": [
+                "integer",
+                "null"
+              ]
+            },
+            "residual_upper_minutes": {
+              "type": [
+                "integer",
+                "null"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "evidence": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "candidate_ref",
+          "claim",
+          "source_type",
+          "entailment",
+          "quote",
+          "url",
+          "retrieved_at",
+          "current_status",
+          "temporal",
+          "supports"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^e[1-9][0-9]*$"
+          },
+          "candidate_ref": {
+            "type": "string",
+            "pattern": "^c[1-9][0-9]*$"
+          },
+          "claim": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "source_type": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "enum": [
+              "official_primary",
+              "secondary",
+              null
+            ]
+          },
+          "quote": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "url": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "retrieved_at": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "current_status": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "temporal": {
+            "type": "object",
+            "required": [
+              "kind",
+              "date",
+              "start_date",
+              "end_date"
+            ],
+            "properties": {
+              "kind": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "date": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "start_date": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "end_date": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              }
+            }
+          },
+          "supports": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "entailment": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "enum": [
+              "direct",
+              null
+            ]
+          }
+        }
+      }
+    }
+  }
+}
