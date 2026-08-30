@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://op2u.local/schemas/eusp_p1_hidden_traits.schema.json",
+  "title": "Synthetic EUSP P1 evaluator-only hidden trait ledger",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "fixture_id", "synthetic", "evaluator_only", "not_for_pipeline", "traits"],
+  "properties": {
+    "schema_version": {"const": "eusp-p1-hidden-traits/v1"},
+    "fixture_id": {"type": "string", "pattern": "^eusp_p1_hidden_traits_[a-z0-9_]+$"},
+    "synthetic": {"const": true},
+    "evaluator_only": {"const": true},
+    "not_for_pipeline": {"const": true},
+    "traits": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "label", "evaluation_question", "leakage_marker"],
+        "properties": {
+          "id": {"type": "string", "pattern": "^ht-v1-[a-z0-9-]+$"},
+          "label": {"type": "string", "minLength": 1},
+          "evaluation_question": {"type": "string", "minLength": 1},
+          "leakage_marker": {"type": "string", "pattern": "^EUSP-HT-V1-[A-Z0-9-]+$"}
+        }
+      }
+    }
+  }
+}

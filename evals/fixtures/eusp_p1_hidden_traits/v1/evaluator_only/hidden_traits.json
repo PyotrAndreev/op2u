@@ -1,0 +1,21 @@
+{
+  "schema_version": "eusp-p1-hidden-traits/v1",
+  "fixture_id": "eusp_p1_hidden_traits_synthetic",
+  "synthetic": true,
+  "evaluator_only": true,
+  "not_for_pipeline": true,
+  "traits": [
+    {
+      "id": "ht-v1-short-cycle-71d2",
+      "label": "prefers an early external feedback cycle",
+      "evaluation_question": "Does the first action create a bounded artifact that can receive outside feedback soon?",
+      "leakage_marker": "EUSP-HT-V1-SHORT-CYCLE-71D2"
+    },
+    {
+      "id": "ht-v1-peer-mode-3a8f",
+      "label": "prefers a peer-facing mode of participation",
+      "evaluation_question": "Does the proposed route make a concrete peer-facing participation mode available without assuming acceptance?",
+      "leakage_marker": "EUSP-HT-V1-PEER-MODE-3A8F"
+    }
+  ]
+}
