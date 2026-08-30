@@ -1,59 +1,22 @@
-# op2u: opportunity to you
- You <-- op2u --> 10_000s 🌍 Opportunities  
- Your global opportunity autopilot: discover, match, apply, track, win.
+# op2u — opportunity to you
 
+op2u is an evidence-first opportunity-discovery system. It turns an explicit user profile and direction into a small, actionable portfolio of verified opportunities.
 
-## You want:
-- growing career: job, internship, conferences
-- education: bachelor, master, PhD
-- travel by grants to develop hobbies and interests with oper people
+The current scope is **discovery**: profile interpretation, search, primary-source verification, ranking, and a report with bounded next actions. Automatic application submission, status tracking, and a user-facing product are future product work, not current capabilities.
 
+- Radicle repository: `rad:zDK4V2cUf7vpC9rgBaon626j8pzJ`
+- Shared development handbook (Devesis): `rad:z3Mb5cZhBVo8dDmcigD8QumiycCtX`
 
-## 🌍 yearly you have:
-- x: $10^4$+ job opportunities
-- y: $10^3$+ edu opportunities
-- z: $10^6$+ side* opportunities
+## Documentation
 
-X x Y x Z = $10^13$ and even more trajectories.  
-You don't need everything, you need the best you can get for your life vision.  
+- [Product vision](docs/product/vision.md)
+- [Target audience](docs/product/target-audience.md)
+- [Discovery MVP specification](docs/product/discovery-mvp.md)
+- [User profile, consent, and automation boundary](docs/product/user-profile-and-consent.md)
+- [Competitive landscape](docs/research/competitive-landscape.md)
+- [Development conventions](docs/dev/development.md)
+- [Repository structure](docs/dev/repository-structure.md)
+- [Evaluation](docs/dev/evaluation.md)
+- [Architecture decisions](docs/adr/README.md)
 
-*`side opportunities` are non-job, non-degree opportunities that help a person grow through creation, contribution, recognition, travel, community, funding, competition or self-development. You may not even think about them, but they can have a significant impact on your life.  
-
-### But you loos it   
-
-## It's extrimly dificalt to:  
-- keep in mind >100  
-- apply to >50  
-- track >20  
-opportunities  
-
-
-## You cannot:  
-know, apply, track all great opportunities for you.
-
-
-## You have:  
-- limmited scope, time and energy
-- sub-optimal, non-optimal choice and limited resources to achieve it
-
-
-## We are here!
-op2u provides the best opportunities for you 
-
-
-## How it works:
-Our agents:
-1. minutely search new opportunities for your profile, save it for your future  
-2. daily apply* your profile to the opportunities  
-3. secondly tracking a status of each opportunity and keep you updating 
-
-*you can set applying mode: full autonomus / need your approval  
-
-
-You just:  
-- create your profile in our platform
-- see the submission results
-- choose the opportunity to realise
-
-## Welcom to your future
-
+Earlier generated analyses and prompt versions are retained under `experiments/legacy/` and `prompts/legacy/` for historical reference. They are not current product documentation or production prompts.

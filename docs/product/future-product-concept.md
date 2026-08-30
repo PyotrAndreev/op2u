@@ -1,3 +1,7 @@
+# Future product concept
+
+This is an exploratory interface and workflow sketch for capabilities outside the Discovery MVP. It is not an implementation specification.
+
 ```md
 ┌──────────────────────────────────────────────────────────┐
 │                      usr CONTROL ROOM                    │
