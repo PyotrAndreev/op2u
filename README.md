@@ -10,11 +10,13 @@ The current scope is **discovery**: profile interpretation, search, primary-sour
 ## Documentation
 
 - [Product vision](docs/product/vision.md)
+- [Target audience](docs/product/target-audience.md)
 - [Discovery MVP specification](docs/product/discovery-mvp.md)
 - [User profile, consent, and automation boundary](docs/product/user-profile-and-consent.md)
+- [Competitive landscape](docs/research/competitive-landscape.md)
 - [Development conventions](docs/dev/development.md)
 - [Repository structure](docs/dev/repository-structure.md)
 - [Evaluation](docs/dev/evaluation.md)
 - [Architecture decisions](docs/adr/README.md)
 
-`docs/product_concept.md`, `docs/target_audience.md`, and `docs/competitors.md` are earlier product and market material. They remain useful context until their durable content is incorporated into the documents above.
+Earlier generated analyses and prompt versions are retained under `experiments/legacy/` and `prompts/legacy/` for historical reference. They are not current product documentation or production prompts.

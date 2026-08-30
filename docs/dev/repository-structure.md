@@ -5,10 +5,11 @@ The repository contains a discovery research and evaluation system, not yet a co
 - `docs/product/` holds durable product intent, scope, requirements, and user boundaries.
 - `docs/dev/` holds op2u-specific development conventions and maps repository artifacts.
 - `docs/adr/` holds durable architecture and policy decisions.
-- `prompts/` holds production and experimental prompt implementations.
+- `docs/research/` holds maintained market and research context that is neither a requirement nor a decision.
+- `prompts/` holds production and experimental prompt implementations; `prompts/legacy/` is historical reference only.
 - `evals/` holds rubrics, directions, schemas, and named fixtures.
 - `tools/` holds runners, validators, scorers, report builders, and comparison tooling.
-- `experiments/` holds reproducible experiment metadata, frontiers, selected reports, and retained comparison artifacts.
+- `experiments/` holds reproducible experiment metadata, frontiers, selected reports, and retained comparison artifacts; `experiments/legacy/` contains earlier generated analyses kept only as history.
 - `usr/` is deliberately empty in Git; local personal profiles are ignored.
 
 A new directory needs an immediate, durable purpose. Do not reserve package, product, test, vendor, or platform directories in advance.

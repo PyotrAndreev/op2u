@@ -1,16 +1,20 @@
-# Initialization
+# Legacy prompt: opportunity report v1
+
+> Historical reference only. This prompt is superseded by the evidence-first discovery prompts in `prompts/`; do not use it as the current product contract.
+
+## Initialization
 Load and use the following static project context:
 
 - PROJECT_IDEA:        /op2u/README.md
-- PRODUCT_CONCEPT:     /op2u/docs/product_concept.md
-- TARGET_AUDIENCE:     /op2u/docs/target_audience.md
+- PRODUCT_VISION:      /op2u/docs/product/vision.md
+- TARGET_AUDIENCE:     /op2u/docs/product/target-audience.md
 
 Do not ask the user to restate the op2u idea. Treat it as fixed context.
 
 ## Input params
 - USER_FILE:           /op2u/usr/profile.md
 - OUTPUT_FORMAT:       PDF
-- OUTPUT_DIR:          /op2u/docs/agent_analysis
+- OUTPUT_DIR:          /op2u/exports
 - REPORT_BASENAME:     find_opps_report
 
 ## Output objective

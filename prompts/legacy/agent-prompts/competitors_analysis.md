@@ -1,13 +1,17 @@
-# Initialization
+# Legacy prompt: competitor analysis v1
+
+> Historical reference only. This prompt does not define the current product or evaluation contract.
+
+## Initialization
 Load and use the following project context:
 
 - PROJECT_IDEA:         /op2u/README.md
-- PRODUCT CONCEPT:      /op2u/docs/product_concept.md
-- COMPETITORS:          /op2u/docs/competitors.md
-- TARGET_AUDIENCE:      /op2u/docs/target_audience.md
+- PRODUCT_VISION:       /op2u/docs/product/vision.md
+- COMPETITIVE_LANDSCAPE: /op2u/docs/research/competitive-landscape.md
+- TARGET_AUDIENCE:      /op2u/docs/product/target-audience.md
 
 ## Output params:
-- OUTPUT_DIR:           /op2u/docs/agent_analysis
+- OUTPUT_DIR:           /op2u/exports
 - OUTPUT_FILE_FORMAT:   PDF
 - OUTPUT_STYLE:         LONG_READ
 

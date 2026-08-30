@@ -8,4 +8,4 @@ The initial wedge is **funded international mobility for ambitious people**. It 
 
 The product must prefer a small, current, evidence-backed set of actions over a large, persuasive but unreliable list. It must preserve uncertainty rather than infer eligibility, legal status, citizenship, residency, work authorization, or other missing personal facts.
 
-The discovery MVP is defined in [Discovery MVP specification](discovery-mvp.md). Earlier audience and market research remains in [target audience](../target_audience.md) and [competitors](../competitors.md).
+The discovery MVP is defined in [Discovery MVP specification](discovery-mvp.md). Supporting material includes the [target audience](target-audience.md), [competitive landscape](../research/competitive-landscape.md), [product positioning](positioning.md), and the [future product concept](future-product-concept.md).
