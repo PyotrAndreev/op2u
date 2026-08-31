@@ -14,8 +14,9 @@ import uuid
 from pathlib import Path
 from typing import Any
 
-from run_experiment import (ALL_ROLES, MODELS, ROLES, ROOT, append_jsonl, atomic_write, call_pi,
-                            completed_result, cost_record, jdump, latest_versioned_artifact, read_json, remaining, sha256_file,
+from run_experiment import (ALL_ROLES, MODELS, P1_EXECUTION_CONFIG_VERSION, ROLES, ROOT,
+                            SOURCE_ACCESS_TOOLS, append_jsonl, atomic_write, call_pi, completed_result,
+                            cost_record, jdump, latest_versioned_artifact, read_json, remaining, sha256_file,
                             status_for, utcnow, write_json)
 
 
@@ -49,8 +50,27 @@ def _packet_validation_path(packet: Path) -> Path:
     return packet.with_name(packet.name.replace("judge_packet", "judge_packet_validation", 1))
 
 
+def _validate_eusp_p1_execution_config(value: Any) -> None:
+    """Reject unversioned or incomplete P1 budget/source-access declarations."""
+    if not isinstance(value, dict):
+        raise ValueError("eusp-p1 manifest lacks p1_execution_config")
+    required = {"schema_version", "source_access_tools", "source_research_wall_clock_seconds",
+                "worker_call_timeout_seconds", "report_call_timeout_seconds",
+                "finalization_reserve_seconds"}
+    if set(value) != required or value.get("schema_version") != P1_EXECUTION_CONFIG_VERSION:
+        raise ValueError("eusp-p1 execution config is malformed or has an unsupported version")
+    if value["source_access_tools"] != list(SOURCE_ACCESS_TOOLS):
+        raise ValueError("eusp-p1 execution config has different source-access tools")
+    for field in required - {"schema_version", "source_access_tools"}:
+        number = value.get(field)
+        if not isinstance(number, (int, float)) or isinstance(number, bool) or number <= 0:
+            raise ValueError(f"eusp-p1 execution config has invalid {field}")
+    if value["report_call_timeout_seconds"] != value["worker_call_timeout_seconds"]:
+        raise ValueError("eusp-p1 report and worker call budgets must be identical")
+
+
 def validate_eusp_p1_manifests(left: dict[str, Any], right: dict[str, Any]) -> None:
-    """P1 is only the current-prompt frontier against the one-shot web baseline."""
+    """P1 is only the frozen frontier against the one-shot web baseline."""
     expected = {
         "P1_FRONTIER": {"pipeline_mode": "staged", "stages": ["profile", "triggers", "search_plan", "discovery", "verification", "actionability", "ranking", "report"]},
         "P1_V0": {"pipeline_mode": "monolithic", "stages": ["report"]},
@@ -62,6 +82,17 @@ def validate_eusp_p1_manifests(left: dict[str, Any], right: dict[str, Any]) -> N
         contract = expected[manifest["variant"]]
         if manifest.get("pipeline_mode") != contract["pipeline_mode"] or manifest.get("stages") != contract["stages"]:
             raise ValueError(f"eusp-p1 manifest does not match the required {manifest['variant']} arm")
+        if not isinstance(manifest.get("worker_model"), str) or not manifest["worker_model"]:
+            raise ValueError("eusp-p1 manifest lacks worker_model")
+        if not isinstance(manifest.get("git_revision"), str) or not manifest["git_revision"]:
+            raise ValueError("eusp-p1 manifest lacks git_revision")
+        _validate_eusp_p1_execution_config(manifest.get("p1_execution_config"))
+    if left["worker_model"] != right["worker_model"]:
+        raise ValueError("eusp-p1 runs have different worker models")
+    if left["git_revision"] != right["git_revision"]:
+        raise ValueError("eusp-p1 runs have different runner revisions")
+    if left["p1_execution_config"] != right["p1_execution_config"]:
+        raise ValueError("eusp-p1 runs have different source/research or report budgets")
 
 
 def load_candidate(run: Path, target: str, protocol: str = "standard") -> tuple[dict[str, Any], dict[str, Any], str, Path]:
@@ -101,12 +132,24 @@ def load_candidate(run: Path, target: str, protocol: str = "standard") -> tuple[
 
 
 def require_eusp_p1_snapshots(left: Path, right: Path) -> None:
-    """P1 comparisons are valid only for exactly the same saved evaluation inputs."""
-    for relative in ("inputs/profile.md", "inputs/direction.yaml", "inputs/rubric.yaml"):
-        left_file, right_file = left / relative, right / relative
-        if not left_file.is_file() or not right_file.is_file():
-            raise FileNotFoundError(f"P1 comparison requires both saved snapshots: {relative}")
-        if left_file.read_bytes() != right_file.read_bytes():
+    """P1 comparisons require byte-identical common inputs and contracts.
+
+    ``prompt.md`` is deliberately excluded: it is the arm treatment. All other
+    saved inputs, including schemas and the shared report serialization control,
+    must match exactly.
+    """
+    def shared_files(run: Path) -> dict[Path, Path]:
+        inputs = run / "inputs"
+        if not inputs.is_dir():
+            raise FileNotFoundError(f"P1 comparison requires saved inputs: {inputs}")
+        return {path.relative_to(inputs): path for path in inputs.rglob("*")
+                if path.is_file() and path.relative_to(inputs).as_posix() not in {"prompt.md", "hashes.json"}}
+
+    left_files, right_files = shared_files(left), shared_files(right)
+    if set(left_files) != set(right_files):
+        raise ValueError("runs have different saved common input snapshots; comparison would be confounded")
+    for relative in sorted(left_files):
+        if left_files[relative].read_bytes() != right_files[relative].read_bytes():
             raise ValueError(f"runs have different saved {relative} snapshots; comparison would be confounded")
 
 

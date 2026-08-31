@@ -24,6 +24,8 @@ ROOT = Path(__file__).resolve().parents[1]
 MODELS = ("openai-codex/gpt-5.6-luna", "openai-codex/gpt-5.6-terra")
 ROLES = ("actionability", "evidence", "personalization")
 ALL_ROLES = ROLES + ("breadth", "academic_depth", "readiness")
+SOURCE_ACCESS_TOOLS = ("web_search", "source_check", "fetch_content", "get_search_content")
+P1_EXECUTION_CONFIG_VERSION = "eusp-p1-execution-config/v1"
 STAGED = ("profile", "triggers", "search_plan", "discovery", "verification", "actionability", "ranking", "report")
 VARIANTS = {
     "V0": {"prompt": "prompts/find_opportunities_baseline.md", "stages": ("report",), "mode": "monolithic"},
@@ -153,6 +155,11 @@ def snapshot_inputs(run: Path, variant: str, profile_path: Path | None = None,
         "known_cases.yaml": ROOT / "evals/known_cases.yaml",
         "rubric.yaml": rubric_path or ROOT / "evals/rubric.yaml",
     }
+    # This is a common measurement control, not an arm prompt. Snapshot it
+    # separately so a P1 comparison can prove both arms used the same version.
+    if variant.startswith("P1_"):
+        sources["p1_report_serialization_addendum.md"] = (
+            ROOT / "prompts/variants/P1_REPORT_SERIALIZATION_ADDENDUM.md")
     # Schemas are contracts, not model training/optimization data.
     for item in sorted((ROOT / "evals/schemas").glob("*.json")):
         sources[f"schemas/{item.name}"] = item
@@ -299,14 +306,26 @@ def parse_pi_output(raw: str) -> tuple[Any | None, str | None, dict[str, Any] | 
     return None, "no assistant JSON result found in pi output", usage
 
 
+def p1_execution_config(timeout: float, deadline_seconds: float,
+                        finalization_reserve: float) -> dict[str, Any]:
+    """Versioned, comparable P1 execution controls saved with each arm."""
+    return {"schema_version": P1_EXECUTION_CONFIG_VERSION,
+            "source_access_tools": list(SOURCE_ACCESS_TOOLS),
+            "source_research_wall_clock_seconds": deadline_seconds,
+            "worker_call_timeout_seconds": timeout,
+            # Final report rendering shares the worker call ceiling; no separate,
+            # unmetered report allowance exists.
+            "report_call_timeout_seconds": timeout,
+            "finalization_reserve_seconds": finalization_reserve}
+
+
 def call_pi(prompt: str, model: str, timeout: float, dry_run: bool,
             output_mode: str = "json") -> dict[str, Any]:
     """One bounded pi invocation. The caller persists all returned fields immediately."""
     started = utcnow()
     before = time.monotonic()
     command = ["pi", "--model", model, "--mode", output_mode, "--print", "--no-session",
-               "--no-context-files", "--tools",
-               "web_search,source_check,fetch_content,get_search_content"]
+               "--no-context-files", "--tools", ",".join(SOURCE_ACCESS_TOOLS)]
     if dry_run:
         return {"started_at": started, "duration_seconds": 0.0, "exit_code": 0,
                 "stdout": "", "stderr": "", "result": {"dry_run": True}, "parse_error": None,
@@ -1029,6 +1048,9 @@ def run_research(args: argparse.Namespace) -> int:
                     "seed": args.seed, "git_revision": git_revision(), "input_hashes": hashes,
                     "timeouts": {"per_call_seconds": args.timeout, "deadline_seconds": args.deadline_seconds,
                                  "finalization_reserve_seconds": args.finalization_reserve},
+                    **({"p1_execution_config": p1_execution_config(
+                        args.timeout, args.deadline_seconds, args.finalization_reserve)}
+                       if args.variant.startswith("P1_") else {}),
                     "dry_run": args.dry_run}
         write_json(run / "manifest.json", manifest)
         atomic_write(run / "pipeline.yaml", "variant: " + args.variant + "\nmode: " + config["mode"] + "\nstages:\n" + "".join(f"  - {stage}\n" for stage in config["stages"]))
