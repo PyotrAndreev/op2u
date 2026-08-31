@@ -80,3 +80,4 @@ The synthetic fixture and live-source variability limit conclusions to this prot
 - [P1 synthetic-neutral record](../../experiments/analyses/eusp_p1_synthetic_neutral_record.md)
 - [Synthetic evaluator-only hidden-traits protocol](eusp-p1-hidden-traits-protocol.md)
 - [Discovery MVP specification](../product/discovery-mvp.md)
+- [Future execution approval boundary](../product/future-execution-approval-boundary.md) — future-design only; not an EUSP treatment or MVP change

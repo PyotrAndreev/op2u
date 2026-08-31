@@ -13,6 +13,7 @@ The current scope is **discovery**: profile interpretation, search, primary-sour
 - [Target audience](docs/product/target-audience.md)
 - [Discovery MVP specification](docs/product/discovery-mvp.md)
 - [User profile, consent, and automation boundary](docs/product/user-profile-and-consent.md)
+- [Future execution approval boundary](docs/product/future-execution-approval-boundary.md) — future-design only; it does not enable execution
 - [EUSP local user-profile model](docs/product/eusp-local-user-profile.md)
 - [Competitive landscape](docs/research/competitive-landscape.md)
 - [EUSP literature synthesis: exploration under an insufficient verified portfolio](docs/research/eusp-exploration-discovery-agents.md)

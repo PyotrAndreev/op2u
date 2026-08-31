@@ -10,10 +10,10 @@ Personal profiles and complete production runs stay outside the Git repository. 
 
 ## Consent boundary
 
-Discovery and drafting are distinct from external action. Before a future system stores documents, contacts an organization, fills a form, submits an application, or shares profile information with a third party, it needs a separate explicit consent and review design.
+Discovery and drafting are distinct from external action. The [future execution approval boundary](future-execution-approval-boundary.md) defines the required future consent, review, action-specific approval, credential, retry, notification, audit, cancellation, and retention rules. It is a design boundary, not authorization to implement an integration or to change the current MVP.
 
 The current discovery MVP performs none of those actions. It can recommend an atomic first action, but the user remains responsible for deciding and executing it.
 
 ## Open product decisions
 
-Retention, deletion, encryption, third-party data sharing, approval modes for application drafting and submission, and notification handling need explicit specifications and, where durable, ADRs before implementation.
+Provider-specific retention/deletion obligations, encryption/key-management implementation, third-party data-sharing arrangements, supported execution action types, and notification delivery channels require separate implementation designs and, where durable, ADRs. They must conform to the future execution approval boundary and are not authorized by it.

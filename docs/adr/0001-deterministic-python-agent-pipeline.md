@@ -65,7 +65,7 @@ The pipeline gains an inspectable state owner, reproducible saved-artifact evalu
 
 This choice requires schema maintenance, content-addressed artifact storage, retention controls for potentially sensitive source and profile snapshots, and explicit contract migration when contracts change. Personal profiles and complete production runs remain outside Git as required by the consent boundary ([user profile, consent, and automation boundary](../product/user-profile-and-consent.md)).
 
-Out of scope are a Temporal migration, distributed scheduling, changing product requirements or evaluation claims, and autonomous external actions such as portal authentication, messaging, form completion, or application submission. Those actions require separate consent, product, and architecture decisions.
+Out of scope are a Temporal migration, distributed scheduling, changing product requirements or evaluation claims, and autonomous external actions such as portal authentication, messaging, form completion, or application submission. The [future execution approval boundary](../product/future-execution-approval-boundary.md) now defines the product-policy prerequisites for any such future work; it does not authorize an implementation or make the pipeline an execution system.
 
 ## Evidence
 

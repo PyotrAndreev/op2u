@@ -1,6 +1,6 @@
 # Future product concept
 
-This is an exploratory interface and workflow sketch for capabilities outside the Discovery MVP. It is not an implementation specification.
+This is an exploratory interface and workflow sketch for capabilities outside the Discovery MVP. It is not an implementation specification. In particular, its `Autonomy` and `APPLY` sketches do not authorize unattended execution: any future external write must follow the [future execution approval boundary](future-execution-approval-boundary.md).
 
 ```md
 ┌──────────────────────────────────────────────────────────┐

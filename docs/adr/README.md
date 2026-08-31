@@ -12,3 +12,4 @@ The initial format and lifecycle are defined by [ADR 0000](0000-record-architect
 
 - [ADR 0000: Record architecture decisions](0000-record-architecture-decisions.md) — Accepted
 - [ADR 0001: Deterministic Python agent pipeline](0001-deterministic-python-agent-pipeline.md) — Accepted
+- [ADR 0002: Explicit approval for future external writes](0002-explicit-approval-for-future-external-writes.md) — Accepted
