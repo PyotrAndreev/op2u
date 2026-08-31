@@ -1,0 +1,83 @@
+{
+  "schema_version": "eusp-known-forgotten/v1",
+  "synthetic": true,
+  "fixture_notice": "This is a fabricated, anonymized public evaluation fixture. It contains no real person, account, history, contact, calendar, or source snapshot.",
+  "snapshot_date": "2026-08-30",
+  "candidates": [
+    {
+      "id": "kf-known-high",
+      "classification": "ACT_NOW",
+      "action_priority": 100,
+      "gates": {"grounding": "pass", "liveness": "pass", "actionability": "pass"},
+      "awareness": {
+        "state": "known",
+        "evidence": [{
+          "kind": "explicit_current_recognition",
+          "provenance": "user_supplied_local",
+          "statement": "I recognize this fictional call."
+        }]
+      }
+    },
+    {
+      "id": "kf-unknown-high",
+      "classification": "ACT_NOW",
+      "action_priority": 90,
+      "gates": {"grounding": "pass", "liveness": "pass", "actionability": "pass"},
+      "awareness": {"state": "unknown", "evidence": []}
+    },
+    {
+      "id": "kf-forgotten-useful",
+      "classification": "PREPARE_NEXT",
+      "action_priority": 80,
+      "gates": {"grounding": "pass", "liveness": "pass", "actionability": "pass"},
+      "awareness": {
+        "state": "forgotten",
+        "evidence": [{
+          "kind": "explicit_reminder_request",
+          "provenance": "user_supplied_local",
+          "statement": "Remind me about this fictional path."
+        }]
+      }
+    },
+    {
+      "id": "kf-unknown-novel",
+      "classification": "PREPARE_NEXT",
+      "action_priority": 70,
+      "gates": {"grounding": "pass", "liveness": "pass", "actionability": "pass"},
+      "awareness": {"state": "unknown", "evidence": []}
+    },
+    {
+      "id": "kf-forgotten-low",
+      "classification": "PREPARE_NEXT",
+      "action_priority": 40,
+      "gates": {"grounding": "pass", "liveness": "pass", "actionability": "pass"},
+      "awareness": {
+        "state": "forgotten",
+        "evidence": [{
+          "kind": "explicit_reminder_request",
+          "provenance": "user_supplied_local",
+          "statement": "Keep a local reminder for this fictional path."
+        }]
+      }
+    },
+    {
+      "id": "kf-forgotten-stale",
+      "classification": "ACT_NOW",
+      "action_priority": 95,
+      "gates": {"grounding": "pass", "liveness": "fail", "actionability": "pass"},
+      "awareness": {
+        "state": "forgotten",
+        "evidence": [{
+          "kind": "explicit_reminder_request",
+          "provenance": "user_supplied_local",
+          "statement": "Remind me only if this fictional route is still current."
+        }]
+      }
+    }
+  ],
+  "evaluation": {
+    "action_capacity": 3,
+    "high_value_priority_at_least": 80,
+    "reminder_useful_ids": ["kf-forgotten-useful"]
+  }
+}
