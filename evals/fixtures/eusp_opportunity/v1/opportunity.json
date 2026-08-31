@@ -1,0 +1,124 @@
+{
+  "schema_version": "eusp-opportunity/v1",
+  "synthetic": true,
+  "fixture_notice": "This is a fabricated, anonymized public evaluation fixture. It is not a real opportunity, person, profile, or source snapshot.",
+  "id": "opp-example-mobility-lab",
+  "title": "Example Mobility Lab public-interest call",
+  "organization": "Example Mobility Lab",
+  "classification": "PREPARE_NEXT",
+  "snapshot_date": "2026-08-30",
+  "timezone": "Etc/UTC",
+  "eligibility_assessment": "not_assessed",
+  "evidence": [
+    {
+      "id": "e-status",
+      "claim": "The call has a current application window ending after the snapshot.",
+      "quote": "The 2026 public-interest call is open until 30 September 2026.",
+      "url": "https://example.test/mobility-lab/call",
+      "retrieved_at": "2026-08-30T10:00:00+00:00",
+      "source_type": "official_primary",
+      "entailment": "direct",
+      "current_status": "open",
+      "temporal": {"kind": "deadline", "date": "2026-09-30", "start_date": null, "end_date": null},
+      "verification_artifact": "verification/e-status.json",
+      "verification_artifact_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "supports": ["liveness"]
+    },
+    {
+      "id": "e-route",
+      "claim": "The organization provides a public application route.",
+      "quote": "Download the applicant guide and submit the public-interest form through this call page.",
+      "url": "https://example.test/mobility-lab/call",
+      "retrieved_at": "2026-08-30T10:00:00+00:00",
+      "source_type": "official_primary",
+      "entailment": "direct",
+      "current_status": "open",
+      "temporal": {"kind": "deadline", "date": "2026-09-30", "start_date": null, "end_date": null},
+      "verification_artifact": "verification/e-route.json",
+      "verification_artifact_sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+      "supports": ["participation_route"]
+    },
+    {
+      "id": "e-vh-funded-exposure",
+      "claim": "The call offers a funded public presentation component.",
+      "quote": "Selected projects receive a travel stipend and present their work at the public-interest forum.",
+      "url": "https://example.test/mobility-lab/benefits",
+      "retrieved_at": "2026-08-30T10:01:00+00:00",
+      "source_type": "official_primary",
+      "entailment": "direct",
+      "current_status": "open",
+      "temporal": {"kind": "deadline", "date": "2026-09-30", "start_date": null, "end_date": null},
+      "verification_artifact": "verification/e-vh-funded-exposure.json",
+      "verification_artifact_sha256": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+      "supports": ["value_hypothesis:vh-funded-exposure"]
+    },
+    {
+      "id": "e-vh-peer-feedback",
+      "claim": "The call includes structured peer feedback.",
+      "quote": "Forum participants exchange structured feedback with the cohort before the public presentation.",
+      "url": "https://example.test/mobility-lab/forum",
+      "retrieved_at": "2026-08-30T10:02:00+00:00",
+      "source_type": "official_primary",
+      "entailment": "direct",
+      "current_status": "open",
+      "temporal": {"kind": "deadline", "date": "2026-09-30", "start_date": null, "end_date": null},
+      "verification_artifact": "verification/e-vh-peer-feedback.json",
+      "verification_artifact_sha256": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+      "supports": ["value_hypothesis:vh-peer-feedback"]
+    }
+  ],
+  "uncertainties": [
+    {
+      "id": "u-eligibility",
+      "description": "Whether the user meets the organizer's requirements is unknown; no eligibility assessment is made."
+    },
+    {
+      "id": "u-project-fit",
+      "description": "Whether a specific user project fits the forum's review criteria is unknown."
+    }
+  ],
+  "value_hypotheses": [
+    {
+      "id": "vh-funded-exposure",
+      "statement": "The call could provide a funded route to present a public-interest project.",
+      "causal_bridge": "The explicit goal to test a public-interest project could be advanced by the quoted stipend and public forum presentation.",
+      "profile_basis": [{"field_id": "goal-1", "provenance": "user_supplied"}, {"field_id": "thematic_interest-1", "provenance": "user_supplied"}],
+      "evidence_ids": ["e-vh-funded-exposure"],
+      "uncertainty_ids": ["u-eligibility", "u-project-fit"],
+      "confidence": "medium"
+    },
+    {
+      "id": "vh-peer-feedback",
+      "statement": "The call could provide a short peer-feedback cycle for a public-interest project.",
+      "causal_bridge": "The explicit preference for peer-facing feedback could be served by the quoted structured cohort feedback before presentation.",
+      "profile_basis": [{"field_id": "preference-1", "provenance": "user_supplied"}, {"field_id": "thematic_interest-1", "provenance": "user_supplied"}],
+      "evidence_ids": ["e-vh-peer-feedback"],
+      "uncertainty_ids": ["u-project-fit"],
+      "confidence": "low"
+    }
+  ],
+  "path": {
+    "label": "Prepare one public-interest call submission",
+    "verified_actions": [
+      {
+        "id": "a-download-guide",
+        "action": "Download the applicant guide from the official call page.",
+        "deliverable": "A saved applicant-guide checklist.",
+        "start_date": "2026-08-31",
+        "minutes_min": 20,
+        "minutes_max": 30,
+        "evidence_ids": ["e-route"]
+      }
+    ],
+    "gaps": [
+      {
+        "id": "g-eligibility",
+        "question": "Which organizer requirements, if any, does the user meet?"
+      },
+      {
+        "id": "g-materials",
+        "question": "Which existing project materials are available for a submission?"
+      }
+    ]
+  }
+}
