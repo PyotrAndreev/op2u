@@ -19,8 +19,8 @@ from compare_variants import (evaluate_eusp_p1_packet, eusp_p1_outcome, eusp_p1_
                               load_candidate, parser, require_eusp_p1_snapshots, run,
                               validate_eusp_p1_manifests)
 from run_experiment import (STAGED, VARIANTS, build_eusp_p1_judge_packet, direction_bool,
-                            direction_effort_cap, direction_snapshot_metadata, snapshot_inputs,
-                            stage_result_error, variant_instructions)
+                            direction_effort_cap, direction_snapshot_metadata, p1_execution_config,
+                            snapshot_inputs, stage_result_error, variant_instructions)
 
 
 DIRECTION = (ROOT / "evals/direction_eusp_p1.yaml").read_text(encoding="utf-8")
@@ -82,8 +82,12 @@ class EuspP1HarnessTests(unittest.TestCase):
                     run = source / "run"
                     hashes = snapshot_inputs(run, variant, profile, direction, rubric)
                     prompt = run / "inputs/prompt.md"
+                    common_contract = run / "inputs/p1_report_serialization_addendum.md"
                     self.assertIn(contract, prompt.read_text(encoding="utf-8"))
+                    self.assertEqual(common_contract.read_text(encoding="utf-8"), contract)
                     self.assertEqual(hashes["prompt.md"], hashlib.sha256(prompt.read_bytes()).hexdigest())
+                    self.assertEqual(hashes["p1_report_serialization_addendum.md"],
+                                     hashlib.sha256(common_contract.read_bytes()).hexdigest())
         for stage in set(STAGED) - {"report"}:
             self.assertNotIn(contract, variant_instructions("P1_FRONTIER", stage))
 
@@ -274,13 +278,17 @@ class EuspP1HarnessTests(unittest.TestCase):
     def test_p1_manifest_hashes_the_versioned_packet_presented_to_judges(self) -> None:
         def make_run(root: Path, variant: str) -> Path:
             run_dir = root / variant
-            (run_dir / "inputs").mkdir(parents=True)
-            for name, content in (("profile.md", PROFILE), ("direction.yaml", DIRECTION), ("rubric.yaml", "rubric")):
-                (run_dir / "inputs" / name).write_text(content, encoding="utf-8")
+            profile, direction, rubric = root / "profile.md", root / "direction.yaml", root / "rubric.yaml"
+            profile.write_text(PROFILE, encoding="utf-8")
+            direction.write_text(DIRECTION, encoding="utf-8")
+            rubric.write_text("rubric", encoding="utf-8")
+            snapshot_inputs(run_dir, variant, profile, direction, rubric)
             stages = (["report"] if variant == "P1_V0" else
                       ["profile", "triggers", "search_plan", "discovery", "verification", "actionability", "ranking", "report"])
             (run_dir / "manifest.json").write_text(json.dumps({"variant": variant,
-                "pipeline_mode": "monolithic" if variant == "P1_V0" else "staged", "stages": stages}), encoding="utf-8")
+                "pipeline_mode": "monolithic" if variant == "P1_V0" else "staged", "stages": stages,
+                "worker_model": "test-worker", "git_revision": "test-revision",
+                "p1_execution_config": p1_execution_config(900, 10800, 60)}), encoding="utf-8")
             (run_dir / "report.result.json").write_text("{}", encoding="utf-8")
             (run_dir / "report.status.json").write_text('{"state":"complete"}', encoding="utf-8")
             (run_dir / "summary.json").write_text('{"state":"complete"}', encoding="utf-8")
@@ -309,14 +317,23 @@ class EuspP1HarnessTests(unittest.TestCase):
                 latest = run_dir / "judge_packet.attempt-02.json"
                 self.assertEqual(manifest["input_hashes"][identity], hashlib.sha256(latest.read_bytes()).hexdigest())
 
-    def test_wrong_arm_manifest_is_rejected(self) -> None:
-        frontier = {"variant": "P1_FRONTIER", "pipeline_mode": "staged", "stages": ["profile", "triggers", "search_plan", "discovery", "verification", "actionability", "ranking", "report"]}
-        baseline = {"variant": "P1_V0", "pipeline_mode": "monolithic", "stages": ["report"]}
+    def test_wrong_arm_or_frozen_execution_manifest_is_rejected(self) -> None:
+        common = {"worker_model": "test-worker", "git_revision": "test-revision",
+                  "p1_execution_config": p1_execution_config(900, 10800, 60)}
+        frontier = {**common, "variant": "P1_FRONTIER", "pipeline_mode": "staged", "stages": ["profile", "triggers", "search_plan", "discovery", "verification", "actionability", "ranking", "report"]}
+        baseline = {**common, "variant": "P1_V0", "pipeline_mode": "monolithic", "stages": ["report"]}
         validate_eusp_p1_manifests(frontier, baseline)
         with self.assertRaises(ValueError):
             validate_eusp_p1_manifests(frontier, {**baseline, "variant": "V0"})
         with self.assertRaises(ValueError):
             validate_eusp_p1_manifests(frontier, {**baseline, "pipeline_mode": "staged"})
+        with self.assertRaises(ValueError):
+            validate_eusp_p1_manifests(frontier, {**baseline, "worker_model": "other-worker"})
+        with self.assertRaises(ValueError):
+            validate_eusp_p1_manifests(frontier, {**baseline, "p1_execution_config": p1_execution_config(600, 10800, 60)})
+        with self.assertRaises(ValueError):
+            validate_eusp_p1_manifests(frontier, {key: value for key, value in baseline.items()
+                                                   if key != "p1_execution_config"})
 
     def test_unbound_or_partial_packet_is_rejected(self) -> None:
         with tempfile.TemporaryDirectory() as directory:
@@ -343,12 +360,15 @@ class EuspP1HarnessTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as directory:
             left, right = Path(directory) / "left", Path(directory) / "right"
             for run in (left, right):
-                (run / "inputs").mkdir(parents=True)
-                (run / "inputs/profile.md").write_text("same", encoding="utf-8")
-                (run / "inputs/direction.yaml").write_text("same", encoding="utf-8")
-                (run / "inputs/rubric.yaml").write_text("same", encoding="utf-8")
+                (run / "inputs/schemas").mkdir(parents=True)
+                for relative in ("profile.md", "direction.yaml", "rubric.yaml", "known_cases.yaml",
+                                 "p1_report_serialization_addendum.md", "schemas/p1.json"):
+                    path = run / "inputs" / relative
+                    path.parent.mkdir(parents=True, exist_ok=True)
+                    path.write_text("same", encoding="utf-8")
             require_eusp_p1_snapshots(left, right)
-            for relative in ("profile.md", "direction.yaml", "rubric.yaml"):
+            for relative in ("profile.md", "direction.yaml", "rubric.yaml", "known_cases.yaml",
+                             "p1_report_serialization_addendum.md", "schemas/p1.json"):
                 target = right / "inputs" / relative
                 original = target.read_text(encoding="utf-8")
                 target.write_text("different", encoding="utf-8")
