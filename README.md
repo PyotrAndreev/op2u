@@ -16,6 +16,7 @@ The current scope is **discovery**: profile interpretation, search, primary-sour
 - [Future execution approval boundary](docs/product/future-execution-approval-boundary.md) — future-design only; it does not enable execution
 - [EUSP local user-profile model](docs/product/eusp-local-user-profile.md)
 - [EUSP opportunity contract](docs/product/eusp-opportunity-contract.md)
+- [EUSP path components and research gaps](docs/product/eusp-path-components.md)
 - [Competitive landscape](docs/research/competitive-landscape.md)
 - [EUSP literature synthesis: exploration under an insufficient verified portfolio](docs/research/eusp-exploration-discovery-agents.md)
 - [EUSP social-graph connector admissibility spike](docs/research/eusp-social-connector-admissibility.md)

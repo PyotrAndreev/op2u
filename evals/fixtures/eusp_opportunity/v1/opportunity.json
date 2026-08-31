@@ -50,7 +50,7 @@
       "temporal": {"kind": "deadline", "date": "2026-09-30", "start_date": null, "end_date": null},
       "verification_artifact": "verification/e-vh-funded-exposure.json",
       "verification_artifact_sha256": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
-      "supports": ["value_hypothesis:vh-funded-exposure"]
+      "supports": ["value_hypothesis:vh-funded-exposure", "path_component:travel", "path_component:funding"]
     },
     {
       "id": "e-vh-peer-feedback",
@@ -99,6 +99,64 @@
   ],
   "path": {
     "label": "Prepare one public-interest call submission",
+    "route_status": "high_value_with_gaps",
+    "components": [
+      {
+        "component": "travel",
+        "applicability": "applicable",
+        "status": "verified",
+        "source_links": ["https://example.test/mobility-lab/benefits"],
+        "retrieved_at": "2026-08-30T10:01:00+00:00",
+        "assumptions": ["The quoted stipend is treated only as travel support; amount, booking, and reimbursement terms are not assumed."],
+        "evidence_ids": ["e-vh-funded-exposure"],
+        "gap_reason": null,
+        "searched_sources": []
+      },
+      {
+        "component": "lodging",
+        "applicability": "unknown",
+        "status": "gap",
+        "source_links": ["https://example.test/mobility-lab/benefits"],
+        "retrieved_at": "2026-08-30T10:01:00+00:00",
+        "assumptions": ["No lodging arrangement, cost, or availability is assumed."],
+        "evidence_ids": [],
+        "gap_reason": "No direct official-primary lodging fact is recorded; the searched source is retained without asserting lodging information.",
+        "searched_sources": ["https://example.test/mobility-lab/benefits"]
+      },
+      {
+        "component": "visa",
+        "applicability": "unknown",
+        "status": "gap",
+        "source_links": ["https://example.test/mobility-lab/call"],
+        "retrieved_at": "2026-08-30T10:00:00+00:00",
+        "assumptions": ["No citizenship, residence, authorization, legal eligibility, or visa outcome is assumed."],
+        "evidence_ids": [],
+        "gap_reason": "No direct official-primary visa fact is recorded; the searched source is retained without an eligibility conclusion.",
+        "searched_sources": ["https://example.test/mobility-lab/call"]
+      },
+      {
+        "component": "funding",
+        "applicability": "applicable",
+        "status": "verified",
+        "source_links": ["https://example.test/mobility-lab/benefits"],
+        "retrieved_at": "2026-08-30T10:01:00+00:00",
+        "assumptions": ["The amount, coverage, payment conditions, and whether funding meets any user need are not assumed."],
+        "evidence_ids": ["e-vh-funded-exposure"],
+        "gap_reason": null,
+        "searched_sources": []
+      },
+      {
+        "component": "outreach_route",
+        "applicability": "unknown",
+        "status": "gap",
+        "source_links": ["https://example.test/mobility-lab/call"],
+        "retrieved_at": "2026-08-30T10:00:00+00:00",
+        "assumptions": ["No contact channel, reply, permission to message, or external outreach action is assumed."],
+        "evidence_ids": [],
+        "gap_reason": "No direct official-primary outreach-route fact is recorded; the searched source is retained without proposing contact.",
+        "searched_sources": ["https://example.test/mobility-lab/call"]
+      }
+    ],
     "verified_actions": [
       {
         "id": "a-download-guide",

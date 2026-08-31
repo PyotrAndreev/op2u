@@ -23,6 +23,7 @@ PROFILE_FIELD_ID = re.compile(
     r"thematic_interest-[1-9][0-9]*|(?:goal|outcome)-[1-9][0-9]*|"
     r"asset-[1-9][0-9]*|constraint-[1-9][0-9]*|preference-[1-9][0-9]*|"
     r"unknown-[1-9][0-9]*)$")
+PATH_COMPONENTS = frozenset({"travel", "lodging", "visa", "funding", "outreach_route"})
 
 
 def _additional_property_errors(value: Any, schema: dict[str, Any], path: str = "$") -> list[str]:
@@ -179,6 +180,73 @@ def validate_opportunity(value: Any, *, public_fixture: bool = False) -> list[st
                 if (value.get("classification") in {"ACT_NOW", "PREPARE_NEXT"} and snapshot is not None and start_date is not None
                         and not snapshot <= start_date <= snapshot + dt.timedelta(days=7)):
                     errors.append(f"verified action {action_id!r} is not startable within seven days of the snapshot")
+
+        components = path.get("components")
+        component_names: set[str] = set()
+        component_gaps = 0
+        if isinstance(components, list):
+            for index, component in enumerate(components):
+                if not isinstance(component, dict):
+                    continue
+                name = component.get("component")
+                if isinstance(name, str):
+                    if name in component_names:
+                        errors.append(f"duplicate path component {name!r}")
+                    component_names.add(name)
+                _timestamp(component.get("retrieved_at"), f"path component {name!r} retrieved_at", errors)
+                status = component.get("status")
+                applicability = component.get("applicability")
+                if applicability == "applicable" and status not in {"verified", "gap"}:
+                    errors.append(f"applicable path component {name!r} must be verified or a gap")
+                elif applicability == "unknown" and status != "gap":
+                    errors.append(f"unknown path component {name!r} must be a gap, not a fact")
+                elif applicability == "not_applicable" and status != "not_applicable":
+                    errors.append(f"not-applicable path component {name!r} must have not_applicable status")
+
+                evidence_refs = component.get("evidence_ids")
+                source_links = component.get("source_links")
+                searched_sources = component.get("searched_sources")
+                if status == "gap":
+                    component_gaps += 1
+                    if not isinstance(component.get("gap_reason"), str) or not component["gap_reason"].strip():
+                        errors.append(f"path component {name!r} gap needs an explicit reason")
+                    if not isinstance(searched_sources, list) or not searched_sources:
+                        errors.append(f"path component {name!r} gap needs cited searched sources")
+                    elif not isinstance(source_links, list) or not set(searched_sources).issubset(source_links):
+                        errors.append(f"path component {name!r} searched sources must be source links")
+                    if evidence_refs:
+                        errors.append(f"path component {name!r} gap must not present unavailable information as evidence")
+                else:
+                    if component.get("gap_reason") is not None or searched_sources:
+                        errors.append(f"path component {name!r} is not a gap but records a gap reason or searched sources")
+                    if not isinstance(evidence_refs, list) or not evidence_refs:
+                        errors.append(f"path component {name!r} needs direct evidence")
+                    for evidence_id in evidence_refs if isinstance(evidence_refs, list) else []:
+                        row = evidence_by_id.get(evidence_id)
+                        if row is None:
+                            errors.append(f"path component {name!r} references unknown evidence {evidence_id!r}")
+                        elif f"path_component:{name}" not in row.get("supports", []):
+                            errors.append(f"evidence {evidence_id!r} does not directly support path component {name!r}")
+        if component_names != PATH_COMPONENTS:
+            errors.append("path components must record travel, lodging, visa, funding, and outreach_route exactly once")
+
+        route_status = path.get("route_status")
+        action_count = len(actions) if isinstance(actions, list) else 0
+        if route_status == "verified_actions":
+            if not action_count:
+                errors.append("verified-actions path needs a verified action")
+            if component_gaps:
+                errors.append("verified-actions path cannot hide component gaps; use high_value_with_gaps")
+        elif route_status == "high_value_with_gaps":
+            if not component_gaps:
+                errors.append("high-value path needs an explicit component gap")
+        elif route_status == "exploration_lead":
+            if action_count:
+                errors.append("exploration lead cannot contain verified actions")
+            if not component_gaps:
+                errors.append("exploration lead needs an explicit component gap")
+            if value.get("classification") in {"ACT_NOW", "PREPARE_NEXT"}:
+                errors.append("exploration lead is not a selected opportunity")
 
     if value.get("classification") in {"ACT_NOW", "PREPARE_NEXT"}:
         route_rows = [row for row in evidence_by_id.values() if "participation_route" in row.get("supports", [])]
