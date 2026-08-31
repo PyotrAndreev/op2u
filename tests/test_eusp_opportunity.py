@@ -38,7 +38,8 @@ class EuspOpportunityContractTests(unittest.TestCase):
         errors = validate_opportunity(reused)
         self.assertTrue(any("independent grounding" in error for error in errors), errors)
         unsupported = copy.deepcopy(self.opportunity)
-        unsupported["evidence"][2]["supports"] = []
+        next(row for row in unsupported["evidence"]
+             if row["id"] == "e-vh-funded-exposure")["supports"] = []
         errors = validate_opportunity(unsupported)
         self.assertTrue(any("does not directly support value hypothesis" in error for error in errors), errors)
 
@@ -57,6 +58,41 @@ class EuspOpportunityContractTests(unittest.TestCase):
         errors = validate_opportunity(invalid)
         self.assertTrue(any("unexpected property paths" in error for error in errors), errors)
         self.assertTrue(any("gaps[0]: unexpected property evidence_ids" in error for error in errors), errors)
+
+    def test_funding_packet_separates_official_facts_from_indirect_indicators(self) -> None:
+        packet = self.opportunity["path"]["funding_packet"]
+        self.assertEqual({fact["kind"] for fact in packet["official_facts"]},
+                         {"programme", "deadline", "requirements", "documents"})
+        self.assertEqual({indicator["kind"] for indicator in packet["indirect_indicators"]},
+                         {"pool_size", "prior_recipients"})
+        self.assertEqual({gap["subject"] for gap in packet["gaps"]}, {"acceptance_rate"})
+        for fact in packet["official_facts"]:
+            self.assertTrue(fact["evidence_ids"])
+        for indicator in packet["indirect_indicators"]:
+            self.assertTrue(indicator["quote"])
+            self.assertTrue(indicator["uncertainty"])
+            self.assertTrue(indicator["source"]["retrieved_at"])
+            self.assertTrue(indicator["source"]["verification_artifact_sha256"])
+        for gap in packet["gaps"]:
+            self.assertTrue(gap["searched_sources"])
+            self.assertTrue(gap["searched_sources"][0]["retrieved_at"])
+
+    def test_funding_packet_fails_closed_for_unsupported_facts_and_uncited_missing_subjects(self) -> None:
+        invalid = copy.deepcopy(self.opportunity)
+        invalid["path"]["funding_packet"]["official_facts"][0]["evidence_ids"] = ["e-route"]
+        invalid["path"]["funding_packet"]["gaps"] = []
+        errors = validate_opportunity(invalid)
+        self.assertTrue(any("does not directly support funding official fact" in error for error in errors), errors)
+        self.assertTrue(any("acceptance_rate" in error and "cited gap" in error for error in errors), errors)
+
+    def test_funding_packet_cannot_mix_indicator_evidence_or_predict_user_outcomes(self) -> None:
+        invalid = copy.deepcopy(self.opportunity)
+        indicator = invalid["path"]["funding_packet"]["indirect_indicators"][0]
+        indicator["evidence_ids"] = ["e-status"]
+        indicator["uncertainty"] = "The user's chances are likely high."
+        errors = validate_opportunity(invalid)
+        self.assertTrue(any("unexpected property evidence_ids" in error for error in errors), errors)
+        self.assertTrue(any("user eligibility or chances conclusion" in error for error in errors), errors)
 
     def test_path_components_cover_the_fixed_research_surface_with_cited_gaps(self) -> None:
         components = self.opportunity["path"]["components"]
