@@ -122,6 +122,69 @@ class EuspOpportunityContractTests(unittest.TestCase):
         errors = validate_opportunity(hidden_gaps)
         self.assertTrue(any("cannot hide component gaps" in error for error in errors), errors)
 
+    def test_path_cost_keeps_money_time_and_high_stress_separate_without_a_composite(self) -> None:
+        cost = self.opportunity["path"]["path_cost"]
+        self.assertEqual(set(cost), {"date_basis", "programme_duration_days", "money", "time", "stress"})
+        self.assertEqual(cost["stress"]["estimates"][0]["range"],
+                         {"minimum": 4, "maximum": 5, "scale": "stress_1_to_5"})
+        self.assertEqual(self.opportunity["path"]["route_status"], "high_value_with_gaps")
+        self.assertEqual(validate_opportunity(self.opportunity), [])
+
+        invalid = copy.deepcopy(self.opportunity)
+        invalid["path"]["path_cost"]["overall_score"] = 1
+        errors = validate_opportunity(invalid)
+        self.assertTrue(any("unexpected property overall_score" in error for error in errors), errors)
+
+    def test_path_cost_requires_sourced_ranges_and_preserves_unknowns_as_gaps(self) -> None:
+        invalid = copy.deepcopy(self.opportunity)
+        living = invalid["path"]["path_cost"]["money"]["estimates"][0]
+        del living["currency"]
+        living["range"] = {"minimum": 1200, "maximum": 900}
+        del living["source_provenance"]["quote"]
+        invalid["path"]["path_cost"]["time"] = {"status": "unknown", "estimates": [], "gaps": []}
+        errors = validate_opportunity(invalid)
+        self.assertTrue(any("missing required property currency" in error for error in errors), errors)
+        self.assertTrue(any("minimum exceeds maximum" in error for error in errors), errors)
+        self.assertTrue(any("missing required property quote" in error for error in errors), errors)
+        self.assertTrue(any("time marked unknown" in error for error in errors), errors)
+
+    def test_path_cost_uses_opportunity_date_or_explicit_user_availability_for_undated_records(self) -> None:
+        invalid = copy.deepcopy(self.opportunity)
+        date_basis = invalid["path"]["path_cost"]["date_basis"]
+        date_basis["selected_date"] = "2026-10-02"
+        date_basis["profile_field_id"] = "geo-1.period"
+        date_basis["profile_provenance"] = "user_supplied"
+        errors = validate_opportunity(invalid)
+        self.assertTrue(any("must use its opportunity date" in error for error in errors), errors)
+        self.assertTrue(any("must not substitute a profile date" in error for error in errors), errors)
+
+        undated = copy.deepcopy(self.opportunity)
+        date_basis = undated["path"]["path_cost"]["date_basis"]
+        date_basis.update({
+            "kind": "nearest_user_available_date",
+            "selected_date": "2026-10-04",
+            "opportunity_date": None,
+            "evidence_id": None,
+            "profile_field_id": "geo-1.period",
+            "profile_provenance": "user_supplied",
+        })
+        self.assertEqual(validate_opportunity(undated), [])
+
+    def test_long_programme_prioritizes_cost_of_living_before_flights(self) -> None:
+        invalid = copy.deepcopy(self.opportunity)
+        money = invalid["path"]["path_cost"]["money"]
+        money["estimates"][0]["research_priority"] = "secondary"
+        money["estimates"][1]["research_priority"] = "primary"
+        errors = validate_opportunity(invalid)
+        self.assertTrue(any("cost_of_living must be primary" in error for error in errors), errors)
+        self.assertTrue(any("flights must be secondary" in error for error in errors), errors)
+
+        invalid = copy.deepcopy(self.opportunity)
+        money = invalid["path"]["path_cost"]["money"]
+        money["estimates"] = [money["estimates"][1]]
+        errors = validate_opportunity(invalid)
+        self.assertTrue(any("cost_of_living estimate or explicit gap" in error for error in errors), errors)
+
     def test_exploration_lead_cannot_receive_verified_action_credit(self) -> None:
         invalid = copy.deepcopy(self.opportunity)
         invalid["path"]["route_status"] = "exploration_lead"
