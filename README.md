@@ -28,6 +28,7 @@ The current scope is **discovery**: profile interpretation, search, primary-sour
 - [Evaluation](docs/dev/evaluation.md)
 - [EUSP priority-1 experiment charter](docs/dev/eusp-p1-experiment-charter.md)
 - [EUSP known-versus-forgotten local ranking evaluation](docs/dev/eusp-known-forgotten-evaluation.md)
+- [EUSP non-obvious participation-mode ranking evaluation](docs/dev/eusp-participation-mode-evaluation.md)
 - [Architecture decisions](docs/adr/README.md)
 
 `experiments/analyses/` contains retained generated analyses. Current prompts live under `prompts/` and implement the Discovery MVP specification.
