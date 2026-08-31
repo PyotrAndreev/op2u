@@ -24,6 +24,13 @@ PROFILE_FIELD_ID = re.compile(
     r"asset-[1-9][0-9]*|constraint-[1-9][0-9]*|preference-[1-9][0-9]*|"
     r"unknown-[1-9][0-9]*)$")
 PATH_COMPONENTS = frozenset({"travel", "lodging", "visa", "funding", "outreach_route"})
+FUNDING_OFFICIAL_FACTS = frozenset({"programme", "deadline", "requirements", "documents"})
+COMPETITIVENESS_INDICATORS = frozenset({"pool_size", "acceptance_rate", "prior_recipients"})
+FUNDING_PACKET_SUBJECTS = FUNDING_OFFICIAL_FACTS | COMPETITIVENESS_INDICATORS
+USER_OUTCOME = re.compile(
+    r"(?:\b(?:user|you|your)\b.{0,80}\b(?:eligible|ineligible|qualif(?:y|ies|ied)|"
+    r"chance|odds|probability|likely|unlikely)\b|"
+    r"\b(?:chance|odds|probability)\b.{0,80}\b(?:user|you|your)\b)", re.IGNORECASE)
 
 
 def _additional_property_errors(value: Any, schema: dict[str, Any], path: str = "$") -> list[str]:
@@ -61,6 +68,11 @@ def _timestamp(value: Any, label: str, errors: list[str]) -> None:
         dt.datetime.fromisoformat(value.replace("Z", "+00:00"))
     except ValueError:
         errors.append(f"{label} must be an ISO date-time")
+
+
+def _funding_packet_text_is_user_outcome(value: Any) -> bool:
+    """Reject conclusions or predictions about this user, not source requirements."""
+    return isinstance(value, str) and USER_OUTCOME.search(value) is not None
 
 
 def _unique(records: Any, label: str, errors: list[str]) -> set[str]:
@@ -180,6 +192,73 @@ def validate_opportunity(value: Any, *, public_fixture: bool = False) -> list[st
                 if (value.get("classification") in {"ACT_NOW", "PREPARE_NEXT"} and snapshot is not None and start_date is not None
                         and not snapshot <= start_date <= snapshot + dt.timedelta(days=7)):
                     errors.append(f"verified action {action_id!r} is not startable within seven days of the snapshot")
+
+        funding_packet = path.get("funding_packet")
+        if isinstance(funding_packet, dict):
+            official_facts = funding_packet.get("official_facts")
+            indicators = funding_packet.get("indirect_indicators")
+            funding_gaps = funding_packet.get("gaps")
+            _unique(official_facts, "funding official fact", errors)
+            _unique(indicators, "competitiveness indicator", errors)
+            _unique(funding_gaps, "funding gap", errors)
+            recorded_subjects: set[str] = set()
+            gap_subjects: set[str] = set()
+
+            if isinstance(official_facts, list):
+                for fact in official_facts:
+                    if not isinstance(fact, dict):
+                        continue
+                    identifier = fact.get("id")
+                    kind = fact.get("kind")
+                    if isinstance(kind, str):
+                        recorded_subjects.add(kind)
+                    if _funding_packet_text_is_user_outcome(fact.get("claim")):
+                        errors.append(f"funding official fact {identifier!r} makes a user eligibility or chances conclusion")
+                    for evidence_id in fact.get("evidence_ids", []):
+                        row = evidence_by_id.get(evidence_id)
+                        if row is None:
+                            errors.append(f"funding official fact {identifier!r} references unknown evidence {evidence_id!r}")
+                        elif f"funding_packet:official_fact:{identifier}" not in row.get("supports", []):
+                            errors.append(f"evidence {evidence_id!r} does not directly support funding official fact {identifier!r}")
+
+            if isinstance(indicators, list):
+                for indicator in indicators:
+                    if not isinstance(indicator, dict):
+                        continue
+                    identifier = indicator.get("id")
+                    kind = indicator.get("kind")
+                    if isinstance(kind, str):
+                        recorded_subjects.add(kind)
+                    for field in ("claim", "uncertainty"):
+                        if _funding_packet_text_is_user_outcome(indicator.get(field)):
+                            errors.append(f"competitiveness indicator {identifier!r} makes a user eligibility or chances conclusion")
+                    source = indicator.get("source")
+                    if isinstance(source, dict):
+                        _timestamp(source.get("retrieved_at"),
+                                   f"competitiveness indicator {identifier!r} source.retrieved_at", errors)
+
+            if isinstance(funding_gaps, list):
+                for gap in funding_gaps:
+                    if not isinstance(gap, dict):
+                        continue
+                    identifier = gap.get("id")
+                    subject = gap.get("subject")
+                    if isinstance(subject, str):
+                        if subject in gap_subjects:
+                            errors.append(f"duplicate funding gap subject {subject!r}")
+                        gap_subjects.add(subject)
+                    if _funding_packet_text_is_user_outcome(gap.get("question")):
+                        errors.append(f"funding gap {identifier!r} makes a user eligibility or chances conclusion")
+                    for source_index, source in enumerate(gap.get("searched_sources", [])):
+                        if isinstance(source, dict):
+                            _timestamp(source.get("retrieved_at"),
+                                       f"funding gap {identifier!r} searched_sources[{source_index}].retrieved_at", errors)
+
+            for subject in FUNDING_PACKET_SUBJECTS:
+                if subject not in recorded_subjects and subject not in gap_subjects:
+                    errors.append(f"funding packet lacks {subject!r}; record a grounded fact or a cited gap")
+                if subject in recorded_subjects and subject in gap_subjects:
+                    errors.append(f"funding packet {subject!r} is both recorded and a gap")
 
         components = path.get("components")
         component_names: set[str] = set()

@@ -97,7 +97,7 @@
     "path": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["label", "route_status", "verified_actions", "gaps", "components"],
+      "required": ["label", "route_status", "verified_actions", "gaps", "components", "funding_packet"],
       "properties": {
         "label": {"type": "string", "minLength": 1},
         "route_status": {"enum": ["verified_actions", "high_value_with_gaps", "exploration_lead"]},
@@ -127,6 +127,83 @@
             "properties": {
               "id": {"type": "string", "pattern": "^g-[a-z0-9][a-z0-9-]*$"},
               "question": {"type": "string", "minLength": 1}
+            }
+          }
+        },
+        "funding_packet": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["official_facts", "indirect_indicators", "gaps"],
+          "properties": {
+            "official_facts": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": ["id", "kind", "claim", "evidence_ids"],
+                "properties": {
+                  "id": {"type": "string", "pattern": "^ff-[a-z0-9][a-z0-9-]*$"},
+                  "kind": {"enum": ["programme", "deadline", "requirements", "documents"]},
+                  "claim": {"type": "string", "minLength": 1},
+                  "evidence_ids": {"type": "array", "minItems": 1, "items": {"type": "string", "pattern": "^e-[a-z0-9][a-z0-9-]*$"}}
+                }
+              }
+            },
+            "indirect_indicators": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": ["id", "kind", "claim", "quote", "source", "uncertainty"],
+                "properties": {
+                  "id": {"type": "string", "pattern": "^ci-[a-z0-9][a-z0-9-]*$"},
+                  "kind": {"enum": ["pool_size", "acceptance_rate", "prior_recipients"]},
+                  "claim": {"type": "string", "minLength": 1},
+                  "quote": {"type": "string", "minLength": 1},
+                  "source": {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "required": ["url", "retrieved_at", "source_type", "verification_artifact", "verification_artifact_sha256"],
+                    "properties": {
+                      "url": {"type": "string", "pattern": "^https://"},
+                      "retrieved_at": {"type": "string", "minLength": 1},
+                      "source_type": {"enum": ["official_primary", "official_secondary", "independent_secondary"]},
+                      "verification_artifact": {"type": "string", "minLength": 1},
+                      "verification_artifact_sha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"}
+                    }
+                  },
+                  "uncertainty": {"type": "string", "minLength": 1}
+                }
+              }
+            },
+            "gaps": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": ["id", "subject", "question", "searched_sources"],
+                "properties": {
+                  "id": {"type": "string", "pattern": "^fg-[a-z0-9][a-z0-9-]*$"},
+                  "subject": {"enum": ["programme", "deadline", "requirements", "documents", "pool_size", "acceptance_rate", "prior_recipients"]},
+                  "question": {"type": "string", "minLength": 1},
+                  "searched_sources": {
+                    "type": "array",
+                    "minItems": 1,
+                    "items": {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "required": ["url", "retrieved_at", "source_type", "verification_artifact", "verification_artifact_sha256"],
+                      "properties": {
+                        "url": {"type": "string", "pattern": "^https://"},
+                        "retrieved_at": {"type": "string", "minLength": 1},
+                        "source_type": {"enum": ["official_primary", "official_secondary", "independent_secondary"]},
+                        "verification_artifact": {"type": "string", "minLength": 1},
+                        "verification_artifact_sha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"}
+                      }
+                    }
+                  }
+                }
+              }
             }
           }
         },

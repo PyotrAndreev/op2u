@@ -22,7 +22,7 @@
       "temporal": {"kind": "deadline", "date": "2026-09-30", "start_date": null, "end_date": null},
       "verification_artifact": "verification/e-status.json",
       "verification_artifact_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
-      "supports": ["liveness"]
+      "supports": ["liveness", "funding_packet:official_fact:ff-deadline"]
     },
     {
       "id": "e-route",
@@ -36,7 +36,35 @@
       "temporal": {"kind": "deadline", "date": "2026-09-30", "start_date": null, "end_date": null},
       "verification_artifact": "verification/e-route.json",
       "verification_artifact_sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
-      "supports": ["participation_route"]
+      "supports": ["participation_route", "funding_packet:official_fact:ff-documents"]
+    },
+    {
+      "id": "e-programme",
+      "claim": "The organization names the 2026 public-interest call as its programme.",
+      "quote": "Example Mobility Lab's 2026 Public-Interest Call supports selected public-interest projects.",
+      "url": "https://example.test/mobility-lab/call",
+      "retrieved_at": "2026-08-30T10:00:00+00:00",
+      "source_type": "official_primary",
+      "entailment": "direct",
+      "current_status": "open",
+      "temporal": {"kind": "deadline", "date": "2026-09-30", "start_date": null, "end_date": null},
+      "verification_artifact": "verification/e-programme.json",
+      "verification_artifact_sha256": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+      "supports": ["funding_packet:official_fact:ff-programme"]
+    },
+    {
+      "id": "e-requirements",
+      "claim": "The call lists a project outline and budget as required materials.",
+      "quote": "Include a project outline and a project budget with the public-interest form.",
+      "url": "https://example.test/mobility-lab/call",
+      "retrieved_at": "2026-08-30T10:00:00+00:00",
+      "source_type": "official_primary",
+      "entailment": "direct",
+      "current_status": "open",
+      "temporal": {"kind": "deadline", "date": "2026-09-30", "start_date": null, "end_date": null},
+      "verification_artifact": "verification/e-requirements.json",
+      "verification_artifact_sha256": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+      "supports": ["funding_packet:official_fact:ff-requirements"]
     },
     {
       "id": "e-vh-funded-exposure",
@@ -100,6 +128,87 @@
   "path": {
     "label": "Prepare one public-interest call submission",
     "route_status": "high_value_with_gaps",
+    "funding_packet": {
+      "official_facts": [
+        {
+          "id": "ff-programme",
+          "kind": "programme",
+          "claim": "The named programme is the 2026 Public-Interest Call.",
+          "evidence_ids": ["e-programme"]
+        },
+        {
+          "id": "ff-deadline",
+          "kind": "deadline",
+          "claim": "The call's stated deadline is 30 September 2026.",
+          "evidence_ids": ["e-status"]
+        },
+        {
+          "id": "ff-requirements",
+          "kind": "requirements",
+          "claim": "The call lists a project outline and project budget as required materials.",
+          "evidence_ids": ["e-requirements"]
+        },
+        {
+          "id": "ff-documents",
+          "kind": "documents",
+          "claim": "The official call page provides an applicant guide.",
+          "evidence_ids": ["e-route"]
+        }
+      ],
+      "indirect_indicators": [
+        {
+          "id": "ci-pool-size",
+          "kind": "pool_size",
+          "claim": "The published 2025 call report records 120 complete applications.",
+          "quote": "The 2025 public-interest call received 120 complete applications.",
+          "source": {
+            "url": "https://example.test/mobility-lab/2025-call-report",
+            "retrieved_at": "2026-08-30T10:03:00+00:00",
+            "source_type": "official_secondary",
+            "verification_artifact": "verification/ci-pool-size.json",
+            "verification_artifact_sha256": "1111111111111111111111111111111111111111111111111111111111111111"
+          },
+          "uncertainty": "This historical pool count does not establish the current pool, selection criteria, or any individual's outcome."
+        },
+        {
+          "id": "ci-prior-recipients",
+          "kind": "prior_recipients",
+          "claim": "The public archive lists three selected 2025 projects.",
+          "quote": "The 2025 recipient archive lists three selected public-interest projects.",
+          "source": {
+            "url": "https://example.test/mobility-lab/2025-recipients",
+            "retrieved_at": "2026-08-30T10:04:00+00:00",
+            "source_type": "official_secondary",
+            "verification_artifact": "verification/ci-prior-recipients.json",
+            "verification_artifact_sha256": "2222222222222222222222222222222222222222222222222222222222222222"
+          },
+          "uncertainty": "A prior recipient archive does not establish the current pool, a rate, review criteria, or any individual's outcome."
+        }
+      ],
+      "gaps": [
+        {
+          "id": "fg-acceptance-rate",
+          "subject": "acceptance_rate",
+          "question": "What acceptance rate, if any, is published for the current call?",
+          "searched_sources": [
+            {
+              "url": "https://example.test/mobility-lab/call",
+              "retrieved_at": "2026-08-30T10:00:00+00:00",
+              "source_type": "official_primary",
+              "verification_artifact": "verification/fg-acceptance-rate-call.json",
+              "verification_artifact_sha256": "3333333333333333333333333333333333333333333333333333333333333333"
+            },
+            {
+              "url": "https://example.test/mobility-lab/2025-call-report",
+              "retrieved_at": "2026-08-30T10:03:00+00:00",
+              "source_type": "official_secondary",
+              "verification_artifact": "verification/fg-acceptance-rate-report.json",
+              "verification_artifact_sha256": "4444444444444444444444444444444444444444444444444444444444444444"
+            }
+          ]
+        }
+      ]
+    },
     "components": [
       {
         "component": "travel",
