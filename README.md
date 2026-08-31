@@ -17,6 +17,7 @@ The current scope is **discovery**: profile interpretation, search, primary-sour
 - [EUSP local user-profile model](docs/product/eusp-local-user-profile.md)
 - [EUSP opportunity contract](docs/product/eusp-opportunity-contract.md)
 - [EUSP path components and research gaps](docs/product/eusp-path-components.md)
+- [EUSP artifact action contract](docs/product/eusp-action-contract.md)
 - [Competitive landscape](docs/research/competitive-landscape.md)
 - [EUSP literature synthesis: exploration under an insufficient verified portfolio](docs/research/eusp-exploration-discovery-agents.md)
 - [EUSP social-graph connector admissibility spike](docs/research/eusp-social-connector-admissibility.md)
