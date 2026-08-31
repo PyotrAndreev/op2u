@@ -1,0 +1,431 @@
+{
+  "schema_version": "eusp-local-unexpectedness/v1",
+  "synthetic": true,
+  "fixture_notice": "This is a fabricated, anonymized public evaluation fixture. It contains no real person, account, social graph, behavioural history, inferred location, inferred date, or source snapshot.",
+  "snapshot_date": "2026-09-20",
+  "supplied_windows": [
+    {
+      "id": "window-cedar-bay-october",
+      "place": "Cedar Bay",
+      "start_date": "2026-10-01",
+      "end_date": "2026-10-31",
+      "provenance": "user_supplied"
+    }
+  ],
+  "frozen_inputs": {
+    "candidate_set_sha256": "e13aa77bb49b3bf707887c64083c15af57e2868d924d6b3487a2a3770ad644b9",
+    "input_bundle_sha256": "6875e266282cf86d0976ab078ec55de99b91875f5ae996266c20c365b912493d",
+    "research_budget": {
+      "official_source_retrievals": 8
+    },
+    "report_budget_minutes": 20,
+    "selection_capacity": 2
+  },
+  "failure_conditions": {
+    "minimum_novelty_count_increase": 1,
+    "relevance_non_inferior": true,
+    "require_full_grounding": true,
+    "require_full_readiness": true,
+    "require_evidence_liveness_and_act_now_safeguards": true
+  },
+  "baseline": {
+    "id": "LU_V0_FROZEN",
+    "ranking_rule": "frozen_base_rank_descending",
+    "local_unexpectedness_bonus": 0,
+    "selection_capacity": 2
+  },
+  "treatment": {
+    "id": "LU_LOCAL_UNEXPECTEDNESS",
+    "ranking_rule": "frozen_base_rank_descending_plus_local_unexpectedness",
+    "local_unexpectedness_bonus": 20,
+    "selection_capacity": 2
+  },
+  "candidates": [
+    {
+      "id": "lu-known-local",
+      "base_rank": 100,
+      "relevance_proxy": 88,
+      "awareness": {
+        "state": "known",
+        "evidence": [
+          {
+            "kind": "explicit_current_recognition",
+            "provenance": "user_supplied_local",
+            "statement": "I currently recognize this exact fictional programme."
+          }
+        ]
+      },
+      "locality": {
+        "place": "Cedar Bay",
+        "start_date": "2026-10-08",
+        "end_date": "2026-10-08",
+        "location_evidence_id": "ev-known-scope",
+        "date_evidence_id": "ev-known-scope"
+      },
+      "classification": "ACT_NOW",
+      "first_action": {
+        "action": "Draft a one-page fictional programme outline",
+        "deliverable": "one-page outline",
+        "start_date": "2026-09-21",
+        "minutes_min": 25,
+        "minutes_max": 40,
+        "blockers": [
+          "Fictional programme fit remains unknown."
+        ]
+      },
+      "evidence": [
+        {
+          "id": "ev-known-status",
+          "claim": "The fictional programme is open.",
+          "quote": "The October programme is open.",
+          "url": "https://cedar-bay.example.test/known",
+          "retrieved_at": "2026-09-20T10:00:00+00:00",
+          "source_type": "official_primary",
+          "entailment": "direct",
+          "current_status": "open",
+          "temporal": {
+            "kind": "deadline",
+            "date": "2026-10-30",
+            "start_date": null,
+            "end_date": null
+          },
+          "supports": [
+            "status",
+            "liveness"
+          ],
+          "verification_artifact": "fixture://eusp-local-unexpectedness/v1/lu-known-local/status",
+          "provenance_sha256": "8cca707667b07d9836275f047797e5d4cd8d45e55b2081620f3ebd9f6d5bc102"
+        },
+        {
+          "id": "ev-known-route",
+          "claim": "The official page provides a participation route.",
+          "quote": "Use the official programme worksheet to prepare your materials.",
+          "url": "https://cedar-bay.example.test/known",
+          "retrieved_at": "2026-09-20T10:00:00+00:00",
+          "source_type": "official_primary",
+          "entailment": "direct",
+          "current_status": "open",
+          "temporal": {
+            "kind": null,
+            "date": null,
+            "start_date": null,
+            "end_date": null
+          },
+          "supports": [
+            "participation_route"
+          ],
+          "verification_artifact": "fixture://eusp-local-unexpectedness/v1/lu-known-local/route",
+          "provenance_sha256": "c51c7c249f2529ee6b3ccd0d16a7703999fc4936e4331270aa23240cbdf47a7d"
+        },
+        {
+          "id": "ev-known-scope",
+          "claim": "The fictional programme takes place in Cedar Bay on 8 October 2026.",
+          "quote": "Cedar Bay session: 8 October 2026.",
+          "url": "https://cedar-bay.example.test/known",
+          "retrieved_at": "2026-09-20T10:00:00+00:00",
+          "source_type": "official_primary",
+          "entailment": "direct",
+          "current_status": "upcoming",
+          "temporal": {
+            "kind": "event",
+            "date": "2026-10-08",
+            "start_date": null,
+            "end_date": null
+          },
+          "supports": [
+            "location",
+            "date_window",
+            "liveness"
+          ],
+          "verification_artifact": "fixture://eusp-local-unexpectedness/v1/lu-known-local/scope",
+          "provenance_sha256": "127c62f95762546b350415f0504f85e6332539751d553d64654fc85831e1f209"
+        }
+      ]
+    },
+    {
+      "id": "lu-unknown-outside",
+      "base_rank": 98,
+      "relevance_proxy": 87,
+      "awareness": {
+        "state": "unknown",
+        "evidence": []
+      },
+      "locality": {
+        "place": "Juniper Point",
+        "start_date": "2026-10-10",
+        "end_date": "2026-10-10",
+        "location_evidence_id": "ev-outside-scope",
+        "date_evidence_id": "ev-outside-scope"
+      },
+      "classification": "ACT_NOW",
+      "first_action": {
+        "action": "Draft a one-page fictional programme outline",
+        "deliverable": "one-page outline",
+        "start_date": "2026-09-21",
+        "minutes_min": 25,
+        "minutes_max": 40,
+        "blockers": [
+          "Fictional programme fit remains unknown."
+        ]
+      },
+      "evidence": [
+        {
+          "id": "ev-outside-status",
+          "claim": "The fictional programme is open.",
+          "quote": "The October programme is open.",
+          "url": "https://juniper-point.example.test/outside",
+          "retrieved_at": "2026-09-20T10:00:00+00:00",
+          "source_type": "official_primary",
+          "entailment": "direct",
+          "current_status": "open",
+          "temporal": {
+            "kind": "deadline",
+            "date": "2026-10-30",
+            "start_date": null,
+            "end_date": null
+          },
+          "supports": [
+            "status",
+            "liveness"
+          ],
+          "verification_artifact": "fixture://eusp-local-unexpectedness/v1/lu-unknown-outside/status",
+          "provenance_sha256": "cffc403cf58ca3d802ce064ddc75c09b4f72c9fad8c93416c97e680d8bb738be"
+        },
+        {
+          "id": "ev-outside-route",
+          "claim": "The official page provides a participation route.",
+          "quote": "Use the official programme worksheet to prepare your materials.",
+          "url": "https://juniper-point.example.test/outside",
+          "retrieved_at": "2026-09-20T10:00:00+00:00",
+          "source_type": "official_primary",
+          "entailment": "direct",
+          "current_status": "open",
+          "temporal": {
+            "kind": null,
+            "date": null,
+            "start_date": null,
+            "end_date": null
+          },
+          "supports": [
+            "participation_route"
+          ],
+          "verification_artifact": "fixture://eusp-local-unexpectedness/v1/lu-unknown-outside/route",
+          "provenance_sha256": "3feb9a1e093c2d827e3a99c015f152a179f7d52ffc067c6ad81ee9561f278b61"
+        },
+        {
+          "id": "ev-outside-scope",
+          "claim": "The fictional programme takes place in Juniper Point on 10 October 2026.",
+          "quote": "Juniper Point session: 10 October 2026.",
+          "url": "https://juniper-point.example.test/outside",
+          "retrieved_at": "2026-09-20T10:00:00+00:00",
+          "source_type": "official_primary",
+          "entailment": "direct",
+          "current_status": "upcoming",
+          "temporal": {
+            "kind": "event",
+            "date": "2026-10-10",
+            "start_date": null,
+            "end_date": null
+          },
+          "supports": [
+            "location",
+            "date_window",
+            "liveness"
+          ],
+          "verification_artifact": "fixture://eusp-local-unexpectedness/v1/lu-unknown-outside/scope",
+          "provenance_sha256": "4da42a16323478fa9551dfb93336dceccbb9d67744098c7f4f9f3eb503be0734"
+        }
+      ]
+    },
+    {
+      "id": "lu-unknown-local-one",
+      "base_rank": 89,
+      "relevance_proxy": 91,
+      "awareness": {
+        "state": "unknown",
+        "evidence": []
+      },
+      "locality": {
+        "place": "Cedar Bay",
+        "start_date": "2026-10-12",
+        "end_date": "2026-10-12",
+        "location_evidence_id": "ev-local-one-scope",
+        "date_evidence_id": "ev-local-one-scope"
+      },
+      "classification": "ACT_NOW",
+      "first_action": {
+        "action": "Draft a one-page fictional programme outline",
+        "deliverable": "one-page outline",
+        "start_date": "2026-09-21",
+        "minutes_min": 25,
+        "minutes_max": 40,
+        "blockers": [
+          "Fictional programme fit remains unknown."
+        ]
+      },
+      "evidence": [
+        {
+          "id": "ev-local-one-status",
+          "claim": "The fictional programme is open.",
+          "quote": "The October programme is open.",
+          "url": "https://cedar-bay.example.test/local-one",
+          "retrieved_at": "2026-09-20T10:00:00+00:00",
+          "source_type": "official_primary",
+          "entailment": "direct",
+          "current_status": "open",
+          "temporal": {
+            "kind": "deadline",
+            "date": "2026-10-30",
+            "start_date": null,
+            "end_date": null
+          },
+          "supports": [
+            "status",
+            "liveness"
+          ],
+          "verification_artifact": "fixture://eusp-local-unexpectedness/v1/lu-unknown-local-one/status",
+          "provenance_sha256": "1fa1520c6b7bc07c117623a31055d32fb91e1c639d13bb06eb33baf04d531ef9"
+        },
+        {
+          "id": "ev-local-one-route",
+          "claim": "The official page provides a participation route.",
+          "quote": "Use the official programme worksheet to prepare your materials.",
+          "url": "https://cedar-bay.example.test/local-one",
+          "retrieved_at": "2026-09-20T10:00:00+00:00",
+          "source_type": "official_primary",
+          "entailment": "direct",
+          "current_status": "open",
+          "temporal": {
+            "kind": null,
+            "date": null,
+            "start_date": null,
+            "end_date": null
+          },
+          "supports": [
+            "participation_route"
+          ],
+          "verification_artifact": "fixture://eusp-local-unexpectedness/v1/lu-unknown-local-one/route",
+          "provenance_sha256": "72953d5b69a7e8d1a62fc2b7235a71711038bd98bda7fa2d75cec4d0517d6a03"
+        },
+        {
+          "id": "ev-local-one-scope",
+          "claim": "The fictional programme takes place in Cedar Bay on 12 October 2026.",
+          "quote": "Cedar Bay session: 12 October 2026.",
+          "url": "https://cedar-bay.example.test/local-one",
+          "retrieved_at": "2026-09-20T10:00:00+00:00",
+          "source_type": "official_primary",
+          "entailment": "direct",
+          "current_status": "upcoming",
+          "temporal": {
+            "kind": "event",
+            "date": "2026-10-12",
+            "start_date": null,
+            "end_date": null
+          },
+          "supports": [
+            "location",
+            "date_window",
+            "liveness"
+          ],
+          "verification_artifact": "fixture://eusp-local-unexpectedness/v1/lu-unknown-local-one/scope",
+          "provenance_sha256": "8e34caa8bfbb047ee804f12c713c203f0dade517bc59f56ec0c53b2fdb660e1c"
+        }
+      ]
+    },
+    {
+      "id": "lu-unknown-local-two",
+      "base_rank": 88,
+      "relevance_proxy": 90,
+      "awareness": {
+        "state": "unknown",
+        "evidence": []
+      },
+      "locality": {
+        "place": "Cedar Bay",
+        "start_date": "2026-10-18",
+        "end_date": "2026-10-18",
+        "location_evidence_id": "ev-local-two-scope",
+        "date_evidence_id": "ev-local-two-scope"
+      },
+      "classification": "ACT_NOW",
+      "first_action": {
+        "action": "Draft a one-page fictional programme outline",
+        "deliverable": "one-page outline",
+        "start_date": "2026-09-21",
+        "minutes_min": 25,
+        "minutes_max": 40,
+        "blockers": [
+          "Fictional programme fit remains unknown."
+        ]
+      },
+      "evidence": [
+        {
+          "id": "ev-local-two-status",
+          "claim": "The fictional programme is open.",
+          "quote": "The October programme is open.",
+          "url": "https://cedar-bay.example.test/local-two",
+          "retrieved_at": "2026-09-20T10:00:00+00:00",
+          "source_type": "official_primary",
+          "entailment": "direct",
+          "current_status": "open",
+          "temporal": {
+            "kind": "deadline",
+            "date": "2026-10-30",
+            "start_date": null,
+            "end_date": null
+          },
+          "supports": [
+            "status",
+            "liveness"
+          ],
+          "verification_artifact": "fixture://eusp-local-unexpectedness/v1/lu-unknown-local-two/status",
+          "provenance_sha256": "ee8932bb873b6b6a1d6b977ee6d2b5144d5bc115bd02e3493791aaa2610a50ca"
+        },
+        {
+          "id": "ev-local-two-route",
+          "claim": "The official page provides a participation route.",
+          "quote": "Use the official programme worksheet to prepare your materials.",
+          "url": "https://cedar-bay.example.test/local-two",
+          "retrieved_at": "2026-09-20T10:00:00+00:00",
+          "source_type": "official_primary",
+          "entailment": "direct",
+          "current_status": "open",
+          "temporal": {
+            "kind": null,
+            "date": null,
+            "start_date": null,
+            "end_date": null
+          },
+          "supports": [
+            "participation_route"
+          ],
+          "verification_artifact": "fixture://eusp-local-unexpectedness/v1/lu-unknown-local-two/route",
+          "provenance_sha256": "3910452fde31bfd466ea7e7e1f3a5c618c459815a58c86537e8ee5fc050d2d48"
+        },
+        {
+          "id": "ev-local-two-scope",
+          "claim": "The fictional programme takes place in Cedar Bay on 18 October 2026.",
+          "quote": "Cedar Bay session: 18 October 2026.",
+          "url": "https://cedar-bay.example.test/local-two",
+          "retrieved_at": "2026-09-20T10:00:00+00:00",
+          "source_type": "official_primary",
+          "entailment": "direct",
+          "current_status": "upcoming",
+          "temporal": {
+            "kind": "event",
+            "date": "2026-10-18",
+            "start_date": null,
+            "end_date": null
+          },
+          "supports": [
+            "location",
+            "date_window",
+            "liveness"
+          ],
+          "verification_artifact": "fixture://eusp-local-unexpectedness/v1/lu-unknown-local-two/scope",
+          "provenance_sha256": "ed07d15fa10d2711b23515c979bcab24fabf184dd49b692bf888ba114643256e"
+        }
+      ]
+    }
+  ]
+}
