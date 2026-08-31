@@ -93,6 +93,20 @@
       "verification_artifact": "verification/e-vh-peer-feedback.json",
       "verification_artifact_sha256": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
       "supports": ["value_hypothesis:vh-peer-feedback"]
+    },
+    {
+      "id": "e-programme-dates",
+      "claim": "The forum residency is a 21-day programme in Example City starting on 1 October 2026.",
+      "quote": "The Example City forum residency runs from 1 to 21 October 2026.",
+      "url": "https://example.test/mobility-lab/forum",
+      "retrieved_at": "2026-08-30T10:02:00+00:00",
+      "source_type": "official_primary",
+      "entailment": "direct",
+      "current_status": "upcoming",
+      "temporal": {"kind": "event", "date": "2026-10-01", "start_date": "2026-10-01", "end_date": "2026-10-21"},
+      "verification_artifact": "verification/e-programme-dates.json",
+      "verification_artifact_sha256": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+      "supports": ["path_cost:date_basis"]
     }
   ],
   "uncertainties": [
@@ -286,6 +300,98 @@
         "id": "g-materials",
         "question": "Which existing project materials are available for a submission?"
       }
-    ]
+    ],
+    "path_cost": {
+      "date_basis": {
+        "kind": "opportunity_date",
+        "selected_date": "2026-10-01",
+        "opportunity_date": "2026-10-01",
+        "evidence_id": "e-programme-dates",
+        "profile_field_id": null,
+        "profile_provenance": null
+      },
+      "programme_duration_days": {
+        "range": {"minimum": 21, "maximum": 21},
+        "location_basis": "Example City forum residency",
+        "retrieved_at": "2026-08-30T10:02:00+00:00",
+        "source_provenance": {
+          "source_type": "official_primary",
+          "url": "https://example.test/mobility-lab/forum",
+          "quote": "The Example City forum residency runs from 1 to 21 October 2026."
+        }
+      },
+      "money": {
+        "status": "partial",
+        "estimates": [
+          {
+            "category": "cost_of_living",
+            "range": {"minimum": 900, "maximum": 1200},
+            "currency": "EUR",
+            "research_priority": "primary",
+            "location_basis": "Example City, 21 days during the residency",
+            "retrieved_at": "2026-08-30T10:03:00+00:00",
+            "source_provenance": {
+              "source_type": "public_dataset",
+              "url": "https://example.test/city-costs",
+              "quote": "Example City 21-day living-cost sample range: EUR 900 to EUR 1200."
+            }
+          },
+          {
+            "category": "flights",
+            "range": {"minimum": 200, "maximum": 350},
+            "currency": "EUR",
+            "research_priority": "secondary",
+            "location_basis": "Example departure airport to Example City return journey",
+            "retrieved_at": "2026-08-30T10:04:00+00:00",
+            "source_provenance": {
+              "source_type": "provider",
+              "url": "https://example.test/air/example-city",
+              "quote": "Example return-flight sample range: EUR 200 to EUR 350."
+            }
+          }
+        ],
+        "gaps": [
+          {
+            "category": "programme_fee",
+            "reason": "No programme-fee amount is supported by the retained sources.",
+            "searched_sources": ["https://example.test/mobility-lab/benefits"]
+          }
+        ]
+      },
+      "time": {
+        "status": "known",
+        "estimates": [
+          {
+            "category": "programme_time",
+            "range": {"minimum": 30240, "maximum": 30240, "unit": "minutes"},
+            "location_basis": "Example City forum residency",
+            "retrieved_at": "2026-08-30T10:02:00+00:00",
+            "source_provenance": {
+              "source_type": "official_primary",
+              "url": "https://example.test/mobility-lab/forum",
+              "quote": "The Example City forum residency runs from 1 to 21 October 2026."
+            }
+          }
+        ],
+        "gaps": []
+      },
+      "stress": {
+        "status": "known",
+        "estimates": [
+          {
+            "category": "schedule",
+            "range": {"minimum": 4, "maximum": 5, "scale": "stress_1_to_5"},
+            "location_basis": "Example City forum residency",
+            "retrieved_at": "2026-08-30T10:02:00+00:00",
+            "source_provenance": {
+              "source_type": "official_primary",
+              "url": "https://example.test/mobility-lab/forum",
+              "quote": "Forum participants exchange structured feedback with the cohort before the public presentation."
+            }
+          }
+        ],
+        "gaps": []
+      }
+    }
   }
 }

@@ -75,6 +75,66 @@ def _funding_packet_text_is_user_outcome(value: Any) -> bool:
     return isinstance(value, str) and USER_OUTCOME.search(value) is not None
 
 
+def _ordered_range(record: Any, label: str, errors: list[str]) -> tuple[int | float, int | float] | None:
+    """Check a disclosed range without deriving a single value from it."""
+    if not isinstance(record, dict):
+        return None
+    minimum, maximum = record.get("minimum"), record.get("maximum")
+    numeric = (int, float)
+    if (not isinstance(minimum, numeric) or isinstance(minimum, bool)
+            or not isinstance(maximum, numeric) or isinstance(maximum, bool)):
+        return None
+    if minimum > maximum:
+        errors.append(f"{label} minimum exceeds maximum")
+    return minimum, maximum
+
+
+def _validate_cost_source(value: Any, label: str, errors: list[str]) -> None:
+    if not isinstance(value, dict):
+        return
+    _timestamp(value.get("retrieved_at"), f"{label}.retrieved_at", errors)
+    source = value.get("source_provenance")
+    if not isinstance(source, dict):
+        return
+    url = source.get("url")
+    if not isinstance(url, str) or not url.startswith("https://"):
+        errors.append(f"{label} needs an HTTPS source provenance URL")
+    if not isinstance(source.get("quote"), str) or not source["quote"].strip():
+        errors.append(f"{label} needs an exact source provenance quote")
+
+
+def _validate_cost_dimension(dimension: Any, name: str, errors: list[str]) -> list[dict[str, Any]]:
+    """Validate one independent path-cost ledger; never compare it to another."""
+    if not isinstance(dimension, dict):
+        return []
+    estimates = dimension.get("estimates")
+    gaps = dimension.get("gaps")
+    estimate_rows = [row for row in estimates if isinstance(row, dict)] if isinstance(estimates, list) else []
+    gap_rows = [row for row in gaps if isinstance(row, dict)] if isinstance(gaps, list) else []
+    status = dimension.get("status")
+    if status == "known" and (not estimate_rows or gap_rows):
+        errors.append(f"path cost {name} marked known needs estimates and no gaps")
+    elif status == "partial" and (not estimate_rows or not gap_rows):
+        errors.append(f"path cost {name} marked partial needs estimates and explicit gaps")
+    elif status == "unknown" and (estimate_rows or not gap_rows):
+        errors.append(f"path cost {name} marked unknown needs no estimates and explicit gaps")
+
+    categories: set[str] = set()
+    for estimate in estimate_rows:
+        category = estimate.get("category")
+        if isinstance(category, str):
+            if category in categories:
+                errors.append(f"duplicate path cost {name} category {category!r}")
+            categories.add(category)
+        _ordered_range(estimate.get("range"), f"path cost {name} estimate {category!r} range", errors)
+        _validate_cost_source(estimate, f"path cost {name} estimate {category!r}", errors)
+    for index, gap in enumerate(gap_rows):
+        searched = gap.get("searched_sources")
+        if not isinstance(searched, list) or not searched:
+            errors.append(f"path cost {name} gap {index} needs cited searched sources")
+    return estimate_rows
+
+
 def _unique(records: Any, label: str, errors: list[str]) -> set[str]:
     ids: set[str] = set()
     if not isinstance(records, list):
@@ -308,6 +368,59 @@ def validate_opportunity(value: Any, *, public_fixture: bool = False) -> list[st
                             errors.append(f"evidence {evidence_id!r} does not directly support path component {name!r}")
         if component_names != PATH_COMPONENTS:
             errors.append("path components must record travel, lodging, visa, funding, and outreach_route exactly once")
+
+        path_cost = path.get("path_cost")
+        if isinstance(path_cost, dict):
+            date_basis = path_cost.get("date_basis")
+            if isinstance(date_basis, dict):
+                selected_date = _date(date_basis.get("selected_date"), "path cost selected_date", errors)
+                opportunity_date = _date(date_basis.get("opportunity_date"), "path cost opportunity_date", errors)
+                basis_kind = date_basis.get("kind")
+                evidence_id = date_basis.get("evidence_id")
+                profile_field = date_basis.get("profile_field_id")
+                profile_provenance = date_basis.get("profile_provenance")
+                if basis_kind == "opportunity_date":
+                    if opportunity_date is None or selected_date != opportunity_date:
+                        errors.append("path cost dated opportunity must use its opportunity date")
+                    if profile_field is not None or profile_provenance is not None:
+                        errors.append("path cost opportunity-date basis must not substitute a profile date")
+                    row = evidence_by_id.get(evidence_id)
+                    if row is None or "path_cost:date_basis" not in row.get("supports", []):
+                        errors.append("path cost opportunity date needs direct official date evidence")
+                elif basis_kind == "nearest_user_available_date":
+                    if opportunity_date is not None:
+                        errors.append("path cost uses a user date only when the opportunity has no date")
+                    if evidence_id is not None:
+                        errors.append("path cost undated opportunity must not invent official date evidence")
+                    if (not isinstance(profile_field, str) or PROFILE_FIELD_ID.fullmatch(profile_field) is None
+                            or profile_provenance != "user_supplied"):
+                        errors.append("path cost undated opportunity needs an explicit user-supplied availability field")
+
+            duration = path_cost.get("programme_duration_days")
+            duration_range = None
+            if isinstance(duration, dict):
+                duration_range = _ordered_range(duration.get("range"), "programme duration range", errors)
+                _validate_cost_source(duration, "programme duration", errors)
+
+            money_rows = _validate_cost_dimension(path_cost.get("money"), "money", errors)
+            _validate_cost_dimension(path_cost.get("time"), "time", errors)
+            _validate_cost_dimension(path_cost.get("stress"), "stress", errors)
+            money = path_cost.get("money")
+            if isinstance(money, dict):
+                for estimate in money_rows:
+                    if estimate.get("currency") is not None and not isinstance(estimate.get("currency"), str):
+                        errors.append("path cost money estimate needs a currency")
+                if duration_range is not None and duration_range[1] >= 14:
+                    living = [row for row in money_rows if row.get("category") == "cost_of_living"]
+                    living_gaps = [row for row in money.get("gaps", [])
+                                   if isinstance(row, dict) and row.get("category") == "cost_of_living"]
+                    if not living and not living_gaps:
+                        errors.append("long programme needs a cost_of_living estimate or explicit gap before flights")
+                    if any(row.get("research_priority") != "primary" for row in living):
+                        errors.append("long programme cost_of_living must be primary")
+                    if any(row.get("research_priority") != "secondary" for row in money_rows
+                           if row.get("category") == "flights"):
+                        errors.append("long programme flights must be secondary to cost_of_living")
 
         route_status = path.get("route_status")
         action_count = len(actions) if isinstance(actions, list) else 0

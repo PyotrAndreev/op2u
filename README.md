@@ -18,6 +18,7 @@ The current scope is **discovery**: profile interpretation, search, primary-sour
 - [EUSP opportunity contract](docs/product/eusp-opportunity-contract.md)
 - [EUSP path components and research gaps](docs/product/eusp-path-components.md)
 - [EUSP funding and competitiveness packet](docs/product/eusp-funding-competitiveness-packet.md)
+- [EUSP path-cost policy](docs/product/eusp-path-cost-policy.md)
 - [EUSP artifact action contract](docs/product/eusp-action-contract.md)
 - [Competitive landscape](docs/research/competitive-landscape.md)
 - [EUSP literature synthesis: exploration under an insufficient verified portfolio](docs/research/eusp-exploration-discovery-agents.md)

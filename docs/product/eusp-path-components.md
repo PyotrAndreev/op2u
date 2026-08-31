@@ -33,4 +33,4 @@ python tools/eusp_opportunity.py --public-fixture \
   evals/fixtures/eusp_opportunity/v1/opportunity.json
 ```
 
-The committed fixture is fabricated. Its unknown lodging, visa, and outreach-route components are cited gaps, not claims that those facts do or do not exist. Real source artifacts, profiles, and research runs remain outside Git.
+The committed fixture is fabricated. Its unknown lodging, visa, outreach-route, and path-cost facts are cited gaps rather than claims that those facts do or do not exist. Real source artifacts, profiles, and research runs remain outside Git. See the [path-cost policy](eusp-path-cost-policy.md) for separate money, time, and stress ledgers.
